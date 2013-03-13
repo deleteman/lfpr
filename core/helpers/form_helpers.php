@@ -142,8 +142,8 @@ function boolean_field($en, $attr, $label = null) {
 	return $html;
 }
 
-function email_field($en, $attr, $label = null) {
-	return text_field($en, $attr, $label);
+function email_field($en, $attr, $label = null, $attrs = array()) {
+	return text_field($en, $attr, $label, $attrs);
 }
 
 function text_field($en, $attr, $label = null, $html_attr = array()) {
@@ -156,7 +156,9 @@ function text_field($en, $attr, $label = null, $html_attr = array()) {
 		}
 	}
 	$error = (isset($en->errors[$attr])) ? "validation-error" : "";
-	$html = '<div class="form-field '.$error.'">';
+	if(!$html_attr["no-container"]) {
+		$html = '<div class="form-field '.$error.'">';
+	}
 	if($label !== false) {
 		$label_text = $label;
 		if($label === null) {
@@ -169,13 +171,16 @@ function text_field($en, $attr, $label = null, $html_attr = array()) {
 				id="' . $en->__get_entity_name() . '_' .$attr.'" 
 				value="' . $en->$attr . '" 
 				'.$html_opts.' />';
-	$html .= "</div>";
+	if(!$html_attr["no-container"]) {
+		$html .= "</div>";
+	}
+
 
 	return $html;
 }
 
 
-function text_field_tag($name, $id, $html = array()) {
+function text_field_tag($name, $id, $label = null, $html = array()) {
 	$html_opts = "";
 	if(count($html) > 0) {
 		foreach($html as $attr => $val) {
@@ -187,6 +192,9 @@ function text_field_tag($name, $id, $html = array()) {
 	if(isset($html['no-container']) && !$html['no-container'] || !isset($html['no-container'])) {
 		$html_code = '<div class="form-field">';
 	} 	
+	if($label !== null) {
+		$html_code .= '<label for="'.$id.'">' . $label.'</label>';
+	}
 	$html_code .= '<input type="text" 
 				name="' . $name . '"
 				id="' . $id . '"

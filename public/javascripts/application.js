@@ -11,16 +11,40 @@ $(document).ready(function() {
 								});
 	$(".time-field").timePicker();
 
-	$("#listado-buques .flag").tooltip();
-
-	$('.typeahead').typeahead({
-	    source: function (query, typeahead) {
-	        return $.get('/buque/search', { query: query }, function (data) {
-	        	var json_data = $.parseJSON(data);
-	            return typeahead(json_data.results);
-	        });
-	    }
-	});
 
 	$("#lang").dropkick();
+
+	$("#query-btn").on('click', function() {
+		var $this = $("#project_url");
+		var btn = $(this);
+		btn.addClass("disabled");
+		$.post('/project/grab_data',
+			 {url: $this.val()},
+			 function(data, textStatus, xhq) {
+			 	var json = JSON.parse(data);
+			 	if(json.message) {
+			 		$("#error-box").html(json.message);
+			 		$("#error-box").fadeIn();
+
+				 	$("#save-project-btn").attr("disabled", true);
+				 	$("#save-project-btn").addClass("disabled");
+			 	} else {
+			 		$("#error-box").fadeOut();
+					$("#project_name").val(json.name);
+				 	$("#project_description").val(json.description);
+				 	$("#project_owner_name").val(json.owner_name);
+				 	$("#project_stars").val(json.stars);
+				 	$("#project_forks").val(json.forks);
+				 	$("#project_last_update").val(json.last_update);
+				 	$("#project_language").val(json.language);
+
+				 	$("#save-project-btn").attr("disabled", false);
+				 	$("#save-project-btn").removeClass("disabled");
+			 	}
+			 	
+			 	btn.removeClass("disabled");
+			 });
+	});
+
+	$(".dev-link, .goto-github").tooltip();
 });

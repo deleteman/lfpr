@@ -7,12 +7,16 @@
 	-webkit-border-radius: 6px;
 	-moz-border-radius:6px;
 	border-radius:6px;
+	margin-bottom: 10px;
 }
 
 .latest-projects {
 	margin-bottom: 10px;
 }
-
+.project-spotlight .simple-stats {
+	text-align: left;
+	list-style: none;
+}
 .project-spotlight .btn.btn-large {
 	bottom: 10px;
 	position: absolute;
@@ -45,4 +49,27 @@ footer {
 
 footer .navbar {
 	margin-bottom: 0;
+}
+
+#error-box { 
+display: none;
+}
+
+.one-line-form-elements .form-field{
+	display: inline-block;
+}
+
+.palette-info-dark {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;	
+	-moz-border-bottom-left-radius: 10px;
+	-moz-border-bottom-right-radius: 10px;	
+	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;	
+}
+
+.twitter-share-button.twitter-count-horizontal {
+	position: absolute;
+bottom: 59px;
+left: 25%;
 }

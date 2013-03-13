@@ -26,7 +26,7 @@
 		?>
 			<div class="alert alert-success">
 				<button type="button" class="close" data-dismiss="alert">×</button>
-				<h4>&Eacute;xito!</h4> <?=$flash_msg?>
+				<h4>Success!</h4> <?=$flash_msg?>
 			</div>
 		<?php
 		}

@@ -1,15 +1,14 @@
 <?php
 
-class Developer extends MakiaveloEntity {
+class Suscriptor extends MakiaveloEntity {
 	private $id; //type: integer
 private $created_at; //type: datetime
 private $updated_at; //type: datetime
-private $name; //type: string
-private $avatar_url; //type: string
-private $github_url; //type: string
+private $email; //type: string
 
 
-	static public $validations = array();
+	static protected $validations = array("email"=> array('presence','email'),
+);
 	public function __set($name, $val) {
 		$this->$name = $val;
 	}
@@ -21,5 +20,4 @@ private $github_url; //type: string
 			return null;
 		}
 	}
-
-	}
+}

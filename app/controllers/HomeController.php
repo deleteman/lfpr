@@ -3,7 +3,8 @@
 class HomeController extends ApplicationController {
 
 	public function indexAction() {
-		$this->render();
+		$latest = load_latest_projects();
+		$this->render(array("new_projects" => $latest, "suscriptor" => new Suscriptor()));
 	}
 }
 

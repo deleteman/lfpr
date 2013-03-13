@@ -1,0 +1,7 @@
+crud:
+	entity:
+		name: Suscriptor
+		fields:
+			email:string
+		validations:
+			email:[presence, email]

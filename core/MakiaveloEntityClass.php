@@ -44,9 +44,7 @@ class MakiaveloEntity {
 		Makiavelo::info("Inside load_from_array....");
 		Makiavelo::info("Data to be loaded: " . print_r($arr, true));
 		foreach($arr as $attr => $value) {
-			Makiavelo::info("Setting {$attr} to {$value}");
 			$this->$attr = $this->translateValue($attr, $value);
-			Makiavelo::info("getting {$attr} to {$this->$attr}");
 		}
 	}
 
@@ -70,7 +68,8 @@ class MakiaveloEntity {
 		foreach($properties as $prop) {
 			$attr = $prop->getName();
 			$value = $this->$attr;
-			$validations = $tmp_entity->validations();
+			$validations = $class_name::$validations; //This sucks, TODO: Fix so it works on php < 5.3 and php >= 5.3
+			Makiavelo::info("Validations set for model (" . $class_name .") " . print_r($validations, true));
 			Makiavelo::info("-- Validating attr: " . $attr);
 			if(!isset($validations[$attr])) {
 				Makiavelo::info("-- No validation set");

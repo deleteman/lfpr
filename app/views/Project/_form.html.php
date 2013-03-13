@@ -1,5 +1,15 @@
+<ul class="breadcrumb">
+  <li><a href="<?=home_root_path_path()?>">Home</a> <span class="divider">/</span></li>
+  <li><a href="<?=project_list_path()?>">List of projects</a> <span class="divider">/</span></li>
+  <li class="active">Publish your project</li>
 
+</ul>
 <?= form_for($this->entity)?>
+
+	<div class="alert alert-error" id="error-box">
+
+	</div>
+
 	<?php if(count($this->entity->errors) > 0) { ?>
     <div id="error_explanation">
       <h2>Error saving entity: </h2>
@@ -15,25 +25,29 @@
     <?php } ?>
 
     <div class="palette palette-info">
-		<?=text_field($this->entity, "url", "Project's Github url", array("class" => "span10", "id" => "project-url-field"))?>
+		<?=text_field($this->entity, "url", "Project's Github url", array("class" => "span10", "id" => "project-url-field", "no-container" => true))?>
+		<?=link_to("#", "Query", array("class" => "btn btn-primary", "id" => "query-btn"))?>
+		<br/>
 		<span class="">Enter the url for your project and the information below will be gathered using
 			GitHub's API</span>
 	</div>
 
 	<div class="palette palette-info-dark">
-	<?=text_field($this->entity, "name")?>
+	<?=text_field($this->entity, "name", "Project's Name", array("class" => "span6"))?>
 
-	<?=textarea_field($this->entity, "description")?>
+	<?=textarea_field($this->entity, "description", "Project's description", array("class" => "span10"))?>
 
-	<?=text_field($this->entity, "owner_id")?>
+	<div class="one-line-form-elements">
+		<?=text_field_tag("owner_name", "project_owner_name", "Project Owner")?>
 
-	<?=text_field($this->entity, "stars")?>
+		<?=text_field($this->entity, "language")?>
+		<?=text_field($this->entity, "stars", "Stars", array("class" => "span1"))?>
 
-	<?=text_field($this->entity, "forks")?>
-
-	<?=datetime_field($this->entity, "last_update")?>
-	<?=text_field($this->entity, "language")?>
+		<?=text_field($this->entity, "forks", "Forks", array("class" => "span1"))?>
+		<?=text_field($this->entity, "last_update")?>
+	</div>
+	<input  type ="submit" value="Send info" disabled class="btn btn-primary btn-large pull-right disabled" id="save-project-btn"/>
+	<div class="clearfix"></div>
 </div>
-	<input  type ="submit" value="Save" class="btn btn-primary btn-large pull-right" />
-	<?=link_to(project_list_path(), "Go back to the list", array("class" => "btn btn-large"))?>
+	<?//=link_to(project_list_path(), "Go back to the list", array("class" => "btn btn-large"))?>
 <?=form_end_tag()?>

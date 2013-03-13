@@ -26,4 +26,8 @@ private $language;
 			return null;
 		}
 	}
+
+	public function owner() {
+		return load_developer($this->owner_id);
+	}
 }
