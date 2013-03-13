@@ -1,0 +1,12 @@
+development:
+		host: localhost
+		name: lfpr_dev
+		user: root
+		pwd: doglio23
+
+production:
+		host: localhost
+		name: lfpr_prod
+		user: lfpr
+		pwd: l00k1ng4p00lr3qu3s7
+

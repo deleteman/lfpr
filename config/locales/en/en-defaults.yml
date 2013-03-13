@@ -1,0 +1,17 @@
+en:
+	filters:
+		languages:
+			ruby: Ruby
+			php: PHP
+			java: JAVA
+			javascript: JavaScript 
+			python: Python 
+			c: C 
+			cpp: "C++"
+
+	makiavelo:
+		entities:
+			errors:
+				blank: " can't be blank"
+				integer: " must be a number"
+				email: " is not a valid e-mail"

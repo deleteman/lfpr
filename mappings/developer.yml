@@ -1,0 +1,7 @@
+crud:
+	entity:
+		name: Developer
+		fields:
+			name: string
+			avatar_url: string
+			github_url: string

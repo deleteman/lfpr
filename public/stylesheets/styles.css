@@ -1,0 +1,48 @@
+.project-spotlight {
+	text-align: center;
+	position: relative;
+	background-color: #eeeeee;
+	padding: 10px;
+	height: 250px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius:6px;
+	border-radius:6px;
+}
+
+.latest-projects {
+	margin-bottom: 10px;
+}
+
+.project-spotlight .btn.btn-large {
+	bottom: 10px;
+	position: absolute;
+	left: 25%;
+}
+
+.project-spotlight img {
+	width: 100px;
+	margin-top: 10px;
+}
+
+#dk_container_lang {
+	width:222px;
+}
+#project_url {
+	padding-left:20px;
+}
+
+#project_url:before {
+	content: "http://";
+}
+
+#main-wrapper {
+	min-height: 860px;
+}
+
+footer {
+	margin-bottom: 0;
+}
+
+footer .navbar {
+	margin-bottom: 0;
+}
