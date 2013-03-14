@@ -107,10 +107,14 @@ Retrieves a list of Project
 @order = Optional, can be an array of keys or just a single key to order by the results
 @limit = Optional
 */
-function list_project($order = null, $limit = null) {
+function list_project($order = null, $limit = null, $where = null) {
 	global $__db_conn;	
 
 	$sql = "SELECT * FROM project";
+
+	if($where != null) {
+		$sql .= " WHERE $where ";
+	}
 	if($order != null) {
 		$order_str = $order;
 		if(is_array($order)) {

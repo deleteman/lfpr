@@ -60,7 +60,7 @@ function file_field($en, $attr,$label, $html_attrs = array()) {
 }
 
 
-function select_field_tag($name, $id, $options) {
+function select_field_tag($name, $id, $options, $html_attrs = array()) {
 	$elems = $options['options'];
 	$value_field = (isset($options['value_field'])) ? $options['value_field'] : "";
 	$text_field = (isset($options['text_field'])) ? $options['text_field'] : "";
@@ -68,7 +68,7 @@ function select_field_tag($name, $id, $options) {
 
 
 	$html = "";
-	if(isset($html['no-container']) && !$html['no-container'] || !isset($html['no-container'])) {
+	if(isset($html_attrs['no-container']) && !$html_attrs['no-container'] || !isset($html_attrs['no-container'])) {
 		$html = '<div class="form-field ">';
 	}
 
@@ -84,7 +84,7 @@ function select_field_tag($name, $id, $options) {
 		$html .= '<option value="' . $value . '" ' . $selected . '>' . $text . '</option>';
 	}
 	$html .= "</select>";
-	if(isset($html['no-container']) && !$html['no-container'] || !isset($html['no-container'])) {
+	if(isset($html_attrs['no-container']) && !$html_attrs['no-container'] || !isset($html_attrs['no-container'])) {
 		$html .= "</div>";
 	}
 
@@ -155,23 +155,25 @@ function text_field($en, $attr, $label = null, $html_attr = array()) {
 			$html_opts .= $prop. '="' . $val . '" ';
 		}
 	}
+	$html = "";
 	$error = (isset($en->errors[$attr])) ? "validation-error" : "";
-	if(!$html_attr["no-container"]) {
+	if(!isset($html_attr["no-container"])) {
 		$html = '<div class="form-field '.$error.'">';
 	}
+	$label_text = "";
 	if($label !== false) {
 		$label_text = $label;
 		if($label === null) {
 			$label_text = Makiavelo::titlelize($attr);
 		}
 	}
-		$html .= '<label for="'.$attr.'">'.$label_text.'</label>';
+	$html .= '<label for="'.$attr.'">'.$label_text.'</label>';
 	$html .= '<input type="text" 
 				name="' . $en->__get_entity_name() . '['.$attr.']" 
 				id="' . $en->__get_entity_name() . '_' .$attr.'" 
 				value="' . $en->$attr . '" 
 				'.$html_opts.' />';
-	if(!$html_attr["no-container"]) {
+	if(!isset($html_attr["no-container"])) {
 		$html .= "</div>";
 	}
 

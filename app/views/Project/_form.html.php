@@ -41,10 +41,23 @@
 		<?=text_field_tag("owner_name", "project_owner_name", "Project Owner")?>
 
 		<?=text_field($this->entity, "language")?>
-		<?=text_field($this->entity, "stars", "Stars", array("class" => "span1"))?>
-
-		<?=text_field($this->entity, "forks", "Forks", array("class" => "span1"))?>
-		<?=text_field($this->entity, "last_update")?>
+		<?=text_field($this->entity, "stars", false, array("class" => "hidden"))?>
+		<?=text_field($this->entity, "forks", false, array("class" => "hidden"))?>
+		<?=text_field($this->entity, "last_update", false, array("class" => "hidden"))?>
+	</div>
+	<div class="one-line-form-elements fake-fields">
+		<div class="form-field row">
+			<label>Stars</label>
+			<div class="span1 field-replacement" id="stars_field" ></div>
+		</div>
+		<div class="form-field row">
+			<label>Forks</label>
+			<div class="span1 field-replacement" id="forks_field" ></div>
+		</div>
+		<div class="form-field row">
+			<label>Last Update</label>
+			<div class="span3 field-replacement" id="last_update_field" ></div>
+		</div>
 	</div>
 	<input  type ="submit" value="Send info" disabled class="btn btn-primary btn-large pull-right disabled" id="save-project-btn"/>
 	<div class="clearfix"></div>

@@ -36,6 +36,11 @@ $(document).ready(function() {
 				 	$("#project_stars").val(json.stars);
 				 	$("#project_forks").val(json.forks);
 				 	$("#project_last_update").val(json.last_update);
+				 	
+				 	$("#stars_field").html(json.stars);
+				 	$("#forks_field").html(json.forks);
+				 	$("#last_update_field").html(json.last_update);
+		
 				 	$("#project_language").val(json.language);
 
 				 	$("#save-project-btn").attr("disabled", false);

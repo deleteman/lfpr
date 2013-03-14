@@ -1,3 +1,8 @@
+.hidden {
+	display: none!important;
+}
+
+
 .project-spotlight {
 	text-align: center;
 	position: relative;
@@ -72,4 +77,26 @@ display: none;
 	position: absolute;
 bottom: 59px;
 left: 25%;
+}
+input:disabled {
+	background: white;
+	color:#888;
+}	
+.fake-fields label {
+	padding-left:20px;
+}
+.field-replacement{
+	height: 30px;
+	background: white;
+	border-radius: 6px;
+	padding-left:10px;
+	padding-top: 10px;
+	color: #888;
+}
+
+.project-filters .pull-left {
+	margin-left:10px;
+}
+.project-filters form .btn {
+	margin-top: 22px;
 }
