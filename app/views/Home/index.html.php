@@ -25,12 +25,12 @@
 		foreach($this->new_projects as $proj) { ?> 
 		<div class="span3 text-center">
 			<div class="project-spotlight">
-				<h3><?=$proj->name?></h3>
+				<h3><?=truncate_string($proj->name, 13)?></h3>
 				<ul class="simple-stats">
 					<li><span class="fui-menu-24"></span> <?=$proj->forks?> forks</li>
 					<li><span class="fui-heart-24"></span> <?=$proj->stars?> stars</li>
 				</ul>	
-				<p><?=$proj->description?></p>
+				<p><?=truncate_string($proj->description, 80)?></p>
 				<p>By <a href="#"><?=$proj->owner()->name?></a></p>
 				<?=link_to($proj->url, "See more", array("class" => "btn btn-primary btn-large"))?>
 

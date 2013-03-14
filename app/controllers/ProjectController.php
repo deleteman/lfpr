@@ -1,6 +1,7 @@
 <?php
 
  class ProjectController extends ApplicationController {
+ 	private $per_page = 12;
 
  	public function newAction() {
 		$entity = new Project();
@@ -67,10 +68,21 @@
 			$where .= " and owner_id = " . $dev->id;
 		}
 
-		$curr_page = $this->request->getParams("p");
+		$curr_page = intVal($this->request->getParam("p"));
+		$total = count_projects($where);
+		$init = $curr_page * $this->per_page;
+		$pages = ceil($total / $this->per_page);
 
-		$entity_list = list_project(null, null, $where);
-		$this->render(array("entity_list" => $entity_list, "search_crit" => array("lang" => $language, "owner" => $owner)));
+		$entity_list = list_project(null, $init . "," . $this->per_page, $where);
+		$this->render(array(
+						"entity_list" => $entity_list, 
+						"pagination" => array(
+											"current_page" => $curr_page,
+											"total_pages" => $pages,
+											"total_results" => $total),
+						"search_crit" => array(
+												"lang" => $language, 
+												"owner" => $owner)));
 	}
 
 	private function queryGithub($usr, $repo) {

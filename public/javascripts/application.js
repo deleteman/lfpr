@@ -51,5 +51,5 @@ $(document).ready(function() {
 			 });
 	});
 
-	$(".dev-link, .goto-github").tooltip();
+	$(".dev-link, .goto-github, .has-tooltip").tooltip();
 });

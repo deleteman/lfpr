@@ -102,6 +102,22 @@ function load_project_where($where) {
 	}
 }
 
+function count_projects($where = null) {
+	global $__db_conn;	
+
+	$sql = "SELECT count(*) as cant FROM project";
+
+	if($where != null) {
+		$sql .= " WHERE $where ";
+	}
+	
+	$result = mysql_query($sql, $__db_conn);
+	$results = array();
+
+	$row = mysql_fetch_assoc($result);
+	return $row['cant'];
+}
+
 /** 
 Retrieves a list of Project
 @order = Optional, can be an array of keys or just a single key to order by the results

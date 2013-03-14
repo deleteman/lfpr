@@ -136,7 +136,7 @@ class RoutesHandler {
 		foreach ($_ROUTES as $entity_routes) {
 			foreach($entity_routes as $action => $data) {
 				Makiavelo::info("Creating function helper: " . Makiavelo::camel_to_underscore($data['controller']) . "_" . $action . '_path ()');
-				$fnc = 'function ' . Makiavelo::camel_to_underscore($data['controller']) . "_" . $action . '_path () {
+				$fnc = 'function ' . Makiavelo::camel_to_underscore($data['controller']) . "_" . $action . '_path ($params = array()) {
 
 						$url = "'.$data['url'].'";
 						$args = func_get_args();
@@ -150,6 +150,15 @@ class RoutesHandler {
 							}
 							$url = str_replace(":$attr", $value, $url);
 						}
+
+							if(count($params) > 0) {
+								$url .= "?";
+								$query_params = array();
+								foreach($params as $k => $v) {
+									$query_params[] = $k . "=" . $v;
+								}
+								$url .= implode("&", $query_params);
+							}
 							return $url;
 						}';
 
