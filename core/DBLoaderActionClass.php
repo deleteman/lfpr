@@ -19,7 +19,11 @@ class DBLoaderAction extends Action{
 					Makiavelo::puts("Loading entity: $item ...");
 					$conn = DBLayer::connect();
 					$sql = fread($fp, filesize($file_path));
-					mysql_query($sql, $conn);
+					fclose($fp);
+					$res = mysql_query($sql, $conn);
+					if(!$res && mysql_errno($conn) == 1050) {
+						Makiavelo::puts("---- Entity already loaded, ignoring");
+					}
 					DBLayer::disconnect($conn);
 				}
 			}

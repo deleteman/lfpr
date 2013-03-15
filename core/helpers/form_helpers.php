@@ -72,10 +72,16 @@ function select_field_tag($name, $id, $options, $html_attrs = array()) {
 		$html = '<div class="form-field ">';
 	}
 
+	$html_extra_attrs = "";
+	foreach($html_attrs as $attr => $value) {
+		$html_extra_attrs .= ' '.$attr.'="'.$value.'"';
+	}
+
 	$html .= '<select 
 				name="' . $name .'" 
 				id="' . $id .'" 
-				>';
+				'.$html_extra_attrs.' 
+				 >';
 	foreach($elems as $elem) {
 		$value = is_array($elem) ? $elem[0] : $elem->$value_field;
 		$text  = is_array($elem) ? $elem[1] : $elem->$text_field;

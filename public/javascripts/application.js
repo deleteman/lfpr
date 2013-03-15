@@ -12,7 +12,7 @@ $(document).ready(function() {
 	$(".time-field").timePicker();
 
 
-	$("#lang").dropkick();
+	$(".dropkick-select").dropkick();
 
 	$("#query-btn").on('click', function() {
 		var $this = $("#project_url");

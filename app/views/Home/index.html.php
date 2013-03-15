@@ -26,13 +26,23 @@
 		<div class="span3 text-center">
 			<div class="project-spotlight">
 				<h3><?=truncate_string($proj->name, 13)?></h3>
-				<ul class="simple-stats">
-					<li><span class="fui-menu-24"></span> <?=$proj->forks?> forks</li>
-					<li><span class="fui-heart-24"></span> <?=$proj->stars?> stars</li>
-				</ul>	
+				<div class="">
+					<ul class="simple-stats pull-left">
+						<li><span class="fui-menu-24"></span> <?=$proj->forks?> forks</li>
+						<li><span class="fui-heart-24"></span> <?=$proj->stars?> stars</li>
+					</ul>
+					<ul class="simple-stats pull-left">
+						<li><span class="fui-settings-24"></span> <?=$proj->language?> </li>
+					<li ><span class="fui-man-24"></span> <?=link_to(project_list_path(array("language" => "All", "owner" => $proj->owner()->name)),
+										$proj->owner()->name,
+										array("class" => "dev-link", "data-title" => "See all projects by this user"))?></li>
+					</ul>	
+					<div class="clearfix"></div>
+				</div>
+				
 				<p><?=truncate_string($proj->description, 80)?></p>
-				<p>By <a href="#"><?=$proj->owner()->name?></a></p>
-				<?=link_to($proj->url, "See more", array("class" => "btn btn-primary btn-large"))?>
+			
+				<?=link_to(project_show_path($proj), '<span class="fui-eye-24"></span> View Stats', array("class" => "btn btn-primary btn-large"))?>
 
 				<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?=$proj->url?>" data-text="Checkout this cool project on @Github! <?=$proj->url?>" data-via="lookingfor_pr">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>

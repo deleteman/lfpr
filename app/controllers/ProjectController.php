@@ -23,8 +23,9 @@
 	public function showAction() {
 		$id = $this->request->getParam("id");
 		$ent = load_project($id);
-		$this->render(array("entity" => $ent));
+		$this->render(array("project" => $ent));
 	}
+
 
 	public function createAction() {
 		$entity = new Project();
@@ -32,7 +33,7 @@
 
 		if(!load_project_where("url = '".$proj['url']."'")) {
 			$dev = load_developer_where('name = "' . $this->request->getParam("owner_name").'"');
-			if($dev == null) {
+			if($dev == null) { //Create the developer if it's not on our database already
 				$dev = new Developer();
 				$dev->name = $this->request->getParam("owner_name");
 				save_developer($dev);
@@ -40,6 +41,8 @@
 			$proj['owner_id'] = $dev->id;
 			$entity->load_from_array($proj);
 			if(save_project($entity)) {
+				//Create the first set of stats 
+				$entity->saveInitStats();
 				$this->flash->success("The project was added correctly, thanks!");
 				$this->redirect_to(project_list_path());
 			} else {
@@ -68,12 +71,14 @@
 			$where .= " and owner_id = " . $dev->id;
 		}
 
+		$sort = str_replace("_", " ", $this->request->getParam("sort"));
+
 		$curr_page = intVal($this->request->getParam("p"));
 		$total = count_projects($where);
 		$init = $curr_page * $this->per_page;
 		$pages = ceil($total / $this->per_page);
 
-		$entity_list = list_project(null, $init . "," . $this->per_page, $where);
+		$entity_list = list_project($sort, $init . "," . $this->per_page, $where);
 		$this->render(array(
 						"entity_list" => $entity_list, 
 						"pagination" => array(
@@ -82,27 +87,12 @@
 											"total_results" => $total),
 						"search_crit" => array(
 												"lang" => $language, 
-												"owner" => $owner)));
+												"owner" => $owner,
+												"sort" => $this->request->getParam("sort"))));
 	}
 
 	private function queryGithub($usr, $repo) {
-
-		Makiavelo::info("Querying URL: https://api.github.com/repos/".$usr."/".$repo );
-		$repo = str_replace(".git", "", $repo);
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "https://api.github.com/repos/".$usr."/".$repo);
-		//curl_setopt($ch, CURLOPT_USERPWD, "deleteman:doglio23");
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$value = curl_exec($ch);
-		if(!$value) {
-			$error = curl_error($ch);
-			Makiavelo::info("CURL ERROR :: " . $error);
-			return json_decode('{"message": "'.$error.'"}');
-		} else {
-			return json_decode($value);
-
-		}
+		return GithubAPI::queryProjectData($usr, $repo);
 	}
 
 	public function grab_dataAction() {

@@ -30,4 +30,28 @@ private $language;
 	public function owner() {
 		return load_developer($this->owner_id);
 	}
+
+	public function saveInitStats() {
+		Makiavelo::info("===== Saving initial deltas");
+		$pd = new ProjectDelta();
+		$pd->forks = $this->forks;
+		$pd->delta_forks = 0;
+
+		$pd->stars = $this->stars;
+		$pd->delta_stars = 0;
+
+		$pd->project_id = $this->id;
+		$pd->sample_date = date("Y-m-d H:i:s");
+
+		if(save_project_delta($pd)) {
+			Makiavelo::info("===== Delta saved! ");
+		} else {
+			Makiavelo::info("===== ERROR saving delta");
+		}
+	}
+
+	public function getStats($init = null, $end = null) {
+		$deltas = list_project_delta("sample_date",null, "project_id = " .$this->id);
+		return $deltas;	
+	}
 }

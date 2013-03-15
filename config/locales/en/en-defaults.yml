@@ -1,13 +1,9 @@
 en:
-	filters:
-		languages:
-			ruby: Ruby
-			php: PHP
-			java: JAVA
-			javascript: JavaScript 
-			python: Python 
-			c: C 
-			cpp: "C++"
+	sort_by:
+		language_asc: Language
+		stars_desc: Stars 
+		forks_desc: Forks
+
 
 	makiavelo:
 		entities:

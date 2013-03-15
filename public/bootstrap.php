@@ -31,10 +31,18 @@ function __autoload_validator($class) {
 		require_once($path);
 	}
 }
+
+function __autoload_lib($class) {
+	$path = dirname(__FILE__)."/../lib/" . $class . "Class.php";
+	if(file_exists($path)) {
+		require_once($path);
+	}
+}
 spl_autoload_register('__autoload_core');
 spl_autoload_register('__autoload_app');
 spl_autoload_register('__autoload_controller');
 spl_autoload_register('__autoload_validator');
+spl_autoload_register('__autoload_lib');
 
 session_start();
 
