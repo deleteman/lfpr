@@ -31,13 +31,19 @@
 		$entity = new Project();
 		$proj = $this->request->getParam("project");
 
-		if(!load_project_where("url = '".$proj['url']."'")) {
-			$dev = load_developer_where('name = "' . $this->request->getParam("owner_name").'"');
+		$dev = load_developer_where('name = "' . $this->request->getParam("owner_name").'"');
+
+		if(!load_project_where("name = '".$proj['name']."' and owner_id = ".$dev->id)) {
 			if($dev == null) { //Create the developer if it's not on our database already
 				$dev = new Developer();
 				$dev->name = $this->request->getParam("owner_name");
 				save_developer($dev);
 			}
+			$proj['url'] = str_replace("https", "", $proj['url']);
+			$proj['url'] = str_replace("http", "", $proj['url']);
+			$proj['url'] = str_replace("://", "", $proj['url']);
+			$proj['url'] = "http://" . $proj['url'];
+
 			$proj['owner_id'] = $dev->id;
 			$entity->load_from_array($proj);
 			if(save_project($entity)) {

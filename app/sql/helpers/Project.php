@@ -34,7 +34,6 @@ function save_project($entity) {
 			foreach($matches[1] as $attr) {
 				$sql = str_replace(":$attr:", $entity->$attr, $sql);
 			}
-			Makiavelo::debug("Inserting new project::" . $sql);
 			if(mysql_query($sql, $__db_conn)) {
 				$entity->id = mysql_insert_id($__db_conn);
 				return true;
