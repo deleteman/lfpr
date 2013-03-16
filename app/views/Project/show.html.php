@@ -4,7 +4,11 @@
 	<?=link_to(project_list_path(), "&lt;&lt; Back to list", array("class" => "btn btn-large pull-right"))?>
 	</h1>
 </div>
-
+<ul class="breadcrumb">
+  <li><a href="<?=home_root_path_path()?>">Home</a> <span class="divider">/</span></li>
+  <li ><a href="<?=project_list_path()?>">List of projects</a> <span class="divider">/</span></li>
+  <li class="active">Stats for project</li>
+</ul>
 <div class="row">
 	<h2>Current data</h2>
 	<div class="well">
