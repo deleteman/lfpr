@@ -121,3 +121,16 @@ input:disabled {
 	float:right!important;
 	padding: 16px;
 }
+
+#logo-dad {
+	background: rgb(121, 169, 213);
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	padding: 10px;
+}
+
+footer .twitter-follow-button {
+	margin-left:15px;
+}
