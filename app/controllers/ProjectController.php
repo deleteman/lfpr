@@ -32,13 +32,15 @@
 		$proj = $this->request->getParam("project");
 
 		$dev = load_developer_where('name = "' . $this->request->getParam("owner_name").'"');
+		
+		if($dev == null) { //Create the developer if it's not on our database already
+			$dev = new Developer();
+			$dev->name = $this->request->getParam("owner_name");
+			save_developer($dev);
+		}
 
 		if(!load_project_where("name = '".$proj['name']."' and owner_id = ".$dev->id)) {
-			if($dev == null) { //Create the developer if it's not on our database already
-				$dev = new Developer();
-				$dev->name = $this->request->getParam("owner_name");
-				save_developer($dev);
-			}
+			
 			$proj['url'] = str_replace("https", "", $proj['url']);
 			$proj['url'] = str_replace("http", "", $proj['url']);
 			$proj['url'] = str_replace("://", "", $proj['url']);
