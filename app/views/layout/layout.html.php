@@ -71,10 +71,18 @@
 						<a href="/">
 							Looking for Pull Requests
 						</a>
-					</li>
-					<li class="pull-right">
 						<a href="https://twitter.com/lookingfor_pr" class="twitter-follow-button" data-show-count="false">Follow @lookingfor_pr</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					</li>
+					<li class="pull-right">
+						<a href="http://www.dad.uy" target="_blank">
+							<img id="logo-dad" src="/img/dadmonkey_group.png" alt="Powered by the DadMonkey Group" title="Powered by the DadMonkey Group" />
+						</a>
+						<a href="https://twitter.com/dad_monkey" class="twitter-follow-button" data-show-count="false">Follow @dad_monkey</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					</li>
+					<li class="pull-right">
+						
 					</li>
 				</ul>
 			</div>
