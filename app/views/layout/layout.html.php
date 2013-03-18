@@ -33,6 +33,24 @@
   })();
 
 </script>
+<!-- UserVoice JavaScript SDK (only needed once on a page) -->
+<script>(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/8topNa84Z8EH4uZJOeNVw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()</script>
+
+<!-- A tab to launch the Classic Widget -->
+<script>
+UserVoice = window.UserVoice || [];
+UserVoice.push(['showTab', 'classic_widget', {
+  mode: 'full',
+  primary_color: '#cc6d00',
+  link_color: '#007dbf',
+  default_mode: 'feedback',
+  forum_id: 198730,
+  tab_label: 'Feedback & Support',
+  tab_color: '#cc6d00',
+  tab_position: 'middle-right',
+  tab_inverted: false
+}]);
+</script>
 	<div class="container">
 		
 		<div id="main-wrapper">
