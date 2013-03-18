@@ -18,6 +18,31 @@ This project has a lot more features coming, specially related to project and us
 
 OR, you can just email me at: deleteman[at]gmail[dot]com 
 
+###Running the site locally
+
+If you're planning on cloning the site and running it locally, follow these simple steps:
+
+1. Clone the repo
+2. Run ./makiavelo.php db:create
+3. Run ./makiavelo.php db:load
+4. Run ./makiavelo.php db:migrate
+5. Configure a virtual host, with the following information
+```
+<VirtualHost *:80>
+    ServerAdmin webmaster@dummy-host2.example.com
+    DocumentRoot "<path to the public folder>""
+    ServerName lfpr.local.com
+    SetEnv makiavelo_env "development"
+    
+   <Directory "<path to the public folder>">
+      AllowOverride All 
+  </Directory>
+</VirtualHost>
+```
+6. Add an entry to your hosts file, so that the virtual host will work.
+7. ????
+8. Profit!
+
 ##More?
 
 Wanna know more about the author? Check out my other repos at: http://github.com/deleteman
