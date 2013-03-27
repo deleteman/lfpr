@@ -2,6 +2,13 @@
 
 class LoadAllDataTask {
 
+	public function loadGitalyticsData() {
+		$proj = load_project(12);
+		Makiavelo::puts("Grabing data for project: " . $proj->name);
+		$proj->grabHistoricData();
+		Makiavelo::puts("Done!");
+	}
+
 	public function load() {
 
  		$projects = list_project();

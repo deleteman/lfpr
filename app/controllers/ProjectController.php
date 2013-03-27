@@ -57,8 +57,9 @@
 			if(save_project($entity)) {
 				//Create the first set of stats 
 				$entity->saveInitStats();
+				$entity->grabHistoricData();
 				$this->flash->success("The project was added correctly, thanks!");
-				$this->redirect_to(project_list_path());
+				$this->redirect_to(project_show_path($entity));
 			} else {
 				$this->render(array("entity" => $entity), "new");
 			}
