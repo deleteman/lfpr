@@ -9,6 +9,10 @@ private $stars; //type: integer
 private $delta_stars; //type: integer
 private $forks; //type: integer
 private $delta_forks; //type: integer
+private $commits_count;
+private $new_pulls;
+private $closed_pulls;
+private $merged_pulls;
 
 
 	static public $validations = array();

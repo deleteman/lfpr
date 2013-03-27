@@ -8,7 +8,8 @@ function save_project_delta($entity) {
 		if($entity->validate()) {
 			global $__db_conn;	
 
-			$sql = "INSERT INTO project_delta(created_at,updated_at,sample_date,stars,delta_stars,forks,delta_forks, project_id) values (':created_at:',':updated_at:',':sample_date:',':stars:',':delta_stars:',':forks:',':delta_forks:', ':project_id:')";
+			$sql = "INSERT INTO project_delta(created_at,updated_at,sample_date,stars,delta_stars,forks,delta_forks, project_id, commits_count, new_pulls, closed_pulls, merged_pulls) 
+					values (':created_at:',':updated_at:',':sample_date:',':stars:',':delta_stars:',':forks:',':delta_forks:', ':project_id:', ':commits_count:', ':new_pulls:',':closed_pulls:', ':merged_pulls:')";
 
 			$sql = str_replace(":created_at:", Date("Y-m-d"), $sql);
 			$sql = str_replace(":updated_at:", Date("Y-m-d"), $sql);
@@ -32,7 +33,7 @@ function update_project_delta($en) {
 	if($en->validate()) {
 		global $__db_conn;	
 
-		$sql = str_replace(":id:", $en->id, "UPDATE project_delta SET id=':id:',created_at=':created_at:',updated_at=':updated_at:',sample_date=':sample_date:',stars=':stars:',delta_stars=':delta_stars:',forks=':forks:',delta_forks=':delta_forks:' , project_id= ':project_id:' WHERE id = :id:"); 
+		$sql = str_replace(":id:", $en->id, "UPDATE project_delta SET id=':id:',created_at=':created_at:',updated_at=':updated_at:',sample_date=':sample_date:',stars=':stars:',delta_stars=':delta_stars:',forks=':forks:',delta_forks=':delta_forks:' , project_id= ':project_id:', commits_count = ':commits_count:', new_pulls=':new_pulls:', closed_pulls=':closed_pulls:', merged_pulls=':merged_pulls:' WHERE id = :id:"); 
 
 		$sql = str_replace(":updated_at:", Date("Y-m-d"), $sql);
 

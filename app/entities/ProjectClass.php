@@ -31,6 +31,17 @@ private $language;
 		return load_developer($this->owner_id);
 	}
 
+	public function url() {
+		$url = $this->url;
+		$url = str_replace("https://", "", $url);
+		$url = str_replace("http://", "", $url);
+		return "http://" . $url;
+	}
+
+	public function language() {
+		return ($this->language != "") ? $this->language : "N/A";
+	}
+
 	public function saveInitStats() {
 		Makiavelo::info("===== Saving initial deltas");
 		$pd = new ProjectDelta();

@@ -85,10 +85,10 @@ display: none;
 	-webkit-border-bottom-right-radius: 10px;	
 }
 
-.twitter-share-button.twitter-count-horizontal {
+.twitter-share-button {
 	position: absolute;
 bottom: 59px;
-left: 25%;
+left: 39%;
 }
 input:disabled {
 	background: white;
@@ -133,4 +133,13 @@ input:disabled {
 
 footer .twitter-follow-button {
 	margin-left:15px;
+}
+
+.avatar {
+	width: 50px;
+	vertical-align: bottom;
+}
+
+a.proj-name-link {
+	color:#34495e;
 }

@@ -36,6 +36,8 @@ $(document).ready(function() {
 				 	$("#project_stars").val(json.stars);
 				 	$("#project_forks").val(json.forks);
 				 	$("#project_last_update").val(json.last_update);
+
+				 	$("#owner_avatar").val(json.avatar_url);
 				 	
 				 	$("#stars_field").html(json.stars);
 				 	$("#forks_field").html(json.forks);

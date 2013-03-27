@@ -1,4 +1,5 @@
 <?php
+set_time_limit(0);
 
 function __autoload_core($class) {
 	try {

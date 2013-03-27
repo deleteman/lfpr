@@ -22,4 +22,12 @@ private $github_url; //type: string
 		}
 	}
 
+	public function avatar() {
+		if($this->avatar_url == "") {
+			return "/img/no-avatar.png";
+		} else {
+			return $this->avatar_url;
+		}
 	}
+
+}

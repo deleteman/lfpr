@@ -36,7 +36,13 @@
 		if($dev == null) { //Create the developer if it's not on our database already
 			$dev = new Developer();
 			$dev->name = $this->request->getParam("owner_name");
+			$dev->avatar_url = $this->request->getParam("owner_avatar");
 			save_developer($dev);
+		} else { //Update the avatar if it changed
+			if ( $dev->avatar_url != $this->request->getParam("owner_avatar")) {
+				$dev->avatar_url = $this->request->getParam("owner_avatar");
+				save_developer($dev);
+			}
 		}
 
 		if(!load_project_where("name = '".$proj['name']."' and owner_id = ".$dev->id)) {
@@ -110,17 +116,18 @@
 		$max = count($url_parts) - 1;
 
 		$data = $this->queryGithub($url_parts[$max -1], $url_parts[$max]);
-		Makiavelo::info("Data returned: " . print_r($data, true));
+		//Makiavelo::info("Data returned: " . print_r($data, true));
 
 		if($data->message) {
 			$json_array = $data;
 		} else {
 
-		$json_array = array(
+			$json_array = array(
 						"name" => $data->{'name'},
 						"raw" => print_r($data, true),
 						"description" => $data->{'description'},
 						"owner_name" => $data->{'owner'}->{'login'},
+						"avatar_url" => $data->{'owner'}->{'avatar_url'},
 						"stars" => $data->{'watchers'},
 						"forks" => $data->{'forks'},
 						"last_update" => $data->{'updated_at'},

@@ -16,8 +16,8 @@ function __autoload_entities ($classname) {
 	if(file_exists($fname)) {
 
 		//Includes the sql helpers for the entity
-		$sql_helper_folder = ROOT_PATH . Makiavelo::SQL_HELPERS_FOLDER;
-		include($sql_helper_folder . "/" . $classname . ".php");
+		//$sql_helper_folder = ROOT_PATH . Makiavelo::SQL_HELPERS_FOLDER;
+		//include($sql_helper_folder . "/" . $classname . ".php");
 		include_once($fname);
 	}
 }
@@ -38,14 +38,37 @@ function __autoload_tasks ($classname) {
 	}
 }
 
+
+function __autoload_lib($class) {
+	$path = dirname(__FILE__)."/lib/" . $class . "Class.php";
+	if(file_exists($path)) {
+		require_once($path);
+	}
+}
+
 spl_autoload_register('__autoload_core');
 spl_autoload_register('__autoload_entities');
 spl_autoload_register('__autoload_validator');
 spl_autoload_register('__autoload_tasks');
+spl_autoload_register('__autoload_lib');
+
 
 
 include_once(ROOT_PATH . "/core/spyc.php");
 include_once(ROOT_PATH . "/config/config.php");
+
+
+//Includes all sql helpers
+$sql_helper_folder = ROOT_PATH . Makiavelo::SQL_HELPERS_FOLDER;
+$d = dir($sql_helper_folder);
+while(false !== ($entry = $d->read())) {
+	if($entry[0] != ".") {
+		include($sql_helper_folder . "/" . $entry);
+	}
+}
+
+//DB connection... simple for now...
+$__db_conn = DBLayer::connect();
 
 
 $parameters = $argv;

@@ -48,14 +48,14 @@ if(count($this->entity_list) > 0) {  ?>
 <?php foreach($this->entity_list as $idx => $entity) { ?>
 	<div class="span3 text-center">
 		<div class="project-spotlight">
-			<h3><?=truncate_string($entity->name, 13)?></h3>
+			<h3><?=link_to(project_show_path($entity), truncate_string($entity->name, 13), array("class" => "proj-name-link"))?></a></h3>
 			<div class="">
 				<ul class="simple-stats pull-left">
 					<li><span class="fui-menu-24"></span> <?=$entity->forks?> forks</li>
 					<li><span class="fui-heart-24"></span> <?=$entity->stars?> stars</li>
 				</ul>
 				<ul class="simple-stats pull-left">
-					<li><span class="fui-settings-24"></span> <?=$entity->language?> </li>
+					<li><span class="fui-settings-24"></span> <?=$entity->language()?> </li>
 				<li ><span class="fui-man-24"></span> <?=link_to(project_list_path(array("language" => "All", "owner" => $entity->owner()->name)),
 									$entity->owner()->name,
 									array("class" => "dev-link", "data-title" => "See all projects by this user"))?></li>
@@ -64,7 +64,7 @@ if(count($this->entity_list) > 0) {  ?>
 			</div>
 			<p><?=truncate_string($entity->description, 70)?></p>
 
-			<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?=$entity->url?>" data-text="Checkout this cool project on @Github! <?=$entity->url?>" data-via="lookingfor_pr">Tweet</a>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?=$entity->url?>" data-text="Checkout this cool project on @Github!" data-via="lookingfor_pr">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 			<?=link_to(project_show_path($entity), 
 					'<span class="fui-eye-24"></span> View Stats', array("class" => "btn btn-primary btn-large" ))?>

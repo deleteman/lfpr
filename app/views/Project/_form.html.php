@@ -33,6 +33,7 @@
 	</div>
 
 	<div class="palette palette-info-dark">
+	<?=hidden_field_tag("owner_avatar", "owner_avatar")?>
 	<?=text_field($this->entity, "name", "Project's Name", array("class" => "span6"))?>
 
 	<?=textarea_field($this->entity, "description", "Project's description", array("class" => "span10"))?>
