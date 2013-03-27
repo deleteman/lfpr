@@ -65,11 +65,14 @@ class MakiaveloEntity {
 		$properties = $reflect->getProperties();
 		$validates = true;
 
+		$validations = $reflect->getStaticPropertyValue("validations");
+
 		foreach($properties as $prop) {
 			$attr = $prop->getName();
 			$value = $this->$attr;
-			$validations = $class_name::$validations; //This sucks, TODO: Fix so it works on php < 5.3 and php >= 5.3
+			//$validations = $class_name::$validations; //This sucks, TODO: Fix so it works on php < 5.3 and php >= 5.3
 			Makiavelo::info("Validations set for model (" . $class_name .") " . print_r($validations, true));
+
 			Makiavelo::info("-- Validating attr: " . $attr);
 			if(!isset($validations[$attr])) {
 				Makiavelo::info("-- No validation set");
