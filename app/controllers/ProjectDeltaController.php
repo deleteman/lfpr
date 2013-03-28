@@ -80,7 +80,7 @@
 			$pd->closed_pulls 	= $closed_pulls_today;
 			$pd->merged_pulls 	= $merged_pulls_today;
 			$pd->sample_date 	= date("Y-m-d H:i:s");
-			
+
 			if(save_project_delta($pd)) {
 				Makiavelo::info("===== Delta saved! ");
 			} else {

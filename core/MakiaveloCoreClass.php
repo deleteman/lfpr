@@ -86,6 +86,13 @@ class MakiaveloCore {
 
 	public function renderNoRouteError() {
 		header("HTTP/1.0 404 Not Found");
+		$not_found_path = ROOT_PATH . "/" . Makiavelo::NOTFOUND_PAGE_PATH;
+		$fp = fopen($not_found_path, "r");
+		if($fp) {
+			$not_found = fread($fp, filesize($not_found_path));
+			echo $not_found;
+			fclose($fp);
+		}
 	}
 
 	

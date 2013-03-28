@@ -6,6 +6,8 @@ class Makiavelo {
 	//System paths
 	const MAPPINGS_FOLDER = "/mappings/";
 
+	const NOTFOUND_PAGE_PATH = "/public/404.html";
+
 	const ENTITITES_FOLDER = "/app/entities/";
 	const CONTROLLERS_FOLDER = "/app/controllers/";
 	const VIEWS_FOLDER = "/app/views/";
