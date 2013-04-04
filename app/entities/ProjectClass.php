@@ -137,9 +137,9 @@ private $language;
 			$pd->sample_date 	= $str_date; 
 			
 			if(save_project_delta($pd)) {
-				Makiavelo::puts("===== Delta saved! ");
+				Makiavelo::info("===== Delta saved! ");
 			} else {
-				Makiavelo::puts("===== ERROR saving delta::" . mysql_error());
+				Makiavelo::info("===== ERROR saving delta::" . mysql_error());
 			}
 		}
 	}
