@@ -53,5 +53,11 @@ $(document).ready(function() {
 			 });
 	});
 
+	$(".project-spotlight").hover(function(){
+		$(this).addClass("over");
+	}, function() {
+		$(this).removeClass("over");
+	});
+
 	$(".dev-link, .goto-github, .has-tooltip").tooltip();
 });

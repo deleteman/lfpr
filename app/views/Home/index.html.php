@@ -6,7 +6,7 @@
 	world know you're looking for contributors
 </p>
 	<p class="pull-left">
-	<?=link_to(project_list_path(), "Find projects", array("class" => "btn btn-primary btn-large"))?>
+	<?=link_to(project_list_path(), "Find projects", array("class" => "btn btn-primary btn-large", "id" => "main-btn"))?>
 	<?=link_to(project_new_path(), "Publish your project", array("class" => "btn btn-large"))?>
 	</p>
 	<div class="well span4 pull-right">
@@ -49,7 +49,7 @@
 		</div>
 		<?php } ?>
 		<div class="span3 text-center">
-			<div class="project-spotlight">
+			<div class="project-spotlight" id="your-project">
 				<h3>Your project</h3>
 				<p>
 					<img src="/img/illustrations/clipboard.png">

@@ -4,6 +4,7 @@
 
 
 .project-spotlight {
+	transition: box-shadow 0.5s;
 	text-align: center;
 	position: relative;
 	background-color: #eeeeee;
@@ -11,10 +12,29 @@
 	height: 250px;
 	-webkit-border-radius: 6px;
 	-moz-border-radius:6px;
+	-o-border-radius:6px;
 	border-radius:6px;
 	margin-bottom: 10px;
 }
 
+.project-spotlight.over {
+	box-shadow: 0px 0px 8px;
+	-moz-box-shadow: 0px 0px 8px;
+	-webkit-box-shadow: 0px 0px 8px;
+	-o-box-shadow: 0px 0px 8px;
+}
+
+.project-spotlight#your-project {
+	border: 3px solid #2ecc71;
+	box-shadow: 0px 0px 8px;
+	-moz-box-shadow: 0px 0px 8px;
+	-webkit-box-shadow: 0px 0px 8px;
+	-o-box-shadow: 0px 0px 8px;
+}
+
+#main-btn {
+	border: 3px solid rgb(71, 81, 136);
+}
 .latest-projects {
 	margin-bottom: 10px;
 }
