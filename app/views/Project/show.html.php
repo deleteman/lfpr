@@ -87,7 +87,7 @@ $(document).ready(function() {
   var chart1 = new Highcharts.Chart({
         chart: {
             renderTo: 'main-stats',
-            type: 'spline'
+            type: 'column'
         },
         title: {
             text: 'Stars & Forks over time'
@@ -102,9 +102,11 @@ $(document).ready(function() {
                     },
         series: [{
             name: 'Forks',
+            type: 'column',
             data: [<?=implode(",", $forks)?>]
         }, {
             name: 'Stars',
+            type: 'spline',
             data: [<?=implode(",", $stars)?>]
         }]
     });
@@ -113,7 +115,7 @@ $(document).ready(function() {
   var chart2 = new Highcharts.Chart({
         chart: {
             renderTo: 'commits-stats',
-            type: 'column'
+            type: 'spline'
         },
         title: {
             text: 'Commits activity'
@@ -140,7 +142,7 @@ $(document).ready(function() {
 	var chart3 = new Highcharts.Chart({
         chart: {
             renderTo: 'pull-stats',
-            type: 'spline'
+            type: ''
         },
         title: {
             text: 'Pull requests activity'
@@ -159,13 +161,16 @@ $(document).ready(function() {
         },
         series: [{
             name: 'Merged',
+            type: 'column',
             data: [<?=implode(",", $merged_pulls)?>]
         },
         {
+            type: 'spline',
             name: 'Closed',
             data: [<?=implode(",", $closed_pulls)?>]
         },
         {
+            type: 'areaspline',
             name: 'Opened',
             data: [<?=implode(",", $new_pulls)?>]
         }]
