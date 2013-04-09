@@ -65,7 +65,12 @@ class MakiaveloEntity {
 		$properties = $reflect->getProperties();
 		$validates = true;
 
-		$validations = $reflect->getStaticPropertyValue("validations");
+		try {
+			$validations = $reflect->getStaticPropertyValue("validations");
+		} catch(Exception $e) {
+			$props = $reflect->getStaticProperties();
+			$validations = $props['validations'];
+		}
 
 		foreach($properties as $prop) {
 			$attr = $prop->getName();
