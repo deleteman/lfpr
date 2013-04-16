@@ -12,7 +12,7 @@ private $stars; //type: integer
 private $forks; //type: integer
 private $last_update; //type: datetime
 private $language;
-private $published;
+private $published; //type: integer
 
 
 	static public $validations = array();
