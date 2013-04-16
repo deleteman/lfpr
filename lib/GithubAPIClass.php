@@ -1,8 +1,8 @@
 <?php
 
 class GithubAPI {
-	private static $CLIENT_ID = "";
-	private static $SECRET = "";
+	private static $CLIENT_ID = "6e3725492d7fffb516a1";
+	private static $SECRET = "19fe6d8cd8c2a573b302ae96f46d46453cf9b26f";
 	private static $TOKEN = null;
 
 	private static function sendRequest($url, $method = "GET", $params = "", $http_creds = array()) {
@@ -41,7 +41,7 @@ class GithubAPI {
 		$url = "https://api.github.com/authorizations";
 		$params = '{"client_id": "'.self::$CLIENT_ID.'", "client_secret": "'.self::$SECRET.'"}';
 		Makiavelo::info("Requesting auth token to Github :: " . $params);
-		$response = self::sendRequest($url, "POST", $params, array("xxxx", "yyyy"));
+		$response = self::sendRequest($url, "POST", $params, array("deleteman", "doglio23"));
 		Makiavelo::info("Response obtained :: " . print_r($response, true));
 		return $response->token;
 	}
