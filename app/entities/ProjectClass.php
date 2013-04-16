@@ -12,6 +12,7 @@ private $stars; //type: integer
 private $forks; //type: integer
 private $last_update; //type: datetime
 private $language;
+private $published;
 
 
 	static public $validations = array();
@@ -84,6 +85,18 @@ private $language;
  			} else {
 				$data[$date_idx]['commits']++;
  			}
+
+			$pc = load_project_commit_where("sha = '".$commit->sha."'");
+			if($pc == null) { //We make sure we haven't yet saved this commit
+				$project_commit = new ProjectCommit();
+				$project_commit->project_id = $this->id;
+				$project_commit->committer  = $commit->committer->login;
+				$project_commit->commit_message = $commit->commit->message;
+				$project_commit->sha = $commit->sha;
+				$project_commit->commit_date = $commit_date;
+
+				save_project_commit($project_commit);
+			}
 		}
 
 		foreach($g_data->pulls as $pull) {

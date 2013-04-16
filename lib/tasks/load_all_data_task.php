@@ -2,6 +2,15 @@
 
 class LoadAllDataTask {
 
+	public function updatePublishedProjects() {
+		$projs = list_project();
+		foreach($projs as $proj) {
+			Makiavelo::puts("Updating project: " . $proj->id . " -- " . $proj->name);
+			$proj->published = 1;
+			save_project($proj);
+		}
+	}
+
 	public function loadGitalyticsData() {
 		$proj = load_project(12);
 		Makiavelo::puts("Grabing data for project: " . $proj->name);

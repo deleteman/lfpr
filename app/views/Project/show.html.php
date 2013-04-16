@@ -14,7 +14,7 @@
 	<h2 class="pull-left">Current data</h2>
 	<h3 class="pull-right" >
 		by
-		<?=link_to(project_list_path(array("language" => "All", "owner" => $this->project->owner()->name)),
+		<?=link_to(developer_show_path($this->project->owner()),
 										$this->project->owner()->name,
 										array("class" => "dev-link", "data-title" => "See all projects by this user"))?>
 		<?=image_tag($this->project->owner()->avatar(), array("class" => "avatar"))?> 

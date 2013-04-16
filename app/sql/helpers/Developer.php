@@ -69,13 +69,18 @@ function load_developer_where($where) {
 	$sql =  "SELECT * FROM developer WHERE $where"; #SELECT * FROM tipo_buque WHERE id = " . $id;
 
 	$result = mysql_query($sql, $__db_conn);
-	if(mysql_num_rows($result) > 0) {
-		$row = mysql_fetch_assoc($result);
-		$new = new Developer();
-		$new->load_from_array($row);
-		return $new;
-	} else {
+	if(!$result) {
+		Makiavelo::info("ERROR MYSQL:: " . __FILE__ . "::" . mysql_error());
 		return null;
+	} else {
+		if(mysql_num_rows($result) > 0) {
+			$row = mysql_fetch_assoc($result);
+			$new = new Developer();
+			$new->load_from_array($row);
+			return $new;
+		} else {
+			return null;
+		}
 	}
 }
 

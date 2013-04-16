@@ -1,4 +1,17 @@
 <div class="hero-unit">
+	<?php
+	if(user_logged_in()) { ?>
+	<div class="current-user">
+		<?=image_tag(current_user()->avatar_url)?>
+		<?=link_to(developer_show_path(current_user()), '<i class="icon-github-alt"></i> '.current_user()->name, array("class" => "user-link"))?>
+		/ <?=link_to(login_sign_out_path(), '<i class="icon-signout"></i> ', array("class" => "has-tooltip", "data-title" => "Sign out"))?>
+	</div>
+	<?php
+	} else { ?> 
+	<p class="pull-right">
+		<?=link_to(GithubAPI::login_url(), '<i class="icon-github" style="font-size:30px;" ></i> Github', array("class" => "has-tooltip btn btn-large btn-success", "data-title" => "Sign-in using Github"))?>
+	</p>
+	<?php } ?>
 <h3>Welcome to </h3>
 <h1> Looking for Pull Request!</h1>
 <p>
@@ -9,6 +22,7 @@
 	<?=link_to(project_list_path(), "Find projects", array("class" => "btn btn-primary btn-large", "id" => "main-btn"))?>
 	<?=link_to(project_new_path(), "Publish your project", array("class" => "btn btn-large"))?>
 	</p>
+
 	<div class="well span4 pull-right">
 		<p>Subscribe to get weekly updates on the site and new repos published.</p>
 		<?=form_for($this->suscriptor) ?>
@@ -19,7 +33,7 @@
 	<div class="clearfix"></div>
 </div>
 
-	<h3>Latest projects added</h3>
+	<h3>Random projects</h3>
 	<div class="row latest-projects">
 		<?php
 		foreach($this->new_projects as $proj) { ?> 
@@ -33,7 +47,7 @@
 					</ul>
 					<ul class="simple-stats pull-left">
 						<li><span class="fui-settings-24"></span> <?=$proj->language()?> </li>
-					<li ><span class="fui-man-24"></span> <?=link_to(project_list_path(array("language" => "All", "owner" => $proj->owner()->name)),
+					<li ><span class="fui-man-24"></span> <?=link_to(developer_show_path($proj->owner()),
 										$proj->owner()->name,
 										array("class" => "dev-link", "data-title" => "See all projects by this user"))?></li>
 					</ul>	

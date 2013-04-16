@@ -2,6 +2,10 @@
 	display: none!important;
 }
 
+.relative {
+	position: relative;
+}
+
 
 .project-spotlight {
 	transition: box-shadow 0.5s;
@@ -158,8 +162,134 @@ footer .twitter-follow-button {
 .avatar {
 	width: 50px;
 	vertical-align: bottom;
+	border-radius: 30px;
 }
 
 a.proj-name-link {
 	color:#34495e;
+}
+
+.current-user {
+	float:right;
+	font-size:14px;
+}
+
+.current-user img {
+	border-radius: 40px;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	-o-border-radius: 40px;
+	width: 80px;
+	display: block;
+}
+
+.current-user form {
+	display: inline;
+}
+.current-user form a{
+	text-decoration: none;
+}
+
+.current-user .user-link {
+	text-decoration: none;
+}
+
+
+.projects-list li {
+	margin: 5px;
+	padding: 10px;
+	font-size: 30px;
+	border: 1px solid;
+	border-radius: 10px;
+	min-height: 55px;
+	position: relative;
+	transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+	-moz-transition: opacity 0.5s;
+	-o-transition: opacity 0.5s;
+	opacity: 0.5;
+	-webkit-opacity: 0.5;
+	-moz-opacity: 0.5;
+	-o-opacity: 0.5;
+}
+
+.projects-list li:hover {
+	opacity: 1;
+	-webkit-opacity: 1;
+	-moz-opacity: 1;
+	-o-opacity: 1;
+}
+
+.projects-list li.par {
+	background: rgb(255, 252, 182);
+}
+.projects-list li.impar {
+	background: rgb(205, 208, 214);
+}
+
+.projects-list li a.project-lnk {
+	color: #34495e;
+}
+.projects-list li a.project-lnk:hover {
+	color: #005580;
+}
+
+.projects-list li img {
+	position: absolute;
+right: 0px;
+top: 0px;
+margin: 0px;
+padding: 0px;
+z-index: 10;
+width: 60px;
+pointer-events: none;
+}
+
+.projects-list {
+	list-style: none;
+	margin: 0;
+}
+
+.projects-list .project-description {
+	margin: 0;
+	padding:5px;
+	font-size:12px;
+}
+
+.dev-stats {
+	list-style: none;
+	margin: 0;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+.dev-stats li {
+	display: inline-block;
+}
+
+
+.language {
+	font-style: italic;
+	font-size: 14px;
+}
+
+.top-nav {
+	background: #34495e;
+	color: white;
+	padding: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin-bottom:5px;
+}
+
+.top-nav .app-name {
+	font-size: 18px;
+	color: #2fe2bf;
+}
+.top-nav img {
+	width: 25px;
+	border-radius: 20px;
+}
+.top-nav form {
+	display: inline;
 }

@@ -56,7 +56,7 @@ if(count($this->entity_list) > 0) {  ?>
 				</ul>
 				<ul class="simple-stats pull-left">
 					<li><span class="fui-settings-24"></span> <?=$entity->language()?> </li>
-				<li ><span class="fui-man-24"></span> <?=link_to(project_list_path(array("language" => "All", "owner" => $entity->owner()->name)),
+				<li ><span class="fui-man-24"></span> <?=link_to(developer_show_path($entity->owner()),
 									$entity->owner()->name,
 									array("class" => "dev-link", "data-title" => "See all projects by this user"))?></li>
 				</ul>	

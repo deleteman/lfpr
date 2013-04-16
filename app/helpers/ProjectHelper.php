@@ -2,7 +2,7 @@
 
 function get_valid_languages() {
 	global $__db_conn;
-	$sql = "SELECT distinct language from project where language != '' order by language";
+	$sql = "SELECT distinct language from project where language != '' and published = 1 order by language";
 
 	$langs = array("All");
 	if($rs = mysql_query($sql, $__db_conn)) {
