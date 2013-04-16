@@ -2,7 +2,7 @@
 
 function load_latest_projects() {
 	global $__db_conn;
-	$sql = "SELECT * from project order by rand() limit 3";
+	$sql = "SELECT * from project where published = 1 order by rand() limit 3";
 
 	$projects = array();
 	if($rs = mysql_query($sql, $__db_conn)) {
