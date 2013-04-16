@@ -38,7 +38,7 @@ function save_project($entity) {
 				$entity->id = mysql_insert_id($__db_conn);
 				return true;
 			} else {
-				Makiavelo::debug("Error mysql::" . mysql_error());
+				Makiavelo::info("Error mysql::" . mysql_error());
 				return false;
 			}
 
