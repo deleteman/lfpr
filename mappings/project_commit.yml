@@ -1,0 +1,8 @@
+crud:
+	entity:
+		name: ProjectCommit
+		fields:
+			project_id: integer
+			committer: string
+			commit_message: text
+			sha:string

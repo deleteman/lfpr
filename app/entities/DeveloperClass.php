@@ -30,4 +30,12 @@ private $github_url; //type: string
 		}
 	}
 
+	public function getProjects() {
+		return list_project(null, null, "owner_id = " . $this->id);
+	}
+
+	public function commitCount() {
+		return count_project_commit("committer = '".$this->name."'");
+	}
+
 }

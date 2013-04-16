@@ -18,6 +18,9 @@
 	<link rel="stylesheet" href="/stylesheets/styles.css" type="text/css" />
 	<link rel="stylesheet" href="/stylesheets/timePicker.css" type="text/css" />
 	<link rel="stylesheet" href="/stylesheets/ui-lightness/jquery-ui-1.8.23.custom.css" type="text/css" />
+
+	<link rel="stylesheet" href="/stylesheets/font-awesome.min.css" type="text/css" />
+	<link rel="stylesheet" href="/stylesheets/font-awesome-ie7.min.css" type="text/css" />
 </head>
 <body>
 	<script type="text/javascript">
@@ -52,6 +55,23 @@ UserVoice.push(['showTab', 'classic_widget', {
 }]);
 </script>
 	<div class="container">
+		<?php
+		if(user_logged_in()) { ?>
+		<div class="row">
+			<div class="top-nav">
+				<span class="app-name">
+				<!--	Looking For Pull Requests-->
+				</span>
+				<div class="pull-right">
+					<?=image_tag(current_user()->avatar_url)?>
+					<?=link_to(developer_show_path(current_user()), current_user()->name)?>
+					/ 
+					<?=link_to(login_sign_out_path(), '<i class="icon-signout"></i> Log Out', array("class" => "has-tooltip", "data-title" => "Sign out"))?>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<?php } ?>
 		
 		<div id="main-wrapper">
 		<?php

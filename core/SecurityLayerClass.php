@@ -42,7 +42,7 @@ class SecurityLayer {
 		}
 
 		$_SESSION['makiavelo']['current_session']['user'] = $usr;
-		$_SESSION['makiavelo']['current_session']['role'] = $usr->role;
+		$_SESSION['makiavelo']['current_session']['role'] = ($usr->role) ? $usr->role : "default";
 
 	}
 
@@ -53,13 +53,16 @@ class SecurityLayer {
 	}
 
 	public function isUserLoggedIn() {
+		Makiavelo::info(print_r($_SESSION, true));
 		if(isset($_SESSION['makiavelo'])) {
 			if(isset($_SESSION['makiavelo']['current_session'])) {
 				if(isset($_SESSION['makiavelo']['current_session']['role'])) {
+					Makiavelo::info("USER IS LOGGED IN!");
 					return true;
 				}
 			}
 		}
+					Makiavelo::info("USER NOT LOGGED IN!");
 		return false;
 	}
 

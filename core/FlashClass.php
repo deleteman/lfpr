@@ -16,7 +16,7 @@ class Flash {
 			}
 			return $txt;
 		} else {
-			$_SESSION["__flash_" . $method_type] = $text[0];
+			$_SESSION["__flash_" . $method_parts[1]] = $text[0];
 		}
 	}
 

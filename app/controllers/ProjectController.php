@@ -23,9 +23,32 @@
 	public function showAction() {
 		$id = $this->request->getParam("id");
 		$ent = load_project($id);
-		$this->render(array("project" => $ent));
+		if($ent && !$ent->published) {
+			$this->flash->setError("This project has not been published yet!");
+			$this->redirect_to(project_list_path());
+		} else if(!$ent){
+			$this->flash->setError("Project not found!");
+			$this->redirect_to(project_list_path());
+		} else {
+			$this->render(array("project" => $ent));
+		}
 	}
 
+	public function publishAction() {
+		$id = $this->request->getParam("id");
+		$ent = load_project($id);
+		if($ent == null) {
+			$this->flash->setError("Project not found!");
+		} else {
+			$ent->published = true;
+			save_project($ent);
+			//Create the first set of stats 
+			$ent->saveInitStats();
+			$ent->grabHistoricData();
+			$this->flash->setSuccess("Project was published correctly!");
+		}
+		$this->redirect_to(developer_show_path(current_user()));
+	}
 
 	public function createAction() {
 		$entity = new Project();
@@ -76,7 +99,7 @@
 	public function indexAction() {
 		$language = $this->request->getParam("language");
 		$owner = $this->request->getParam("owner");
-		$where = " 1 ";
+		$where = " published = 1 ";
 		if($language != "" && $language != "All") {
 			$where .= " and language = '" . $language ."'";
 		}

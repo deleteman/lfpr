@@ -7,7 +7,7 @@
  		on stars and forks
  		*/
  	public function generateAction() {
- 		$projects = list_project();
+ 		$projects = list_project("published = 1");
  		Makiavelo::info("=== Starting stats process ===");
  		foreach($projects as $proj) {
  			$proj_name = $proj->name;
@@ -29,10 +29,30 @@
  			//Calculate the commits for today
 			$commits_today = 0;
 			$today = date("Y-m-d");
+			/*
+			Makiavelo::info("========================");
+			Makiavelo::info(print_r($data->commits, true));
+			Makiavelo::info("========================");
+			exit();
+			*/
+
 			foreach($data->commits as $commit) {
 				$commit_date = $commit->commit->committer->date;
 				$commit_date = explode("T", $commit_date);
 				$commit_date = $commit_date[0];
+
+				$pc = load_project_commit_where("sha = '".$commit->sha."'");
+				if($pc == null) { //We make sure we haven't yet saved this commit
+					$project_commit = new ProjectCommit();
+					$project_commit->project_id = $proj->id;
+					$project_commit->committer  = $commit->committer->login;
+					$project_commit->commit_message = $commit->commit->message;
+					$project_commit->sha = $commit->sha;
+					$project_commit->commit_date = $commit_date;
+
+					save_project_commit($project_commit);
+				}
+				
 				if($commit_date == $today) {
 					$commits_today++;	
 				}

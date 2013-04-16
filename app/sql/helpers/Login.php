@@ -1,5 +1,24 @@
 <?php
 
+function login_github_user($usr) {
+	global $sLayer;
+	$dev = load_developer_where("name = '" . $usr['username']."'");
+	if($dev != null) {
+		$sLayer->loginUser($dev);			
+		return array("ok" => true, "user" => $dev);
+	} else {
+		$dev = new Developer();
+		$dev->name = $usr['username'];
+		$dev->avatar_url = $usr['avatar_url'];
+		if(save_developer($dev)) {
+			$sLayer->logInUser($dev);
+			return array("ok" => true, "user" => $dev);
+		} else {
+			return array("ok" => false);
+		}
+	}
+}
+
 function login_user($u, $p) {
 	global $__db_conn;
 	global $__SECURITY;
