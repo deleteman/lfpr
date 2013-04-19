@@ -40,7 +40,7 @@
 		if($ent == null) {
 			$this->flash->setError("Project not found!");
 		} else {
-			$ent->published = true;
+			$ent->published = 1;
 			save_project($ent);
 			//Create the first set of stats 
 			$ent->saveInitStats();
@@ -76,6 +76,7 @@
 			$proj['url'] = "http://" . $proj['url'];
 
 			$proj['owner_id'] = $dev->id;
+			$proj['published'] = 1;
 			$entity->load_from_array($proj);
 			if(save_project($entity)) {
 				//Create the first set of stats 
