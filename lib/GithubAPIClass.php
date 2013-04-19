@@ -33,8 +33,10 @@ class GithubAPI {
 		}
 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		Makiavelo::info("Inside the sendRequest method url:: " . print_r($url, true));
+		Makiavelo::info("Inside the sendRequest method PArams:: " . print_r($params, true));
 		$value = curl_exec($ch);
-		Makiavelo::info("Inside the sendRequest methdo:: " . print_r($value, true));
+		Makiavelo::info("Inside the sendRequest method:: " . print_r($value, true));
 		if(!$value) {
 			$error = curl_error($ch);
 			Makiavelo::info("CURL ERROR :: " . $error);
@@ -114,8 +116,8 @@ class GithubAPI {
 		}
 		$repo = str_replace(".git", "", $repo);
 		$repo_url = "https://api.github.com/repos/".$usr."/".$repo;
-		Makiavelo::info("Querying URL: " . $repo_url);
-		$data = self::sendRequest($repo_url);	
+		Makiavelo::info("Repo URL: " . $repo_url);
+		$data = self::sendRequest($repo_url . "?access_token=" . self::$TOKEN);	
 
 		$commits_url = $repo_url . "/commits?access_token=" . self::$TOKEN;
 		$commits_data = self::sendRequest($commits_url);

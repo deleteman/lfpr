@@ -45,25 +45,25 @@ class DBLayer {
 			Makiavelo::info("Error:: " . mysql_error());
 		} else {
 			while($data = mysql_fetch_assoc($res)) {
-				Makiavelo::info("Field data: " . print_r($data, true));
+				//Makiavelo::info("Field data: " . print_r($data, true));
 				$return[$data['Field']] = $data['Type'];
 			}
 
 		}
 		//DBLayer::disconnect($db);
-		Makiavelo::info("table description: " . print_r($return, true));
+		//Makiavelo::info("table description: " . print_r($return, true));
 		return $return;
 	}
 
 	private static function loadConfiguration() {
-		Makiavelo::info("Loading database configuration file: ");
+		//Makiavelo::info("Loading database configuration file: ");
 		$database_yml = ROOT_PATH . Makiavelo::DATABASE_CONFIGURATION;
 
 		Makiavelo::info($database_yml);
 		$parser = new YAMLParser();
 		$config = $parser->parsePath($database_yml);
-		Makiavelo::info("Configuration loaded: ");
-		Makiavelo::info(print_r($config, true));
+		//Makiavelo::info("Configuration loaded: ");
+		//Makiavelo::info(print_r($config, true));
 		DBLayer::$config = $config[Makiavelo::getCurrentEnv()];
 	}
 

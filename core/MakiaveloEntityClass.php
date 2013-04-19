@@ -41,8 +41,8 @@ class MakiaveloEntity {
 	}
 
 	public function load_from_array($arr) {
-		Makiavelo::info("Inside load_from_array....");
-		Makiavelo::info("Data to be loaded: " . print_r($arr, true));
+		//Makiavelo::info("Inside load_from_array....");
+		//Makiavelo::info("Data to be loaded: " . print_r($arr, true));
 		foreach($arr as $attr => $value) {
 			$this->$attr = $this->translateValue($attr, $value);
 		}

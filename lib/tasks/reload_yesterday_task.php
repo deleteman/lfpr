@@ -1,25 +1,24 @@
 <?php
 
- class ProjectDeltaController extends ApplicationController {
+class ReloadYesterdayTask {
 
- 	/**
- 		Loads all projects and queries Githubs API for new data
- 		on stars and forks
- 		*/
- 	public function generateAction() {
- 		$projects = list_project("published = 1");
+
+	public function  run() {
+		$projects = list_project("published = 1");
  		Makiavelo::info("=== Starting stats process ===");
  		foreach($projects as $proj) {
+
  			$proj_name = $proj->name;
  			$usr_name  = $proj->owner()->name;		
  			$dev = $proj->owner();
- 			if($proj->updated_at == date("Y-m-d") . "00:00:00") {
- 				continue; //Avoid duplicated entries
- 			}
 
  			Makiavelo::info("==== Querying for $usr_name/$proj_name");
+ 			Makiavelo::puts("==== Querying for $usr_name/$proj_name");
  			$data = GithubAPI::queryProjectData($usr_name, $proj_name);
-
+ 			if(isset($data->message)) {
+ 				Makiavelo::info("Project error: " . $data->message);
+ 				continue;
+ 			}
  			//We update the dev's avatar if needed
  			if($data->owner->avatar_url != $dev->avatar_url) {
  				$dev->avatar_url = $data->owner->avatar_url;
@@ -28,13 +27,9 @@
 
  			//Calculate the commits for today
 			$commits_today = 0;
-			$today = date("Y-m-d");
-			/*
-			Makiavelo::info("========================");
-			Makiavelo::info(print_r($data->commits, true));
-			Makiavelo::info("========================");
-			exit();
-			*/
+			$today = '2013-04-18';
+		
+
 
 			foreach($data->commits as $commit) {
 				$commit_date = $commit->commit->committer->date;
@@ -99,7 +94,7 @@
 			$pd->new_pulls 		= $new_pulls_today;
 			$pd->closed_pulls 	= $closed_pulls_today;
 			$pd->merged_pulls 	= $merged_pulls_today;
-			$pd->sample_date 	= date("Y-m-d H:i:s");
+			$pd->sample_date 	= '2013-04-18';
 
 			if(save_project_delta($pd)) {
 				Makiavelo::info("===== Delta saved! " );
@@ -110,9 +105,7 @@
  			//}
 
  		}
- 	}
-
- }
-
+	}
+}
 
 ?>
