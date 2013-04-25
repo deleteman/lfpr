@@ -1,8 +1,8 @@
 <?php
 
 class GithubAPI {
-	private static $CLIENT_ID = "";
-	private static $SECRET = "";
+	private static $CLIENT_ID = ""; 
+	private static $SECRET = ""; 
 	private static $TOKEN = null;
 	private static $LOGIN_URL = "https://github.com/login/oauth/authorize";
 
@@ -33,10 +33,12 @@ class GithubAPI {
 		}
 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		Makiavelo::info("Inside the sendRequest method url:: " . print_r($url, true));
-		Makiavelo::info("Inside the sendRequest method PArams:: " . print_r($params, true));
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+
+		//Makiavelo::info("Inside the sendRequest method url:: " . print_r($url, true));
+		//Makiavelo::info("Inside the sendRequest method PArams:: " . print_r($params, true));
 		$value = curl_exec($ch);
-		Makiavelo::info("Inside the sendRequest method:: " . print_r($value, true));
+		//Makiavelo::info("Inside the sendRequest method:: " . print_r($value, true));
 		if(!$value) {
 			$error = curl_error($ch);
 			Makiavelo::info("CURL ERROR :: " . $error);
@@ -53,7 +55,7 @@ class GithubAPI {
 	public static function getUserRepos($user) {
 		$url = "https://api.github.com/users/$user/repos?access_token=" . self::$TOKEN;
 		$repo_list = self::sendRequest($url);
-		Makiavelo::info("=== Getting list of repos :: " . print_r($repo_list, true));
+		//Makiavelo::info("=== Getting list of repos :: " . print_r($repo_list, true));
 		$projects = array();
 		$dev = load_developer_where("name = '" . $user . "'");
 		foreach($repo_list as $repo) {
@@ -83,7 +85,7 @@ class GithubAPI {
 		$params = 'client_id='.self::$CLIENT_ID.'&client_secret='.self::$SECRET.'&code='.$code;
 
 		Makiavelo::info("Requesting WEB auth token to Github :: " . $params);
-		$response = self::sendRequest($url, "POST", $params, array("xxxx", "yyyy"), true);
+		$response = self::sendRequest($url, "POST", $params, array("xxxxl", "yyyyy"), true);
 		$response = explode("&", $response);
 		$response = $response[0];
 		$response = explode("=", $response);
