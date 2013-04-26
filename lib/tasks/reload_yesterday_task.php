@@ -27,7 +27,7 @@ class ReloadYesterdayTask {
 
  			//Calculate the commits for today
 			$commits_today = 0;
-			$today = '2013-04-18';
+			$today = '2013-04-24';
 		
 
 
@@ -39,14 +39,21 @@ class ReloadYesterdayTask {
 				$pc = load_project_commit_where("sha = '".$commit->sha."'");
 				if($pc == null) { //We make sure we haven't yet saved this commit
 					$project_commit = new ProjectCommit();
-					$project_commit->project_id = $proj->id;
-					$project_commit->committer  = $commit->committer->login;
-					$project_commit->commit_message = $commit->commit->message;
-					$project_commit->sha = $commit->sha;
-					$project_commit->commit_date = $commit_date;
-
-					save_project_commit($project_commit);
+				} else { //if we have, then we'll update it
+					$project_commit = $pc;
 				}
+				$project_commit->project_id = $proj->id;
+				if(!$commit->committer) {
+					Makiavelo::puts("**** No se encontró committer... ******");
+					Makiavelo::info(print_r($commit, true));
+				} 
+				$project_commit->committer  = $commit->committer->login;
+				$project_commit->commit_message = $commit->commit->message;
+				$project_commit->sha = $commit->sha;
+				$project_commit->commit_date = $commit_date;
+
+				save_project_commit($project_commit);
+				
 				
 				if($commit_date == $today) {
 					$commits_today++;	
@@ -94,7 +101,7 @@ class ReloadYesterdayTask {
 			$pd->new_pulls 		= $new_pulls_today;
 			$pd->closed_pulls 	= $closed_pulls_today;
 			$pd->merged_pulls 	= $merged_pulls_today;
-			$pd->sample_date 	= '2013-04-18';
+			$pd->sample_date 	= '2013-04-24';
 
 			if(save_project_delta($pd)) {
 				Makiavelo::info("===== Delta saved! " );
