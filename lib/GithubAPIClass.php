@@ -33,10 +33,12 @@ class GithubAPI {
 		}
 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		Makiavelo::info("Inside the sendRequest method url:: " . print_r($url, true));
-		Makiavelo::info("Inside the sendRequest method PArams:: " . print_r($params, true));
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+
+		//Makiavelo::info("Inside the sendRequest method url:: " . print_r($url, true));
+		//Makiavelo::info("Inside the sendRequest method PArams:: " . print_r($params, true));
 		$value = curl_exec($ch);
-		Makiavelo::info("Inside the sendRequest method:: " . print_r($value, true));
+		//Makiavelo::info("Inside the sendRequest method:: " . print_r($value, true));
 		if(!$value) {
 			$error = curl_error($ch);
 			Makiavelo::info("CURL ERROR :: " . $error);
@@ -53,7 +55,7 @@ class GithubAPI {
 	public static function getUserRepos($user) {
 		$url = "https://api.github.com/users/$user/repos?access_token=" . self::$TOKEN;
 		$repo_list = self::sendRequest($url);
-		Makiavelo::info("=== Getting list of repos :: " . print_r($repo_list, true));
+		//Makiavelo::info("=== Getting list of repos :: " . print_r($repo_list, true));
 		$projects = array();
 		$dev = load_developer_where("name = '" . $user . "'");
 		foreach($repo_list as $repo) {
