@@ -103,6 +103,25 @@ class LoadAllDataTask {
 					Makiavelo::puts("===== ERROR saving delta::" . mysql_error());
 				}
 			}
+
+			delete_issues_by_project_id($proj->id);
+
+ 			foreach($data->open_issues_list as $issue) {
+
+			$iss = new Issue();
+			$iss->title = $issue->title;
+			$iss->body = $issue->body;
+			$iss->created_at = $issue->created_at;
+			$iss->updated_at = $issue->updated_at;
+			$iss->url = $issue->url;
+			$iss->number = $issue->number;
+			$iss->project_id = $proj->id;
+
+			if(save_issue($iss)) {
+				Makiavelo::info("===== Issue saved! ");
+			} else {
+				Makiavelo::info("===== ERROR saving issue::" . mysql_error());
+			}
 		}
 	}
 

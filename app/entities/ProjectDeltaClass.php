@@ -2,18 +2,19 @@
 
 class ProjectDelta extends MakiaveloEntity {
 	private $id; //type: integer
-private $created_at; //type: datetime
-private $updated_at; //type: datetime
-private $sample_date; //type: datetime
-private $stars; //type: integer
-private $delta_stars; //type: integer
-private $forks; //type: integer
-private $delta_forks; //type: integer
-private $commits_count;
-private $new_pulls;
-private $closed_pulls;
-private $merged_pulls;
-
+	private $created_at; //type: datetime
+	private $updated_at; //type: datetime
+	private $sample_date; //type: datetime
+	private $stars; //type: integer
+	private $delta_stars; //type: integer
+	private $forks; //type: integer
+	private $delta_forks; //type: integer
+	private $commits_count;
+	private $new_pulls;
+	private $closed_pulls;
+	private $merged_pulls;
+	private $open_issues; //type: integer
+	private $closed_issues; //type: integer
 
 	static public $validations = array();
 	public function __set($name, $val) {

@@ -2,18 +2,19 @@
 
 class Project extends MakiaveloEntity {
 	private $id; //type: integer
-private $created_at; //type: datetime
-private $updated_at; //type: datetime
-private $name; //type: string
-private $url; //type: string
-private $description; //type: text
-private $owner_id; //type: integer
-private $stars; //type: integer
-private $forks; //type: integer
-private $last_update; //type: datetime
-private $language;
-private $published; //type: integer
-
+	private $created_at; //type: datetime
+	private $updated_at; //type: datetime
+	private $name; //type: string
+	private $url; //type: string
+	private $description; //type: text
+	private $owner_id; //type: integer
+	private $stars; //type: integer
+	private $forks; //type: integer
+	private $last_update; //type: datetime
+	private $language;
+	private $published; //type: integer
+	private $open_issues; //type: integer
+	private $closed_issues; //type: integer
 
 	static public $validations = array();
 	public function __set($name, $val) {
@@ -49,6 +50,9 @@ private $published; //type: integer
 		$pd->forks = $this->forks;
 		$pd->delta_forks = 0;
 
+		$pd->open_issues = $this->open_issues;
+		$pd->closed_issues = $this->closed_issues;
+
 		$pd->stars = $this->stars;
 		$pd->delta_stars = 0;
 
@@ -73,6 +77,7 @@ private $published; //type: integer
 		
 		Makiavelo::info("==== Querying for $usr_name/$proj_name");
 		$g_data = GithubAPI::queryProjectData($usr_name, $proj_name);
+
 
 		$data = array();
 		foreach($g_data->commits 	as $commit) {
@@ -147,13 +152,32 @@ private $published; //type: integer
 			$pd->new_pulls 		= isset($stats['new_pulls']) ? $stats['new_pulls'] : 0;
 			$pd->closed_pulls 	= isset($stats['closed_pulls']) ? $stats['closed_pulls'] : 0;
 			$pd->merged_pulls 	= isset($stats['merged_pulls']) ? $stats['merged_pulls'] : 0;
-			$pd->sample_date 	= $str_date; 
+			$pd->sample_date 	= $str_date;
 			
 			if(save_project_delta($pd)) {
 				Makiavelo::info("===== Delta saved! ");
 			} else {
 				Makiavelo::info("===== ERROR saving delta::" . mysql_error());
 			}
+		}
+
+		foreach($g_data->open_issues_list as $issue) {
+
+			$iss = new Issue();
+			$iss->title = $issue->title;
+			$iss->body = MarkdownExtra::defaultTransform($issue->body);
+			$iss->created_at = $issue->created_at;
+			$iss->updated_at = $issue->updated_at;
+			$iss->url = $issue->html_url;
+			$iss->number = $issue->number;
+			$iss->project_id = $this->id;
+
+			if(save_issue($iss)) {
+				Makiavelo::info("===== Issue saved! ");
+			} else {
+				Makiavelo::info("===== ERROR saving issue::" . mysql_error());
+			}
+
 		}
 	}
 }

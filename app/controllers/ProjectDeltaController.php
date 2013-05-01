@@ -64,7 +64,6 @@
 				$closed_data = explode("T", $pull->closed_at);
 				$merged_data = explode("T", $pull->merged_at);
 
-
 				if($created_data[0] == $today) {
 					$new_pulls_today++;
 				}
@@ -91,6 +90,9 @@
 			$pd->forks = $data->forks;
 			$pd->delta_forks = $delta_forks;
 
+			$pd->open_issues = $data->open_issues;
+			$pd->closed_issues = $data->closed_issues;
+
 			$pd->stars = $data->watchers;
 			$pd->delta_stars = $delta_stars;
 
@@ -108,6 +110,27 @@
 				Makiavelo::info("===== ERROR saving delta");
 			}
  			//}
+
+ 			delete_issues_by_project_id($proj->id);
+
+ 			foreach($data->open_issues_list as $issue) {
+
+			$iss = new Issue();
+			$iss->title = $issue->title;
+			$iss->body = MarkdownExtra::defaultTransform($issue->body);
+			$iss->created_at = $issue->created_at;
+			$iss->updated_at = $issue->updated_at;
+			$iss->url = $issue->html_url;
+			$iss->number = $issue->number;
+			$iss->project_id = $proj->id;
+
+			if(save_issue($iss)) {
+				Makiavelo::info("===== Issue saved! ");
+			} else {
+				Makiavelo::info("===== ERROR saving issue::" . mysql_error());
+			}
+
+		}
 
  		}
  	}

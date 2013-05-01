@@ -25,7 +25,7 @@ function save_project($entity) {
 		if($entity->validate()) {
 			global $__db_conn;	
 
-			$sql = "INSERT INTO project(created_at,updated_at,name,url,description,owner_id,stars,forks,last_update, language, published) values (':created_at:',':updated_at:',':name:',':url:',':description:',':owner_id:',':stars:',':forks:',':last_update:', ':language:', ':published:')";
+			$sql = "INSERT INTO project(created_at,updated_at,name,url,description,owner_id,stars,forks,last_update,language,published,open_issues,closed_issues) values (':created_at:',':updated_at:',':name:',':url:',':description:',':owner_id:',':stars:',':forks:',':last_update:', ':language:', ':published:', ':open_issues:', ':closed_issues:')";
 
 			$sql = str_replace(":created_at:", Date("Y-m-d"), $sql);
 			$sql = str_replace(":updated_at:", Date("Y-m-d"), $sql);
@@ -33,6 +33,7 @@ function save_project($entity) {
 			preg_match_all("/:([a-zA-Z_0-9]*):/", $sql, $matches);
 			foreach($matches[1] as $attr) {
 				$sql = str_replace(":$attr:", $entity->$attr, $sql);
+				Makiavelo::info("QUERY =>". $sql);
 			}
 			if(mysql_query($sql, $__db_conn)) {
 				$entity->id = mysql_insert_id($__db_conn);

@@ -8,8 +8,8 @@ function save_project_delta($entity) {
 		if($entity->validate()) {
 			global $__db_conn;	
 
-			$sql = "INSERT INTO project_delta(created_at,updated_at,sample_date,stars,delta_stars,forks,delta_forks, project_id, commits_count, new_pulls, closed_pulls, merged_pulls) 
-					values (':created_at:',':updated_at:',':sample_date:',':stars:',':delta_stars:',':forks:',':delta_forks:', ':project_id:', ':commits_count:', ':new_pulls:',':closed_pulls:', ':merged_pulls:')";
+			$sql = "INSERT INTO project_delta(created_at,updated_at,sample_date,stars,delta_stars,forks,delta_forks, project_id, commits_count, new_pulls, closed_pulls, merged_pulls, closed_issues, open_issues) 
+					values (':created_at:',':updated_at:',':sample_date:',':stars:',':delta_stars:',':forks:',':delta_forks:', ':project_id:', ':commits_count:', ':new_pulls:',':closed_pulls:', ':merged_pulls:', ':closed_issues:', ':open_issues:')";
 
 			$sql = str_replace(":created_at:", Date("Y-m-d"), $sql);
 			$sql = str_replace(":updated_at:", Date("Y-m-d"), $sql);
