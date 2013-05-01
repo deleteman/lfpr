@@ -1,8 +1,8 @@
 <?php
 
 class GithubAPI {
-	private static $CLIENT_ID = ""; 
-	private static $SECRET = ""; 
+	private static $CLIENT_ID = "6e3725492d7fffb516a1"; 
+	private static $SECRET = "19fe6d8cd8c2a573b302ae96f46d46453cf9b26f"; 
 	private static $TOKEN = null;
 	private static $LOGIN_URL = "https://github.com/login/oauth/authorize";
 
@@ -85,7 +85,7 @@ class GithubAPI {
 		$params = 'client_id='.self::$CLIENT_ID.'&client_secret='.self::$SECRET.'&code='.$code;
 
 		Makiavelo::info("Requesting WEB auth token to Github :: " . $params);
-		$response = self::sendRequest($url, "POST", $params, array("xxxxl", "yyyyy"), true);
+		$response = self::sendRequest($url, "POST", $params, array("deleteman", "doglio23"), true);
 		$response = explode("&", $response);
 		$response = $response[0];
 		$response = explode("=", $response);
