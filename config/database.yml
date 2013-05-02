@@ -1,8 +1,8 @@
 development:
-		host: localhost
+		host: mysql.lookingforpullrequests.com
 		name: lfpr_dev
-		user: root
-		pwd: ""
+		user: lfpr_user
+		pwd: infotecdoglio23
 
 production:
 		host: localhost
