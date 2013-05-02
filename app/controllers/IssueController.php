@@ -26,7 +26,18 @@
 	}
 
 	public function indexAction() {
-
+		$page = $this->request->getParam("p");
+		$project_id = $this->request->getParam("pid");
+		$per_page = 5;
+		$init = $page * $per_page;
+		$items = list_issue("num desc", $init . "," . $per_page, "project_id = " . $project_id);
+		$total_results = count_issue("project_id = " . $project_id);
+		$total_pages = ceil($total_results / $per_page);
+		$this->render(array("issues" => $items, 
+							"pid" => $project_id,
+							"pagination" => array("total_pages" => $total_pages,
+												  "total_results" => $total_results,
+												  "current_page" => $page)));
 	}
 
  }

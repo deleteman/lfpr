@@ -4,6 +4,17 @@ $(document).ready(function() {
 		$(this).parent("form").submit();
 	});
 
+	$(".pagination ul li a").live('click', function() {
+		var $elem = $(this);
+		var p = $elem.data("target");
+		var pid = $elem.data("pid");
+		$("#issues-cont").addClass("loading");
+		$.get("/issue/" + pid + "?p=" + p, function(data) {
+			$(".has-tooltip").tooltip();
+			$("#issues-cont").html(data).removeClass("loading");
+		});
+		return false;
+	});
 
 	$(".date-field").datepicker({
 								"dateFormat": "yy-mm-dd",
@@ -64,4 +75,6 @@ $(document).ready(function() {
 	});
 
 	$(".dev-link, .goto-github, .has-tooltip").tooltip();
+
+
 });

@@ -39,6 +39,20 @@ function delete_issues_by_project_id($project_id) {
 	}
 }
 
+function count_issue($where) {
+	global $__db_conn;
+
+	$sql =  "SELECT count(*) as cant FROM issue WHERE $where";
+
+	$result = mysql_query($sql, $__db_conn);
+	if(mysql_num_rows($result) > 0) {
+		$row = mysql_fetch_assoc($result);
+		return $row['cant'];
+	} else {
+		return 0;
+	}
+}
+
 function random_issue($project_id) {
 	global $__db_conn;
 
@@ -75,5 +89,36 @@ function load_issue_where($where) {
 	}
 }
 
+function list_issue($order = null, $limit = null, $where = null) {
+	global $__db_conn;	
 
+	$sql = "SELECT * FROM issue";
+	if($where != null) {
+		$sql .= " WHERE $where";
+	}
+
+	if($order != null) {
+		$order_str = $order;
+		if(is_array($order)) {
+			$order_str = implode(",", $order);
+		}
+		$sql .= " order by $order_str";
+	}
+
+	if($limit != null) {
+		$sql .= " limit $limit";
+	}
+
+	$result = mysql_query($sql, $__db_conn);
+	$results = array();
+
+	while($row = mysql_fetch_assoc($result)) {
+		$tmp = new Issue();
+		$tmp->load_from_array($row);
+		$results[] = $tmp;
+	}
+
+	return $results;
+
+}
 ?>

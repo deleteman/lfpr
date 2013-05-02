@@ -6,6 +6,9 @@
 	position: relative;
 }
 
+.odd {
+	background: white;
+}
 
 .project-spotlight {
 	transition: box-shadow 0.5s;
@@ -169,6 +172,25 @@ a.proj-name-link {
 	color:#34495e;
 }
 
+a.proj-name-link.accordion-toggle {
+	display: inline;
+	text-decoration: none;
+}
+
+a.proj-name-link.accordion-toggle:hover {
+	color:rgb(109, 138, 167);
+}
+
+a.proj-name-link.accordion-toggle.collapsed:before {
+	content: "▼";
+}
+
+a.proj-name-link.accordion-toggle:before {
+	content: "▲";
+}
+.issue-nmbr {
+	padding: 10px;
+}
 .current-user {
 	float:right;
 	font-size:14px;
@@ -292,4 +314,15 @@ pointer-events: none;
 }
 .top-nav form {
 	display: inline;
+}
+.pagination {
+	text-align: center;
+}
+
+.loading {
+	opacity: 0.5;
+}
+
+#issues-list a {
+	text-decoration: none;
 }

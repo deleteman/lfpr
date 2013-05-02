@@ -36,24 +36,8 @@
 		<div class="clearfix"></div>
 	</div>
 </div>
-<?php
-    if(!is_null($this->random_issue)) {
-?>
-    <div class="row">
-    <h3>Can you fix this? Help!</h3>
-        <div class="well">
-            <h3><?=link_to($this->random_issue->url, $this->random_issue->title, array("class" => "proj-name-link"))?></a></h3>
-            <h4>Issue #<?=$this->random_issue->num?></h4>
-             <div class="">  
-               <div class="clearfix"></div>
-               </div>
-                   
-             <p><?=$this->random_issue->body?></p>
-       </div>
-    </div>
-<?php
-    }
-?>
+<!--- issues here -->
+<div id="issues-cont"></div>
 
 <div class="row">
 	<div class="span6 pull-left">
@@ -192,6 +176,11 @@ $(document).ready(function() {
             name: 'Opened',
             data: [<?=implode(",", $new_pulls)?>]
         }]
+    });
+
+    $.get("/issue/<?=$this->project->id?>?p=0",  function(data) {
+        $("#issues-cont").html(data);
+        $(".has-tooltip").tooltip();
     });
 });
 

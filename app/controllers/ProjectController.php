@@ -31,8 +31,9 @@
 			$this->flash->setError("Project not found!");
 			$this->redirect_to(project_list_path());
 		} else {
-			$issue = random_issue($id);
-			$this->render(array("random_issue" => $issue, "project" => $ent));
+			//$issue = random_issue($id);
+			$issues = list_issue("num desc", 5, "project_id = " . $id);
+			$this->render(array("issues" => $issues, "project" => $ent));
 		}
 	}
 
