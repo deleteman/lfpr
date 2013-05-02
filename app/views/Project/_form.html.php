@@ -42,11 +42,21 @@
 		<?=text_field_tag("owner_name", "project_owner_name", "Project Owner")?>
 
 		<?=text_field($this->entity, "language")?>
+    <?=text_field($this->entity, "closed_issues", false, array("class" => "hidden"))?>
+    <?=text_field($this->entity, "open_issues", false, array("class" => "hidden"))?>
 		<?=text_field($this->entity, "stars", false, array("class" => "hidden"))?>
 		<?=text_field($this->entity, "forks", false, array("class" => "hidden"))?>
 		<?=text_field($this->entity, "last_update", false, array("class" => "hidden"))?>
 	</div>
 	<div class="one-line-form-elements fake-fields">
+    <div class="form-field row">
+      <label>Closed issues</label>
+      <div class="span2 field-replacement" id="closed_issues_field" ></div>
+    </div>
+    <div class="form-field row">
+      <label>Open issues</label>
+      <div class="span2 field-replacement" id="open_issues_field" ></div>
+    </div>
 		<div class="form-field row">
 			<label>Stars</label>
 			<div class="span1 field-replacement" id="stars_field" ></div>

@@ -33,7 +33,7 @@ function save_project_commit($entity) {
 
 			preg_match_all("/:([a-zA-Z_0-9]*):/", $sql, $matches);
 			foreach($matches[1] as $attr) {
-				$sql = str_replace(":$attr:", $entity->$attr, $sql);
+				$sql = str_replace(":$attr:", mysql_real_escape_string($entity->$attr), $sql);
 			}
 			mysql_query($sql, $__db_conn);
 			$entity->id = mysql_insert_id($__db_conn);
@@ -57,7 +57,7 @@ function update_project_commit($en) {
 
 		preg_match_all("/:([a-zA-Z_0-9]*):/", $sql, $matches);
 		foreach($matches[1] as $attr) {
-			$sql = str_replace(":$attr:", $en->$attr, $sql);
+			$sql = str_replace(":$attr:", mysql_real_escape_string($en->$attr), $sql);
 		}
 		mysql_query($sql, $__db_conn);
 		return true;

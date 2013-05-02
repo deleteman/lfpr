@@ -55,4 +55,9 @@ $_ROUTES[] = array(
 	"retrieve" => array("url" => "/project_commit/:id", "controller" => "ProjectCommit", "action" => "show", "via" => "get"),
 	"update" => array("url" => "/project_commit/:id/edit", "controller" => "ProjectCommit", "action" => "edit"),
 	"delete" => array("url" => "/project_commit/:id/delete", "controller" => "ProjectCommit", "action" => "delete", "via" => "post")
-	); ?>
+	); 
+
+	 $_ROUTES[] = array(
+	"list" => array("url" => "/issue/:pid", "controller" => "Issue", "action" => "index"),
+	); 
+	 ?>

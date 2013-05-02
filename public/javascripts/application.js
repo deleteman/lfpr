@@ -4,6 +4,17 @@ $(document).ready(function() {
 		$(this).parent("form").submit();
 	});
 
+	$(".pagination ul li a").live('click', function() {
+		var $elem = $(this);
+		var p = $elem.data("target");
+		var pid = $elem.data("pid");
+		$("#issues-cont").addClass("loading");
+		$.get("/issue/" + pid + "?p=" + p, function(data) {
+			$(".has-tooltip").tooltip();
+			$("#issues-cont").html(data).removeClass("loading");
+		});
+		return false;
+	});
 
 	$(".date-field").datepicker({
 								"dateFormat": "yy-mm-dd",
@@ -36,12 +47,16 @@ $(document).ready(function() {
 				 	$("#project_stars").val(json.stars);
 				 	$("#project_forks").val(json.forks);
 				 	$("#project_last_update").val(json.last_update);
+				 	$("#project_open_issues").val(json.open_issues);
+				 	$("#project_closed_issues").val(json.closed_issues);
 
 				 	$("#owner_avatar").val(json.avatar_url);
 				 	
 				 	$("#stars_field").html(json.stars);
 				 	$("#forks_field").html(json.forks);
 				 	$("#last_update_field").html(json.last_update);
+				 	$("#open_issues_field").html(json.open_issues);
+				 	$("#closed_issues_field").html(json.closed_issues);
 		
 				 	$("#project_language").val(json.language);
 
@@ -60,4 +75,6 @@ $(document).ready(function() {
 	});
 
 	$(".dev-link, .goto-github, .has-tooltip").tooltip();
+
+
 });

@@ -23,6 +23,7 @@
 	public function showAction() {
 		$id = $this->request->getParam("id");
 		$ent = load_project($id);
+		
 		if($ent && !$ent->published) {
 			$this->flash->setError("This project has not been published yet!");
 			$this->redirect_to(project_list_path());
@@ -30,7 +31,9 @@
 			$this->flash->setError("Project not found!");
 			$this->redirect_to(project_list_path());
 		} else {
-			$this->render(array("project" => $ent));
+			//$issue = random_issue($id);
+			$issues = list_issue("num desc", 5, "project_id = " . $id);
+			$this->render(array("issues" => $issues, "project" => $ent));
 		}
 	}
 
@@ -90,11 +93,7 @@
 		} else {
 			$this->flash->error("This project has already been submited");
 			$this->render(array("entity" => $entity), "new");
-
 		}
-
-
-		
 	}
 
 	public function indexAction() {
@@ -156,9 +155,11 @@
 						"stars" => $data->{'watchers'},
 						"forks" => $data->{'forks'},
 						"last_update" => $data->{'updated_at'},
-						"language" => $data->{'language'});
+						"language" => $data->{'language'},
+						"open_issues" => $data->{'open_issues'},
+						"closed_issues" => $data->{'closed_issues'}
+						);
 		}
-
 		$this->render(array("json" => json_encode($json_array)));
 
 	}

@@ -36,6 +36,8 @@
 		<div class="clearfix"></div>
 	</div>
 </div>
+<!--- issues here -->
+<div id="issues-cont"></div>
 
 <div class="row">
 	<div class="span6 pull-left">
@@ -174,6 +176,11 @@ $(document).ready(function() {
             name: 'Opened',
             data: [<?=implode(",", $new_pulls)?>]
         }]
+    });
+
+    $.get("/issue/<?=$this->project->id?>?p=0",  function(data) {
+        $("#issues-cont").html(data);
+        $(".has-tooltip").tooltip();
     });
 });
 
