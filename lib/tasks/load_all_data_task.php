@@ -2,6 +2,26 @@
 
 class LoadAllDataTask {
 
+	public function loadIssues() {
+		$projs = list_project(null, null, "published = 1");
+		foreach($projs as $proj) {
+			Makiavelo::puts("Getting issues for : " . $proj->name);
+			$data = GithubAPI::getProjectIssues($proj->owner()->name, $proj->name, "open");
+			foreach($data as $issue) {
+				$iss = new Issue();
+				$iss->title = $issue->title;
+				$iss->body = MarkdownExtra::defaultTransform($issue->body);
+				$iss->created_at = $issue->created_at;
+				$iss->updated_at = $issue->updated_at;
+				$iss->url = $issue->html_url;
+				$iss->number = $issue->number;
+				$iss->project_id = $proj->id;
+				Makiavelo::puts("Saving issue: #" . $iss->number);
+				save_issue($iss);
+			}
+		}
+	}
+
 	public function updatePublishedProjects() {
 		$projs = list_project();
 		foreach($projs as $proj) {
@@ -108,20 +128,21 @@ class LoadAllDataTask {
 
  			foreach($data->open_issues_list as $issue) {
 
-			$iss = new Issue();
-			$iss->title = $issue->title;
-			$iss->body = $issue->body;
-			$iss->created_at = $issue->created_at;
-			$iss->updated_at = $issue->updated_at;
-			$iss->url = $issue->url;
-			$iss->number = $issue->number;
-			$iss->project_id = $proj->id;
+				$iss = new Issue();
+				$iss->title = $issue->title;
+				$iss->body = $issue->body;
+				$iss->created_at = $issue->created_at;
+				$iss->updated_at = $issue->updated_at;
+				$iss->url = $issue->url;
+				$iss->number = $issue->number;
+				$iss->project_id = $proj->id;
 
-			if(save_issue($iss)) {
-				Makiavelo::info("===== Issue saved! ");
-			} else {
-				Makiavelo::info("===== ERROR saving issue::" . mysql_error());
-			}
+				if(save_issue($iss)) {
+					Makiavelo::info("===== Issue saved! ");
+				} else {
+					Makiavelo::info("===== ERROR saving issue::" . mysql_error());
+				}
+			}				
 		}
 	}
 

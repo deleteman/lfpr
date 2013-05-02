@@ -4,7 +4,7 @@ $(document).ready(function() {
 		$(this).parent("form").submit();
 	});
 
-	$(".pagination ul li a").live('click', function() {
+	$("#issues-cont .pagination ul li a").live('click', function() {
 		var $elem = $(this);
 		var p = $elem.data("target");
 		var pid = $elem.data("pid");
