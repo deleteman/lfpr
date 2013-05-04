@@ -80,7 +80,7 @@ class GithubAPI {
 				$proj->language = $repo->language;
 				$proj->published = 0;
 				$proj->open_issues = $repo->open_issues;
-				$proj->close_issues = count(GithubAPI::getProjectIssues($user, $repo, "closed"));
+				$proj->close_issues = count(GithubAPI::getProjectIssues($user, $repo->name, "closed"));
 				if(save_project($proj)) {
 					$projects[] = $proj;
 				}
