@@ -4,7 +4,7 @@ class ReloadYesterdayTask {
 
 
 	public function  run() {
-		$projects = list_project("published = 1");
+		$projects = list_project(null, null, "published = 1");
  		Makiavelo::info("=== Starting stats process ===");
  		foreach($projects as $proj) {
 
@@ -27,7 +27,7 @@ class ReloadYesterdayTask {
 
  			//Calculate the commits for today
 			$commits_today = 0;
-			$today = '2013-04-24';
+			$today = '2013-05-02';
 		
 
 
@@ -101,7 +101,7 @@ class ReloadYesterdayTask {
 			$pd->new_pulls 		= $new_pulls_today;
 			$pd->closed_pulls 	= $closed_pulls_today;
 			$pd->merged_pulls 	= $merged_pulls_today;
-			$pd->sample_date 	= '2013-04-24';
+			$pd->sample_date 	= $today;
 
 			if(save_project_delta($pd)) {
 				Makiavelo::info("===== Delta saved! " );

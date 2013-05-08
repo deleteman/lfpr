@@ -7,7 +7,7 @@
  		on stars and forks
  		*/
  	public function generateAction() {
- 		$projects = list_project("published = 1");
+ 		$projects = list_project(null, null, "published = 1");
  		Makiavelo::info("=== Starting stats process ===");
  		foreach($projects as $proj) {
  			$proj_name = $proj->name;
