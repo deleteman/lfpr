@@ -63,7 +63,9 @@ class MakiaveloCore {
 					}
 					$ret[$new_key][$second_key] = $parts[1];
 				} else {
-					$ret[$parts[0]] = $parts[1];
+					if(isset($parts[1])) {
+						$ret[$parts[0]] = $parts[1];
+					}
 				}
 			}
 			Makiavelo::info("returning::" . print_r($ret, true));

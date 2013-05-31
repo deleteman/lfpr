@@ -1,3 +1,13 @@
+function formatDate(d) {
+	var month = d.getMonth() + 1;
+	var date = d.getDate();
+	var year = d.getFullYear();
+
+	month = (month < 10) ? "0" + month : month;
+	date = (date < 10) ? "0" + date : date ;
+	return month + "/" + date + "/" + year;
+}
+
 
 $(document).ready(function() {
 	$('a[type="submit"]').click(function () {
@@ -23,7 +33,7 @@ $(document).ready(function() {
 	$(".time-field").timePicker();
 
 
-	$(".dropkick-select").dropkick();
+	$("select").dropkick();
 
 	$("#query-btn").on('click', function() {
 		var $this = $("#project_url");
