@@ -142,7 +142,7 @@
 		$data = $this->queryGithub($url_parts[$max -1], $url_parts[$max]);
 		//Makiavelo::info("Data returned: " . print_r($data, true));
 
-		if($data->message) {
+		if(isset($data->message) && $data->message) {
 			$json_array = $data;
 		} else {
 

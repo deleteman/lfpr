@@ -36,9 +36,20 @@
 		<div class="clearfix"></div>
 	</div>
 </div>
+
 <!--- issues here -->
 <div id="issues-cont"></div>
 
+<div class="well">
+    <div class="pull-left">
+        Filter data by a date range...
+    </div>
+    <div class="pull-right">
+        from <input type="text" id="from" /> to  <input type="text" id="to" /> 
+        <a href="#" class="btn btn-large btn-success" id="refresh-charts-btn">Refresh charts</a>
+    </div>
+    <div class="clearfix"></div>
+</div>
 <div class="row">
 	<div class="span6 pull-left">
 		<h2>Popularity over time</h2>
@@ -84,9 +95,95 @@ foreach($stats as $st) {
 
 ?>
 
-$(document).ready(function() {
+var new_dates =  ['<?=implode("','", $new_dates)?>'];
+var regular_dates = ['<?=implode("','", $dates)?>'];
+var forks_values = [<?=implode(",", $forks)?>];
+var stars_values = [<?=implode(",", $stars)?>];
+var commits_values = [<?=implode(",", $commits)?>];
+var merged_pulls = [<?=implode(",", $merged_pulls)?>];
+var closed_pulls = [<?=implode(",", $closed_pulls)?>];
+var new_pulls = [<?=implode(",", $new_pulls)?>];
 
-  var chart1 = new Highcharts.Chart({
+
+$(document).ready(function() {
+function updateCharts() {
+    var from_date = $("#from").val().split("/");
+    from_date = (from_date[2] + from_date[0] + from_date[1]) * 1;
+    var to_date = $("#to").val().split("/");
+    to_date = (to_date [2] + to_date [0] + to_date [1]) * 1;
+
+    var local_new_dates = $.map(new_dates, function(date) {
+        var current_date = date.split("-").join("") * 1;
+        if(from_date <= current_date && current_date <= to_date) {
+            return date;
+        }
+    });
+
+    var local_regular_dates = $.map(regular_dates, function(date) {
+        var current_date = date.split("-").join("") * 1;
+        if(from_date <= current_date && current_date <= to_date) {
+            return date;
+        }
+    });
+
+    chart1_options.xAxis.categories = local_new_dates;
+    chart1_options.series[0].data = (local_new_dates.length == 0) ? [] : forks_values.slice(local_new_dates.length * -1);
+    chart1_options.series[1].data = (local_new_dates.length == 0) ? [] : stars_values.slice(local_new_dates.length * -1);
+    new Highcharts.Chart(chart1_options);
+
+    chart2_options.xAxis.categories = local_regular_dates;
+    chart2_options.series[0].data = (local_regular_dates.length == 0) ? [] : commits_values.slice(local_regular_dates.length * -1);
+    new Highcharts.Chart(chart2_options);
+
+    chart3_options.xAxis.categories = local_regular_dates;
+    chart3_options.series[0].data = (local_regular_dates.length == 0) ? [] : merged_pulls.slice(local_regular_dates.length * -1);
+    chart3_options.series[1].data = (local_regular_dates.length == 0) ? [] :  closed_pulls.slice(local_regular_dates.length * -1);
+    chart3_options.series[2].data = (local_regular_dates.length == 0) ? [] : new_pulls.slice(local_regular_dates.length * -1);
+    new Highcharts.Chart(chart3_options);
+}
+
+    $("#refresh-charts-btn").click(function() {
+        updateCharts();        
+        return false;
+
+    });
+
+    var dropkickOpts = {
+            change: function(val, label) {
+                $("select.ui-datepicker-month").change();
+                $("select.ui-datepicker-month").dropkick(dropkickOpts);
+            }
+        };
+    $("#from, #to, a.ui-datepicker-prev, a.ui-datepicker-next").live('click', function(){
+        $("select.ui-datepicker-month").dropkick(dropkickOpts);
+    });
+
+     $( "#from" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        dateFormat: "mm/dd/yy",
+        numberOfMonths: 3,
+        onClose: function( selectedDate ) {
+            $( "#to" ).datepicker( "option", "minDate", selectedDate );
+        }
+    });
+    $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3,
+        dateFormat: "mm/dd/yy",
+        onClose: function( selectedDate ) {
+            $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+        }
+     });
+
+    var now = new Date();
+    var lastWeek = new Date();
+    lastWeek.setDate(now.getDate() - 7);
+    $("#to").val(formatDate(now));
+    $("#from").val(formatDate(lastWeek));
+
+  var chart1_options = {
         chart: {
             renderTo: 'main-stats',
             type: 'column'
@@ -95,7 +192,7 @@ $(document).ready(function() {
             text: 'Stars & Forks over time'
         },
         xAxis: {
-        	categories: [<?="'".implode("','", $new_dates)."'"?>],
+        	categories: [],
             title: {
             	text: "Dates"
             }
@@ -105,16 +202,16 @@ $(document).ready(function() {
         series: [{
             name: 'Forks',
             type: 'column',
-            data: [<?=implode(",", $forks)?>]
+            data: [],
         }, {
             name: 'Stars',
             type: 'spline',
-            data: [<?=implode(",", $stars)?>]
+            data: [],
         }]
-    });
+    };
 
 
-  var chart2 = new Highcharts.Chart({
+  var chart2_options = {
         chart: {
             renderTo: 'commits-stats',
             type: 'spline'
@@ -123,7 +220,7 @@ $(document).ready(function() {
             text: 'Commits activity'
         },
         xAxis: {
-        	categories: [<?="'".implode("','", $dates)."'"?>],
+        	categories: [],
             title: {
             	text: "Dates"
             },
@@ -136,12 +233,12 @@ $(document).ready(function() {
         },
         series: [{
             name: 'Commits ',
-            data: [<?=implode(",", $commits)?>]
+            data: []
         }]
-    });
+    };
 
 
-	var chart3 = new Highcharts.Chart({
+	var chart3_options = {
         chart: {
             renderTo: 'pull-stats',
             type: ''
@@ -150,7 +247,7 @@ $(document).ready(function() {
             text: 'Pull requests activity'
         },
         xAxis: {
-        	categories: [<?="'".implode("','", $dates)."'"?>],
+        	categories: [],
             title: {
             	text: "Dates"
             },
@@ -164,19 +261,24 @@ $(document).ready(function() {
         series: [{
             name: 'Merged',
             type: 'column',
-            data: [<?=implode(",", $merged_pulls)?>]
+            data: []
         },
         {
             type: 'spline',
             name: 'Closed',
-            data: [<?=implode(",", $closed_pulls)?>]
+            data: []
         },
         {
             type: 'areaspline',
             name: 'Opened',
-            data: [<?=implode(",", $new_pulls)?>]
+            data: []
         }]
-    });
+    };
+
+    new Highcharts.Chart(chart1_options);
+    new Highcharts.Chart(chart2_options);
+    new Highcharts.Chart(chart3_options);
+    updateCharts();
 
     $.get("/issue/<?=$this->project->id?>?p=0",  function(data) {
         $("#issues-cont").html(data);
