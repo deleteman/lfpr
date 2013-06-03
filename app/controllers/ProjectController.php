@@ -97,7 +97,7 @@
 	}
 
 	public function indexAction() {
-		$language = $this->request->getParam("language");
+		$language = urldecode($this->request->getParam("language"));
 		$owner = $this->request->getParam("owner");
 		$where = " published = 1 ";
 		if($language != "" && $language != "All") {
