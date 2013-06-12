@@ -70,6 +70,9 @@
 </div>
 <script type="text/javascript" src="/javascripts/highcharts/js/highcharts.js"></script>
 <script >
+var commit_readings = [];
+var pulls = [];
+var popularity = [];
 <?php
 //TODO: Improve following code...
 $stats = $this->project->getStats();
@@ -91,18 +94,25 @@ foreach($stats as $st) {
 	$new_pulls[] 	= ($st->new_pulls === null) ? 0 : $st->new_pulls;
 	$closed_pulls[] = ($st->closed_pulls === null) ? 0 : $st->closed_pulls;
 	$merged_pulls[] = ($st->merged_pulls === null) ? 0 : $st->merged_pulls;
+
+}
+foreach($dates as $idx => $d) {
+    echo 'commit_readings.push({date: "'.$d.'", value: "'.$commits[$idx].'"});';
+    echo "\n";
+    echo 'pulls.push({date: "' . $d . '", 
+                      new: ' . $new_pulls[$idx] . ', 
+                      closed: ' . $closed_pulls[$idx] . ', 
+                      merged: ' . $merged_pulls[$idx] . '
+                    });';
+    echo "\n";
 }
 
-?>
 
-var new_dates =  ['<?=implode("','", $new_dates)?>'];
-var regular_dates = ['<?=implode("','", $dates)?>'];
-var forks_values = [<?=implode(",", $forks)?>];
-var stars_values = [<?=implode(",", $stars)?>];
-var commits_values = [<?=implode(",", $commits)?>];
-var merged_pulls = [<?=implode(",", $merged_pulls)?>];
-var closed_pulls = [<?=implode(",", $closed_pulls)?>];
-var new_pulls = [<?=implode(",", $new_pulls)?>];
+foreach ($new_dates as  $idx => $date) {
+    echo 'popularity.push({date: "' . $date .'", stars: '.$stars[$idx].', forks: '.$forks[$idx].'});';
+    echo "\n";
+}
+?>
 
 
 $(document).ready(function() {
@@ -112,33 +122,51 @@ function updateCharts() {
     var to_date = $("#to").val().split("/");
     to_date = (to_date [2] + to_date [0] + to_date [1]) * 1;
 
-    var local_new_dates = $.map(new_dates, function(date) {
-        var current_date = date.split("-").join("") * 1;
+    var local_regular_dates = [],
+        local_commits = [],
+        merged_pulls = [],
+        closed_pulls = [],
+        open_pulls = [],
+        local_new_dates = [],
+        local_stars = [],
+        local_forks = [];
+
+    $.each(popularity, function(idx, pop) {
+        var current_date = pop.date.split("-").join("") * 1;
         if(from_date <= current_date && current_date <= to_date) {
-            return date;
+            local_new_dates.push(pop.date);
+            local_stars.push(pop.stars);
+            local_forks.push(pop.forks);
         }
     });
 
-    var local_regular_dates = $.map(regular_dates, function(date) {
+    $.each(commit_readings, function(idx, commit) {
+        var date = commit.date;
+        var pull_data = pulls[idx];
+
         var current_date = date.split("-").join("") * 1;
         if(from_date <= current_date && current_date <= to_date) {
-            return date;
+            local_regular_dates.push(date);
+            local_commits.push(commit.value * 1);
+            merged_pulls.push(pull_data.merged);
+            closed_pulls.push(pull_data.closed);
+            open_pulls.push(pull_data.new);
         }
     });
 
     chart1_options.xAxis.categories = local_new_dates;
-    chart1_options.series[0].data = (local_new_dates.length == 0) ? [] : forks_values.slice(local_new_dates.length * -1);
-    chart1_options.series[1].data = (local_new_dates.length == 0) ? [] : stars_values.slice(local_new_dates.length * -1);
+    chart1_options.series[0].data = local_forks;
+    chart1_options.series[1].data = local_stars; 
     new Highcharts.Chart(chart1_options);
 
     chart2_options.xAxis.categories = local_regular_dates;
-    chart2_options.series[0].data = (local_regular_dates.length == 0) ? [] : commits_values.slice(local_regular_dates.length * -1);
+    chart2_options.series[0].data = local_commits; 
     new Highcharts.Chart(chart2_options);
 
     chart3_options.xAxis.categories = local_regular_dates;
-    chart3_options.series[0].data = (local_regular_dates.length == 0) ? [] : merged_pulls.slice(local_regular_dates.length * -1);
-    chart3_options.series[1].data = (local_regular_dates.length == 0) ? [] :  closed_pulls.slice(local_regular_dates.length * -1);
-    chart3_options.series[2].data = (local_regular_dates.length == 0) ? [] : new_pulls.slice(local_regular_dates.length * -1);
+    chart3_options.series[0].data = merged_pulls; 
+    chart3_options.series[1].data = closed_pulls;
+    chart3_options.series[2].data = open_pulls; 
     new Highcharts.Chart(chart3_options);
 }
 
