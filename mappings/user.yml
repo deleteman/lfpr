@@ -1,0 +1,7 @@
+crud:
+	entity:
+		name: User
+		fields:
+			username: string
+			password: string
+			role: string

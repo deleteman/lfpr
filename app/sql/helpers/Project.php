@@ -1,8 +1,8 @@
 <?php
 
-function load_latest_projects() {
+function load_latest_projects($order = "rand()") {
 	global $__db_conn;
-	$sql = "SELECT * from project where published = 1 order by rand() limit 3";
+	$sql = "SELECT * from project where published = 1 order by $order limit 3";
 
 	$projects = array();
 	if($rs = mysql_query($sql, $__db_conn)) {
@@ -92,6 +92,9 @@ function load_project_where($where) {
 	$sql =  "SELECT * FROM project WHERE $where"; #SELECT * FROM tipo_buque WHERE id = " . $id;
 
 	$result = mysql_query($sql, $__db_conn);
+	if(!$result) {
+		Makiavelo::info("MYSQL ERROR: " . mysql_error() . "::" . $sql1);
+	}
 	if(mysql_num_rows($result) > 0) {
 		$row = mysql_fetch_assoc($result);
 		$new = new Project();

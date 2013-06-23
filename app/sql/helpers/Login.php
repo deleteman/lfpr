@@ -29,7 +29,7 @@ function login_user($u, $p) {
 	$table_name = $tmpEntity->__get_entity_name();
 
 	$func = "load_" . $table_name . "_where";
-	$usuario = $func("email='" . $u . "' and password = '" . $p . "'");
+	$usuario = $func($__SECURITY['username_field'] . "='" . $u . "' and " . $__SECURITY['password_field'] . " = '" . $p . "'");
 	if($usuario != null) {
 		$sLayer->logInUser($usuario);
 		return array("ok" => true, "user" => $usuario);

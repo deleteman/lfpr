@@ -241,14 +241,14 @@ function password_field_tag($name, $id, $html = array()) {
 		}
 	}
 	$html_code = "";
-	if(!$html['no-container']) {
+	if(!isset($html['no-container'])) {
 		$html_code = '<div class="form-field">';
 	} 
 	$html_code .= '<input type="password" 
 				name="' . $name . '"
 				id="' . $id . '"
 				'.$html_opts. ' />';
-	if(!$html['no-container']) {
+	if(!isset($html['no-container'])) {
 		$html_code .= "</div>";
 	}
 

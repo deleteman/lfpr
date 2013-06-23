@@ -31,6 +31,24 @@
  		}
  	}
 
+ 	public function adminLoginAction() {
+ 		$this->render(null, "admin_login");
+ 	}
+
+ 	public function doAdminLoginAction() {
+ 		$username = $this->request->getParam("username");
+ 		$pwd = $this->request->getParam("password");
+
+ 		$login_result = login_user($username, $pwd);
+ 		if(!$login_result["ok"]) {
+ 			$this->flash->setError("Invalid username/password");
+ 			$this->render(null, "admin_login");
+ 		} else {
+ 			login_user($usr);
+ 			$this->redirect_to(admin_index_path());
+ 		}
+ 	}
+
  	public function signOutAction() {
  		logout_user();
  		$this->redirect_to(home_root_path_path());

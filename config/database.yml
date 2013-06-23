@@ -2,7 +2,7 @@ development:
 		host: localhost
 		name: lfpr_dev
 		user: root
-		pwd: root
+		pwd:
 
 production:
 		host: localhost

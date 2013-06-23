@@ -60,4 +60,17 @@ $_ROUTES[] = array(
 	 $_ROUTES[] = array(
 	"list" => array("url" => "/issue/:pid", "controller" => "Issue", "action" => "index"),
 	); 
-	 ?>
+	 $_ROUTES[] = array(
+	"index" => array("url" => "/admin/", "controller" => "Admin", "action" => "index", "role" => "admin"),
+	"login" => array("url" => "/admin/login", "controller" => "Login", "action" => "adminLogin"),
+	"admin_login" => array("url" => "/admin/login", "controller" => "Login", "action" => "doAdminLogin", "via" => "post"),
+	/*
+	"create" => array("url" => "/user/create", "controller" => "User", "action" => "create", "via" => "post", "role" => "admin"),
+	"new" => array("url" => "/user/new", "controller" => "User", "action" => "new", "role" => "admin"),
+	"retrieve" => array("url" => "/user/:id", "controller" => "User", "action" => "show", "via" => "get", "role" => "admin"),
+	"update" => array("url" => "/user/:id/edit", "controller" => "User", "action" => "edit", "role" => "admin"),
+	"delete" => array("url" => "/user/:id/delete", "controller" => "User", "action" => "delete", "via" => "post", "role" => "admin")
+	*/
+	);
+
+ ?>

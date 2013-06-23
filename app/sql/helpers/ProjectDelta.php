@@ -1,5 +1,59 @@
 <?php
 
+function get_projects_by_pr($total = 5) {
+	$start_date = date("Y-m-d", strtotime("-7 days"));
+
+	global $__db_conn;
+
+	$sql = "SELECT (sum(new_pulls) + sum(closed_pulls) + sum(merged_pulls)) as total, 
+			sum(new_pulls) as np , sum(closed_pulls) as cp, sum(merged_pulls) as mp, project_id
+			from project_delta 
+			where sample_date >= '$start_date'
+			group by project_id
+			order by total desc
+			limit $total";
+	$rs = mysql_query($sql, $__db_conn);
+	$projects = array();
+	if($rs) {
+		while($row = mysql_fetch_assoc($rs)) {
+			Makiavelo::info("GETTING PROJECT: " . print_r($row, true));
+			$projects[] = array("project" => load_project($row['project_id']), 
+								"total_activity" => $row['total'],
+								"new_pulls" => $row['np'],
+								"closed_pulls" => $row['cp'],
+								"merged_pulls" => $row['mp']);
+		}
+	} else {
+		Makiavelo::info("MYSQL ERROR:: " . mysql_error());
+	}
+	return $projects;
+}
+
+function get_projects_by_commits($total = 5) {
+
+	$start_date = date("Y-m-d", strtotime("-7 days"));
+
+	global $__db_conn;
+
+	$sql = "SELECT sum(commits_count) as total_commits, project_id
+			from project_delta 
+			where sample_date >= '$start_date'
+			group by project_id
+			order by total_commits desc
+			limit $total";
+	$rs = mysql_query($sql, $__db_conn);
+	$projects = array();
+	if($rs) {
+		while($row = mysql_fetch_assoc($rs)) {
+			Makiavelo::info("GETTING PROJECT: " . print_r($row, true));
+			$projects[] = array("project" => load_project($row['project_id']), "commits" => $row['total_commits']);
+		}
+	} else {
+		Makiavelo::info("MYSQL ERROR:: " . mysql_error());
+	}
+	return $projects;
+}
+
 function save_project_delta($entity) {
 	if(!$entity->is_new()) {
 		return update_project_delta($entity);
