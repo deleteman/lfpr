@@ -15,6 +15,7 @@ class Project extends MakiaveloEntity {
 	private $published; //type: integer
 	private $open_issues; //type: integer
 	private $closed_issues; //type: integer
+	private $readme; //type: text
 
 	static public $validations = array();
 	public function __set($name, $val) {
@@ -78,6 +79,9 @@ class Project extends MakiaveloEntity {
 		Makiavelo::info("==== Querying for $usr_name/$proj_name");
 		$g_data = GithubAPI::queryProjectData($usr_name, $proj_name);
 
+		$this->readme = $g_data->readme;
+		Makiavelo::puts("Updating project...");
+		save_project($this);
 
 		$data = array();
 		foreach($g_data->commits 	as $commit) {

@@ -25,14 +25,14 @@ function save_project($entity) {
 		if($entity->validate()) {
 			global $__db_conn;	
 
-			$sql = "INSERT INTO project(created_at,updated_at,name,url,description,owner_id,stars,forks,last_update,language,published,open_issues,closed_issues) values (':created_at:',':updated_at:',':name:',':url:',':description:',':owner_id:',':stars:',':forks:',':last_update:', ':language:', ':published:', ':open_issues:', ':closed_issues:')";
+			$sql = "INSERT INTO project(created_at,updated_at,name,url,description,owner_id,stars,forks,last_update,language,published,open_issues,closed_issues, readme) values (':created_at:',':updated_at:',':name:',':url:',':description:',':owner_id:',':stars:',':forks:',':last_update:', ':language:', ':published:', ':open_issues:', ':closed_issues:', ':readme:')";
 
 			$sql = str_replace(":created_at:", Date("Y-m-d"), $sql);
 			$sql = str_replace(":updated_at:", Date("Y-m-d"), $sql);
 
 			preg_match_all("/:([a-zA-Z_0-9]*):/", $sql, $matches);
 			foreach($matches[1] as $attr) {
-				$sql = str_replace(":$attr:", $entity->$attr, $sql);
+				$sql = str_replace(":$attr:", mysql_real_escape_string($entity->$attr), $sql);
 				Makiavelo::info("QUERY =>". $sql);
 			}
 			if(mysql_query($sql, $__db_conn)) {
@@ -55,18 +55,19 @@ function update_project($en) {
 	if($en->validate()) {
 		global $__db_conn;	
 
-		$sql = str_replace(":id:", $en->id, "UPDATE project SET id=':id:',created_at=':created_at:',updated_at=':updated_at:',name=':name:',url=':url:',description=':description:',owner_id=':owner_id:',stars=':stars:',forks=':forks:',last_update=':last_update:', language=':language:', published = ':published:' WHERE id = :id:"); 
+		$sql = str_replace(":id:", $en->id, "UPDATE project SET id=':id:',created_at=':created_at:',updated_at=':updated_at:',name=':name:',url=':url:',description=':description:',owner_id=':owner_id:',stars=':stars:',forks=':forks:',last_update=':last_update:', language=':language:', published = ':published:', readme=':readme:' WHERE id = :id:"); 
 
 		$sql = str_replace(":updated_at:", Date("Y-m-d"), $sql);
 
 
 		preg_match_all("/:([a-zA-Z_0-9]*):/", $sql, $matches);
 		foreach($matches[1] as $attr) {
-			$sql = str_replace(":$attr:", $en->$attr, $sql);
+			$sql = str_replace(":$attr:", mysql_real_escape_string($en->$attr), $sql);
 		}
 		mysql_query($sql, $__db_conn);
 		return true;
 	} else {
+		Makiavelo::info("MYSQL ERROR: " . mysql_error() . " :: " . $sql);
 		return false;
 	}
 

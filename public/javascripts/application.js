@@ -14,6 +14,11 @@ $(document).ready(function() {
 		$(this).parent("form").submit();
 	});
 
+	$("#project-tab").click(function(e) {
+		e.preventDefault();
+		$(this).tab('show');
+	})
+
 	$("#issues-cont .pagination ul li a").live('click', function() {
 		var $elem = $(this);
 		var p = $elem.data("target");

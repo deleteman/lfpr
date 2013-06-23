@@ -84,6 +84,7 @@
  			//We also update the project
  			$proj->stars = $data->watchers;
  			$proj->forks = $data->forks;
+ 			$proj->readme = $data->readme;
  			save_project($proj);
 
 			$pd = new ProjectDelta();

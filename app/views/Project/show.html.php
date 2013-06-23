@@ -40,33 +40,48 @@
 <!--- issues here -->
 <div id="issues-cont"></div>
 
-<div class="well">
-    <div class="pull-left">
-        Filter data by a date range...
+<ul class="nav nav-tabs" id="project-tab">
+  <li class="active">
+    <a href="#stats" data-toggle="tab">Stats</a>
+  </li>
+  <li><a href="#readme" data-toggle="tab">Readme</a></li>
+</ul>
+
+
+
+<div class="tab-content">
+
+    <div class="tab-pane active" id="stats">
+        <div class="well">
+            <div class="pull-left">
+                Filter data by a date range...
+            </div>
+            <div class="pull-right">
+                from <input type="text" id="from" /> to  <input type="text" id="to" /> 
+                <a href="#" class="btn btn-large btn-success" id="refresh-charts-btn">Refresh charts</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    	<div class="span6 pull-left">
+    		<h2>Popularity over time</h2>
+    		<div class="well" id="main-stats" style="height:300px;">
+    		</div>
+    	</div>
+    	<div class="span6 pull-left">
+    		<h2>Commits activity</h2>
+    		<div class="well " id="commits-stats" style="height:300px;">
+    		</div>
+    	</div>
+    	<div class="clearfix"></div>
+    	<div class="span12">
+    		<h2>Pull requests activity</h2>
+    		<div class="well " id="pull-stats" style="height:400px;">
+    		</div>
+    	</div>
     </div>
-    <div class="pull-right">
-        from <input type="text" id="from" /> to  <input type="text" id="to" /> 
-        <a href="#" class="btn btn-large btn-success" id="refresh-charts-btn">Refresh charts</a>
+    <div class="well tab-pane" id="readme">
+    <?=MarkdownExtra::defaultTransform($this->project->readme)?>
     </div>
-    <div class="clearfix"></div>
-</div>
-<div class="row">
-	<div class="span6 pull-left">
-		<h2>Popularity over time</h2>
-		<div class="well" id="main-stats" style="height:300px;">
-		</div>
-	</div>
-	<div class="span6 pull-left">
-		<h2>Commits activity</h2>
-		<div class="well " id="commits-stats" style="height:300px;">
-		</div>
-	</div>
-	<div class="clearfix"></div>
-	<div class="span12">
-		<h2>Pull requests activity</h2>
-		<div class="well " id="pull-stats" style="height:400px;">
-		</div>
-	</div>
 </div>
 <script type="text/javascript" src="/javascripts/highcharts/js/highcharts.js"></script>
 <script >

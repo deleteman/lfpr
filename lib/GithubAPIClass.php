@@ -1,10 +1,10 @@
 <?php
 
 class GithubAPI {
-	private static $CLIENT_ID = "6e3725492d7fffb516a1";
-	private static $SECRET = "19fe6d8cd8c2a573b302ae96f46d46453cf9b26f";
-	private static $USERNAME = "deleteman";
-	private static $PASSWORD = "doglio23";
+	private static $CLIENT_ID = "";
+	private static $SECRET = "";
+	private static $USERNAME = "";
+	private static $PASSWORD = "";
 
 	private static $TOKEN = null;
 	private static $LOGIN_URL = "https://github.com/login/oauth/authorize";
@@ -151,7 +151,17 @@ class GithubAPI {
 		$data->open_issues = count($data->open_issues_list);
 		$data->closed_issues = count(GithubAPI::getProjectIssues($usr, $repo, "closed"));
 
+		$data->readme = GithubAPI::getProjectREADME($repo_url);
+
 		return $data;
+	}
+
+	public function getProjectREADME($url) {
+		$url .= "/readme";
+		$resp = self::sendRequest($url);
+		Makiavelo::info("Getting readme, using URL:" . $url);
+		Makiavelo::info("Content: " . $resp->content);
+		return base64_decode($resp->content);
 	}
 
 	/**

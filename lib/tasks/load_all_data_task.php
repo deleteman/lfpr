@@ -38,6 +38,13 @@ class LoadAllDataTask {
 		Makiavelo::puts("Done!");
 	}
 
+	public function loadMakiaveloData() {
+		$proj = load_project(1);
+		Makiavelo::puts("Grabing data for project: " . $proj->name);
+		$proj->grabHistoricData();
+		Makiavelo::puts("Done!");
+	}
+
 	public function load() {
 
  		$projects = list_project();
