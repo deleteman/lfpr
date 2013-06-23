@@ -15,6 +15,17 @@
 # Markdown Parser Class
 #
 
+function getCalledClass(){
+    $arr = array(); 
+    $arrTraces = debug_backtrace();
+    foreach ($arrTraces as $arrTrace){
+       if(!array_key_exists("class", $arrTrace)) continue;
+       if(count($arr)==0) $arr[] = $arrTrace['class'];
+       else if(get_parent_class($arrTrace['class'])==end($arr)) $arr[] = $arrTrace['class'];
+    }
+    return end($arr);
+}
+
 class Markdown {
 
 	### Version ###
@@ -32,7 +43,7 @@ class Markdown {
 	# This will work fine for derived classes too.
 	#
 		# Take parser class on which this function was called.
-		$parser_class = \get_called_class();
+		$parser_class = \getCalledClass();
 
 		# try to take parser from the static parser list
 		static $parser_list;
