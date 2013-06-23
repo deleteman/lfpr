@@ -44,7 +44,6 @@
  			$this->flash->setError("Invalid username/password");
  			$this->render(null, "admin_login");
  		} else {
- 			login_user($usr);
  			$this->redirect_to(admin_index_path());
  		}
  	}
