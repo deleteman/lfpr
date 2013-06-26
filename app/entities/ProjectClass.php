@@ -80,7 +80,7 @@ class Project extends MakiaveloEntity {
 		$g_data = GithubAPI::queryProjectData($usr_name, $proj_name);
 
 		$this->readme = $g_data->readme;
-		Makiavelo::puts("Updating project...");
+		//Makiavelo::puts("Updating project...");
 		save_project($this);
 
 		$data = array();
