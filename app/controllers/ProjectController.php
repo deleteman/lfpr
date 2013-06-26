@@ -10,7 +10,7 @@
 
 	public function deleteAction() {
 		delete_project($this->request->getParam("id"));
-		$this->flash->success("Delete successfull!");
+		$this->flash->setSuccess("Delete successfull!");
 		$this->redirect_to(project_list_path());
 	}
 
@@ -85,13 +85,13 @@
 				//Create the first set of stats 
 				$entity->saveInitStats();
 				$entity->grabHistoricData();
-				$this->flash->success("The project was added correctly, thanks!");
+				$this->flash->setSuccess("The project was added correctly, thanks!");
 				$this->redirect_to(project_show_path($entity));
 			} else {
 				$this->render(array("entity" => $entity), "new");
 			}
 		} else {
-			$this->flash->error("This project has already been submited");
+			$this->flash->setError("This project has already been submited");
 			$this->render(array("entity" => $entity), "new");
 		}
 	}
