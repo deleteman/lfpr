@@ -32,7 +32,8 @@ class Markdown {
 	# This will work fine for derived classes too.
 	#
 		# Take parser class on which this function was called.
-		$parser_class = \get_called_class();
+		//$parser_class = \get_called_class();
+		$parser_class = "MarkdownExtra"; //Ugly hack, but until I find a host with php 5.3+, we have no other choice.
 
 		# try to take parser from the static parser list
 		static $parser_list;
