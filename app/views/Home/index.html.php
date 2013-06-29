@@ -13,7 +13,7 @@
 	</p>
 	<?php } ?>
 <h3>Welcome to </h3>
-<h1> Looking for Pull Request!</h1>
+<h1> Looking for Pull Requests!</h1>
 <p>
 	Use the site to find a project to contribute to, <em>OR</em> publish your projects and let the 
 	world know you're looking for contributors
