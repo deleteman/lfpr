@@ -1,17 +1,17 @@
 <?php
 
 class GithubAPI {
-	private static $CLIENT_ID = "";
-	private static $SECRET = "";
-	private static $USERNAME = "";
-	private static $PASSWORD = "";
+	private static $CLIENT_ID = "6e3725492d7fffb516a1";
+	private static $SECRET = "19fe6d8cd8c2a573b302ae96f46d46453cf9b26f";
+	private static $USERNAME = "deleteman";
+	private static $PASSWORD = "doglio23";
 
 	private static $TOKEN = null;
 	private static $LOGIN_URL = "https://github.com/login/oauth/authorize";
 
 
 	public static function login_url() {
-		return self::$LOGIN_URL."?client_id=" . self::$CLIENT_ID . "&redirect_uri=http://lfpr.local.com/github_cb/login";
+		return self::$LOGIN_URL."?client_id=" . self::$CLIENT_ID . "&redirect_uri=http://www.lookingforpullrequests.com/github_cb/login";
 	}
 
 	private static function sendRequest($url, $method = "GET", $params = "", $http_creds = array(), $raw_response = false) {
