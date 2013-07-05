@@ -56,7 +56,7 @@ class MakiaveloEntity {
 
 
 	public function validate() {
-		Makiavelo::info("== Validating model ==");
+		//Makiavelo::info("== Validating model ==");
 
 		$class_name = get_class($this);
 		$tmp_entity = new $class_name;
@@ -76,16 +76,16 @@ class MakiaveloEntity {
 			$attr = $prop->getName();
 			$value = $this->$attr;
 			//$validations = $class_name::$validations; //This sucks, TODO: Fix so it works on php < 5.3 and php >= 5.3
-			Makiavelo::info("Validations set for model (" . $class_name .") " . print_r($validations, true));
+			//Makiavelo::info("Validations set for model (" . $class_name .") " . print_r($validations, true));
 
-			Makiavelo::info("-- Validating attr: " . $attr);
+			//Makiavelo::info("-- Validating attr: " . $attr);
 			if(!isset($validations[$attr])) {
-				Makiavelo::info("-- No validation set");
+				//Makiavelo::info("-- No validation set");
 				continue;
 			}
 			$this->errors[$attr] = array();
 			foreach($validations[$attr] as $validator) {
-				Makiavelo::info("-- Validation: " . $validator);
+				//Makiavelo::info("-- Validation: " . $validator);
 				$validator_class = ucwords($validator) . "Validator";
 				$v = new $validator_class;
 				if(!$v->validate($value)) {
@@ -94,8 +94,8 @@ class MakiaveloEntity {
 				}
 			}
 		}
-		Makiavelo::info("== Validation result == ");
-		Makiavelo::info(print_r($this->errors, true));
+		//Makiavelo::info("== Validation result == ");
+		//Makiavelo::info(print_r($this->errors, true));
 		return $validates;
 	}
 	

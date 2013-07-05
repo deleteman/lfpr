@@ -13,11 +13,13 @@
  			$proj_name = $proj->name;
  			$usr_name  = $proj->owner()->name;		
  			$dev = $proj->owner();
- 			if($proj->updated_at == date("Y-m-d") . "00:00:00") {
+ 			Makiavelo::info("==== Querying for $usr_name/$proj_name");
+ 			Makiavelo::info("Last Update: " . $proj->updated_at);
+ 			if($proj->updated_at == date("Y-m-d") . " 00:00:00") {
+ 				Makiavelo::info("Skiping project");
  				continue; //Avoid duplicated entries
  			}
 
- 			Makiavelo::info("==== Querying for $usr_name/$proj_name");
  			$data = GithubAPI::queryProjectData($usr_name, $proj_name);
 
  			//We update the dev's avatar if needed
