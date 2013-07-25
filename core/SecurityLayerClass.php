@@ -49,7 +49,7 @@ class SecurityLayer {
 	public function logOutUser() {
 		unset($_SESSION['makiavelo']['current_session']['user']);
 		unset($_SESSION['makiavelo']['current_session']['role']);
-		setcookie(session_id(), "");
+		//setcookie(session_id(), "");
 	}
 
 	public function isUserLoggedIn() {
