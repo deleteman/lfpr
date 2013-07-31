@@ -40,8 +40,21 @@ If you're planning on cloning the site and running it locally, follow these simp
 </VirtualHost>
 ```
 6. Add an entry to your hosts file, so that the virtual host will work.
-7. ????
-8. Profit!
+7. Make sure the /tmp folder inside the project is writable by  Apache (if in doubt, give it a 777)
+8. ????
+9. Profit!
+
+
+###Contributing
+
+If you feel like helping out by bug-fixing, or contributing with a new feature or whatever, just follow these simple steps:
+
+1. Create an issue for it.
+2. Fork the repo.
+3. Make your changes.
+4. Commit and create a pull request.
+5. Be happy :)
+
 
 ##More?
 
