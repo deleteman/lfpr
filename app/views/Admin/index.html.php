@@ -6,7 +6,9 @@
 		<ol>
 		<?php 
 		foreach($this->commits as $pdata) { ?>
-			<li><?=$pdata['project']->name?> - <?=$pdata['commits']?> commits</li>
+			<li><?=$pdata['project']->name?> - <?=$pdata['commits']?> commits 
+				(<a href="http://www.lookingforpullrequests.com/project/<?=$pdata['project']->id?>" target="_blank">open</a>)
+			</li>
 		<?php } ?>
 		</ol>
 	</div>
@@ -17,7 +19,10 @@
 		<?php 
 		foreach($this->most_pr as $pdata) { ?>
 			<li><?=$pdata['project']->name?> - <?=$pdata['total_activity']?> 
-					pulls (<?=$pdata['new_pulls']?> + <?=$pdata['closed_pulls']?> + <?=$pdata['merged_pulls']?>)</li>
+					pulls (<?=$pdata['new_pulls']?> + <?=$pdata['closed_pulls']?> + <?=$pdata['merged_pulls']?>)
+
+				(<a href="http://www.lookingforpullrequests.com/project/<?=$pdata['project']->id?>" target="_blank">open</a>)
+				</li>
 		<?php } ?>
 		</ol>
 	</div>
@@ -26,7 +31,9 @@
 		<ol>
 		<?php 
 		foreach($this->latest as $pdata) { ?>
-			<li><?=$pdata->name?> (Id: <?=$pdata->id?>)</li>
+			<li><?=$pdata->name?> (Id: <?=$pdata->id?>)
+				(<a href="http://www.lookingforpullrequests.com/project/<?=$pdata->id?>" target="_blank">open</a>)
+			</li>
 		<?php } ?>
 		</ol>
 	</div>
