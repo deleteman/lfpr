@@ -32,8 +32,8 @@
 				<?=$this->project->description?>
 			</p>
 		</div>
-        <?php if($this->project->pr_acceptance_rate != -1) { ?> 
-            <div class="has-tooltip pr_acceptance_rate <?=$this->project->getAcceptanceString()?>" data-title="Pull Request Approval Rating">
+        <?php if($this->project->pr_acceptance_rate > 0) { ?> 
+            <div class="has-tooltip pr_acceptance_rate <?=$this->project->getAcceptanceString()?>" data-title="Pull Request Acceptance Rating">
                 <h2><?=$this->project->pr_acceptance_rate?>%</h2>
                 <img src="/img/illustrations/retina.png">
             </div>
