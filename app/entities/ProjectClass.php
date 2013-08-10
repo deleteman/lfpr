@@ -16,6 +16,7 @@ class Project extends MakiaveloEntity {
 	private $open_issues; //type: integer
 	private $closed_issues; //type: integer
 	private $readme; //type: text
+	private $pr_acceptance_rate; //type: integer
 
 	static public $validations = array();
 	public function __set($name, $val) {
@@ -64,6 +65,20 @@ class Project extends MakiaveloEntity {
 			Makiavelo::info("===== Delta saved! ");
 		} else {
 			Makiavelo::info("===== ERROR saving delta");
+		}
+	}
+
+	public function getAcceptanceString() {
+		if($this->pr_acceptance_rate < 30) {
+			return "terrible";
+		}
+
+		if($this->pr_acceptance_rate >= 30 && $this->pr_acceptance_rate < 70) {
+			return "acceptable";
+		}
+
+		if($this->pr_acceptance_rate >= 70) {
+			return "good";
 		}
 	}
 

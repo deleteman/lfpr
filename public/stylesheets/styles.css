@@ -326,3 +326,37 @@ pointer-events: none;
 #issues-list a {
 	text-decoration: none;
 }
+
+#project-data-panel {
+	position: relative;
+}
+
+.pr_acceptance_rate {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 100px;
+	padding: 1px;
+	padding-left: 10px;
+	border-top-left-radius: 10px;	
+}
+
+.pr_acceptance_rate img {
+	width: 31px;
+}
+.pr_acceptance_rate h2{
+	display: inline;
+	vertical-align: middle;
+}
+
+.pr_acceptance_rate.terrible {
+	background: #aa4444;
+}
+
+.pr_acceptance_rate.acceptable {
+	background: rgb(255, 246, 142);
+}
+
+.pr_acceptance_rate.good {
+	background: #55d98d;
+}

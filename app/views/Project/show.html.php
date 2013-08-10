@@ -20,7 +20,7 @@
 		<?=image_tag($this->project->owner()->avatar(), array("class" => "avatar"))?> 
 	</h3>
 	<div class="clearfix"></div>
-	<div class="well">
+	<div class="well" id="project-data-panel">
 		<ul class="simple-data span4">
 			<li><span class="fui-menu-24"></span> <?=$this->project->forks?> forks</li>
 			<li><span class="fui-heart-24"></span> <?=$this->project->stars?> stars</li>
@@ -32,6 +32,12 @@
 				<?=$this->project->description?>
 			</p>
 		</div>
+        <?php if($this->project->pr_acceptance_rate != -1) { ?> 
+            <div class="has-tooltip pr_acceptance_rate <?=$this->project->getAcceptanceString()?>" data-title="Pull Request Approval Rating">
+                <h2><?=$this->project->pr_acceptance_rate?>%</h2>
+                <img src="/img/illustrations/retina.png">
+            </div>
+        <?php } ?>
 		<div class="clearfix"></div>
 	</div>
 </div>

@@ -61,10 +61,18 @@
 			}
 
 			$new_pulls_today = $closed_pulls_today = $merged_pulls_today = 0;
+			$total_pulls = 0;
+			$total_merged_pulls = 0;
+			
 			foreach($data->pulls as $pull) {
 				$created_data = explode("T", $pull->created_at);
 				$closed_data = explode("T", $pull->closed_at);
 				$merged_data = explode("T", $pull->merged_at);
+
+				$total_pulls++;
+				if($pull->merged_at) {
+					$total_merged_pulls++;
+				}
 
 				if($created_data[0] == $today) {
 					$new_pulls_today++;
@@ -76,6 +84,11 @@
 					$merged_pulls_today++;
 				}
 
+			}
+			if($total_pulls > 0) {
+				$proj->pr_acceptance_rate = ($total_merged_pulls / $total_pulls) * 100;
+			} else {
+				$proj->pr_acceptance_ratec = -1;
 			}
 
  			$delta_stars = $data->watchers - $proj->stars;
