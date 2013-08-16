@@ -1,17 +1,13 @@
 <?php
 
 class GithubAPI {
-	private static $CLIENT_ID = "6e3725492d7fffb516a1";
-	private static $SECRET = "19fe6d8cd8c2a573b302ae96f46d46453cf9b26f";
-	private static $USERNAME = "deleteman";
-	private static $PASSWORD = "doglio23";
 
 	private static $TOKEN = null;
 	private static $LOGIN_URL = "https://github.com/login/oauth/authorize";
 
 
 	public static function login_url() {
-		return self::$LOGIN_URL."?client_id=" . self::$CLIENT_ID . "&redirect_uri=http://www.lookingforpullrequests.com/github_cb/login";
+		return self::$LOGIN_URL."?client_id=" . Config::get("github.client_id") . "&redirect_uri=http://www.lookingforpullrequests.com/github_cb/login";
 	}
 
 	private static function sendRequest($url, $method = "GET", $params = "", $http_creds = array(), $raw_response = false) {
@@ -72,7 +68,7 @@ class GithubAPI {
 			if($proj == null) {
 				$proj = new Project();
 				$proj->name = $repo->name;
-				$proj->url  = $repo->url;
+				$proj->url  = ($repo->html_url) ? $repo->html_url : $repo->url;
 				$proj->owner_id = $dev->id;
 				$proj->description = $repo->description;
 				$proj->stars = $repo->watchers;
@@ -93,10 +89,10 @@ class GithubAPI {
 
 	public static function requestWebAuth($code) {
 		$url = "https://github.com/login/oauth/access_token";
-		$params = 'client_id='.self::$CLIENT_ID.'&client_secret='.self::$SECRET.'&code='.$code;
+		$params = 'client_id='.Config::get("github.client_id").'&client_secret='.Config::get("github.secret").'&code='.$code;
 
 		Makiavelo::info("Requesting WEB auth token to Github :: " . $params);
-		$response = self::sendRequest($url, "POST", $params, array(self::$USERNAME, self::$PASSWORD), true);
+		$response = self::sendRequest($url, "POST", $params, array(Config::get("github.username"), Config::get("github.pwd")), true);
 		$response = explode("&", $response);
 		$response = $response[0];
 		$response = explode("=", $response);
@@ -115,9 +111,9 @@ class GithubAPI {
 
 	private static function requestAuth() {
 		$url = "https://api.github.com/authorizations";
-		$params = '{"client_id": "'.self::$CLIENT_ID.'", "client_secret": "'.self::$SECRET.'"}';
+		$params = '{"client_id": "'.Config::get("github.client_id").'", "client_secret": "'.Config::get("github.secret").'"}';
 		Makiavelo::info("Requesting auth token to Github :: " . $params);
-		$response = self::sendRequest($url, "POST", $params, array(self::$USERNAME, self::$PASSWORD));
+		$response = self::sendRequest($url, "POST", $params, array(Config::get("github.username"), Config::get("github.pwd")));
 		Makiavelo::info("Response obtained :: " . print_r($response, true));
 		self::$TOKEN = $response->token;
 		return $response->token;
