@@ -81,6 +81,7 @@ $(document).ready(function() {
 			 	
 			 	btn.removeClass("disabled");
 			 });
+		return false;
 	});
 
 	$(".project-spotlight").hover(function(){
