@@ -151,7 +151,7 @@ class RoutesHandler {
 							$url = str_replace(":$attr", $value, $url);
 						}
 
-							if(count($params) > 0) {
+							if(is_array($params) && count($params) > 0) {
 								$url .= "?";
 								$query_params = array();
 								foreach($params as $k => $v) {
