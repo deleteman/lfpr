@@ -23,6 +23,10 @@
 	public function showAction() {
 		$id = $this->request->getParam("id");
 		$ent = load_project($id);
+		$new_faq = new Faq();
+		$new_faq->project_id = $id;
+		$project = load_project($id);
+		$faqs = $project->getQuestions();
 		
 		if($ent && !$ent->published) {
 			$this->flash->setError("This project has not been published yet!");
@@ -33,7 +37,7 @@
 		} else {
 			//$issue = random_issue($id);
 			$issues = list_issue("num desc", 5, "project_id = " . $id);
-			$this->render(array("issues" => $issues, "project" => $ent));
+			$this->render(array("faqs_list" => $faqs, "faq" => $new_faq, "issues" => $issues, "project" => $ent));
 		}
 	}
 

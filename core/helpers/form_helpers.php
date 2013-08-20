@@ -301,7 +301,7 @@ function textarea_field($en, $attr, $label = null, $html_attrs = array()) {
 	$error = (isset($en->errors[$attr])) ? "validation-error" : "";
 	$html = '<div class="form-field '.$error.'">';
 	$label_text = $label;
-	if($label == null) {
+	if($label === null) {
 		$label_text = Makiavelo::titlelize($attr);
 	}
 	$html .= '<label for="'.$attr.'">'.$label_text.'</label>';

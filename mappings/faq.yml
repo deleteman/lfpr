@@ -1,0 +1,8 @@
+crud:
+	entity:
+		name: Faq
+		fields:
+			project_id: integer
+			question: string
+			answer: text
+			order: integer

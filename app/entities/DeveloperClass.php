@@ -7,9 +7,14 @@ private $updated_at; //type: datetime
 private $name; //type: string
 private $avatar_url; //type: string
 private $github_url; //type: string
-
+private $role; //not in DB
 
 	static public $validations = array();
+
+	public function __construct() {
+		$this->role = "user";
+	}
+
 	public function __set($name, $val) {
 		$this->$name = $val;
 	}
@@ -36,6 +41,10 @@ private $github_url; //type: string
 
 	public function commitCount() {
 		return count_project_commit("committer = '".$this->name."'");
+	}
+
+	public function ownsProject($p) {
+		return $p->owner_id == $this->id;
 	}
 
 }

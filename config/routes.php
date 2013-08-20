@@ -73,4 +73,11 @@ $_ROUTES[] = array(
 	*/
 	);
 
- ?>
+ $_ROUTES[] = array(
+	"list" => array("url" => "/faq/", "controller" => "Faq", "action" => "index"),
+	"create" => array("url" => "/faq/create", "controller" => "Faq", "action" => "create", "via" => "post"),
+	"new" => array("url" => "/faq/new", "controller" => "Faq", "action" => "new"),
+	"retrieve" => array("url" => "/faq/:id", "controller" => "Faq", "action" => "show", "via" => "get"),
+	"update" => array("url" => "/faq/:id/edit", "controller" => "Faq", "action" => "edit"),
+	"delete" => array("url" => "/faq/:id/delete", "controller" => "Faq", "action" => "delete", "via" => "post")
+	); ?>

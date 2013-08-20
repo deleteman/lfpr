@@ -7,7 +7,7 @@ class GithubAPI {
 
 
 	public static function login_url() {
-		return self::$LOGIN_URL."?client_id=" . Config::get("github.client_id") . "&redirect_uri=http://www.lookingforpullrequests.com/github_cb/login";
+		return self::$LOGIN_URL."?client_id=" . Config::get("github.client_id") . "&redirect_uri=".Config::get("github.login_redirect"); 
 	}
 
 	private static function sendRequest($url, $method = "GET", $params = "", $http_creds = array(), $raw_response = false) {

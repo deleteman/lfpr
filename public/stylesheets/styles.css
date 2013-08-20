@@ -360,3 +360,22 @@ pointer-events: none;
 .pr_acceptance_rate.good {
 	background: #55d98d;
 }
+
+#new_faq .question_txt {
+	width: 100%;
+	padding: 10px;
+	height: 42px;
+	font-size: 22px;
+}
+#new_faq .answer_txt {
+	height: 100px;
+	width: 100%;
+}
+
+#faqs-tab .new-sign {
+	font-size: 36px;
+padding: 0;
+float: right;
+margin-top: -22px;
+color: #0088cc;
+}

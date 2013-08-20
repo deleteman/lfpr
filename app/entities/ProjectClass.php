@@ -199,4 +199,8 @@ class Project extends MakiaveloEntity {
 
 		}
 	}
+
+	public function getQuestions() {
+		return list_faq("`order`", null, " project_id = " . $this->id);
+	}
 }

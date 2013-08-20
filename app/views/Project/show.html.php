@@ -50,6 +50,12 @@
     <a href="#stats" data-toggle="tab">Stats</a>
   </li>
   <li><a href="#readme" data-toggle="tab">Readme</a></li>
+  <li data-title="New!" data-placement="right">
+    <a href="#faqs" id="faqs-tab" data-toggle="tab" >
+        F.A.Q
+    <span class="new-sign">&#9996;</span>
+    </a>
+  </li>
 </ul>
 
 
@@ -86,6 +92,9 @@
     </div>
     <div class="well tab-pane" id="readme">
     <?=MarkdownExtra::defaultTransform($this->project->readme)?>
+    </div>
+    <div class="well tab-pane" id="faqs">
+        <?=$this->renderView("_faqs")?>
     </div>
 </div>
 <script type="text/javascript" src="/javascripts/highcharts/js/highcharts.js"></script>
@@ -332,6 +341,7 @@ function updateCharts() {
         $("#issues-cont").html(data);
         $(".has-tooltip").tooltip();
     });
+
 });
 
 </script>
