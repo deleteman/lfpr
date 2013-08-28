@@ -61,9 +61,9 @@ private $role; //not in DB
 			$projects[] = array(
 				"name" => $project->name,
 				"commits" => $project->countCommits(),
-				"pr_acceptance_rate" => $project->pr_acceptance_rate,
-				"stars" => $project->stars,
-				"forks" => $project->forks,
+				"pr_acceptance_rate" => intval($project->pr_acceptance_rate),
+				"stars" => intval($project->stars),
+				"forks" => intval($project->forks),
 				"faq_count" => count($project->getQuestions()),
 				"total_pull_requests" => $project->getTotalPullRequests()
 				);
