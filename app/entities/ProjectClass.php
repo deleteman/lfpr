@@ -35,6 +35,10 @@ class Project extends MakiaveloEntity {
 		return load_developer($this->owner_id);
 	}
 
+	public function countCommits() {
+		return count(load_project_commit_where("project_id = " . $this->id));
+	}
+
 	public function url() {
 		$url = $this->url;
 		$url = str_replace("https://", "", $url);
@@ -202,5 +206,15 @@ class Project extends MakiaveloEntity {
 
 	public function getQuestions() {
 		return list_faq("`order`", null, " project_id = " . $this->id);
+	}
+
+	//Returns the historic number of pull requests ever made to this project
+	public function getTotalPullRequests() {
+		$pds = list_project_delta(null, null, " project_id = " . $this->id);
+		$total_pr = 0;
+		foreach($pds as $pd) {
+			$total_pr += $pd->new_pulls;
+		}
+		return $total_pr;
 	}
 }

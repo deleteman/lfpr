@@ -7,6 +7,20 @@
 		$this->render(array("entity" => $entity));
 	}
 
+	public function getStatsAction() {
+		$this->layout = null;
+		$username = $this->request->getParam("usrname");
+		$dev = load_developer_where("name = '" . $username . "'");
+		$stats = "";
+		if(!$dev) {
+			$stats = array("error" => "User not found");
+			$this->statusCode = Makiavelo::RESPONSE_CODE_NOT_FOUND;
+		} else {
+			$stats = $dev->gatherStats();
+		}
+		$this->render(array("stats" => $stats));
+	}
+
 	public function deleteAction() {
 		delete_developer($this->request->getParam("id"));
 		$this->flash->success("Delete successfull!");

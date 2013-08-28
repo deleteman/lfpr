@@ -35,6 +35,7 @@ class MakiaveloController {
 	protected $request;
 	protected $flash;
 	private $action;
+	protected $statusCode;
 
 
 
@@ -46,6 +47,7 @@ class MakiaveloController {
 	}
 
 	public function handleRequest($get, $post, $named) {
+		$this->statusCode = Makiavelo::RESPONSE_CODE_OK;
 
 		Makiavelo::info("Handling uploading files...");
 		foreach($_FILES as $field_name => $data) {
@@ -98,6 +100,9 @@ class MakiaveloController {
 		}
 		foreach($params as $variable => $value) {
 			$this->$variable = $value;
+		}
+		if($this->statusCode == Makiavelo::RESPONSE_CODE_NOT_FOUND) {
+			header("HTTP/1.0 404 Not Found");
 		}
 		require_once($path_layout);
 	}

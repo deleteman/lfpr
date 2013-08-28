@@ -35,8 +35,12 @@ private $role; //not in DB
 		}
 	}
 
-	public function getProjects() {
-		return list_project(null, null, "owner_id = " . $this->id);
+	public function getProjects($onlyPublished = false) {
+		$wherecond = "owner_id = " . $this->id;
+		if($onlyPublished) {
+			$wherecond .= " and published = 1";
+		}
+		return list_project(null, null, $wherecond);
 	}
 
 	public function commitCount() {
@@ -45,6 +49,28 @@ private $role; //not in DB
 
 	public function ownsProject($p) {
 		return $p->owner_id == $this->id;
+	}
+
+	public function gatherStats() {
+		$db_projects = $this->getProjects(true);
+		$langs = array();
+		$projects = array();
+		foreach($db_projects as $project) {
+			$langs[] = $project->language;
+
+			$projects[] = array(
+				"name" => $project->name,
+				"commits" => $project->countCommits(),
+				"pr_acceptance_rate" => $project->pr_acceptance_rate,
+				"stars" => $project->stars,
+				"forks" => $project->forks,
+				"faq_count" => count($project->getQuestions()),
+				"total_pull_requests" => $project->getTotalPullRequests()
+				);
+		}
+		$stats = array("languages" => array_unique($langs),
+						"projects" => $projects);
+		return $stats;
 	}
 
 }

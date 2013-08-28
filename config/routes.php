@@ -25,7 +25,8 @@ $_ROUTES[] = array(
 	"new" => array("url" => "/developer/new", "controller" => "Developer", "action" => "new"),
 	"show" => array("url" => "/developer/:id", "controller" => "Developer", "action" => "show", "via" => "get"),
 	"update" => array("url" => "/developer/:id/edit", "controller" => "Developer", "action" => "edit"),
-	"delete" => array("url" => "/developer/:id/delete", "controller" => "Developer", "action" => "delete", "via" => "post")
+	"delete" => array("url" => "/developer/:id/delete", "controller" => "Developer", "action" => "delete", "via" => "post"),
+	"stats" => array("url" => "/developer/:usrname/stats", "controller" => "Developer", "action" => "getStats", "via" => "get")
 	); 
 $_ROUTES[] = array(
 	"list" => array("url" => "/suscriptor/", "controller" => "Suscriptor", "action" => "index"),
