@@ -51,14 +51,17 @@ private $role; //not in DB
 		return $p->owner_id == $this->id;
 	}
 
+	public function getMyContributions() {
+		return get_developer_contributions($this->id, $this->name);
+	}
+
 	public function gatherStats() {
 		$db_projects = $this->getProjects(true);
 		$langs = array();
 		$projects = array();
 		foreach($db_projects as $project) {
-			$langs[] = $project->language;
-
 			$projects[] = array(
+				"language" => $project->language,
 				"name" => $project->name,
 				"commits" => $project->countCommits(),
 				"pr_acceptance_rate" => intval($project->pr_acceptance_rate),
@@ -68,9 +71,8 @@ private $role; //not in DB
 				"total_pull_requests" => $project->getTotalPullRequests()
 				);
 		}
-		$stats = array("languages" => array_unique($langs),
-						"projects" => $projects);
+		$stats = array("owned_projects" => $projects,
+						"contributed_projects" => $this->getMyContributions());
 		return $stats;
 	}
-
 }

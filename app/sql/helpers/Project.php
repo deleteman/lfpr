@@ -1,5 +1,23 @@
 <?php
 
+function get_developer_contributions($id, $username) {
+	$sql = "SELECT COUNT( * ) as total , project_id, p.name as project_name
+			FROM  `project_commit` pc
+			INNER JOIN project p ON p.id = pc.project_id
+			WHERE owner_id != " . $id . "
+			AND committer =  '" . $username . "'
+			GROUP BY project_id";
+	global $__db_conn;
+
+	$projects = array();
+	if($rs = mysql_query($sql, $__db_conn)) {
+		while($data = mysql_fetch_assoc($rs)) {
+			$projects[] = array("project" => $data['project_name'], "contribs" => $data['total']);
+		}
+	}
+	return $projects;
+}
+
 function load_latest_projects($order = "rand()") {
 	global $__db_conn;
 	$sql = "SELECT * from project where published = 1 order by $order limit 3";
