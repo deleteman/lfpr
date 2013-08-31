@@ -1,7 +1,7 @@
 <?php
 
 function get_developer_contributions($id, $username) {
-	$sql = "SELECT COUNT( * ) as total , project_id, p.name as project_name
+	$sql = "SELECT COUNT( * ) as total , project_id, p.name as project_name, p.language as lang
 			FROM  `project_commit` pc
 			INNER JOIN project p ON p.id = pc.project_id
 			WHERE owner_id != " . $id . "
@@ -12,7 +12,7 @@ function get_developer_contributions($id, $username) {
 	$projects = array();
 	if($rs = mysql_query($sql, $__db_conn)) {
 		while($data = mysql_fetch_assoc($rs)) {
-			$projects[] = array("project" => $data['project_name'], "contribs" => $data['total']);
+			$projects[] = array("project" => $data['project_name'], "contribs" => $data['total'], "language" => $data['lang']);
 		}
 	}
 	return $projects;
