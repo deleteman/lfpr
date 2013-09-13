@@ -81,6 +81,26 @@ function load_project_commit($id) {
 	return load_project_commit_where("id = $id");
 }
 
+function load_project_commits_where($where) {
+	global $__db_conn;
+
+	$sql =  "SELECT * FROM project_commit WHERE $where"; #SELECT * FROM tipo_buque WHERE id = " . $id;
+
+	$result = mysql_query($sql, $__db_conn);
+	$pcommits = array();
+	if(mysql_num_rows($result) > 0) {
+		while($row = mysql_fetch_assoc($result)) {
+			$new = new ProjectCommit();
+			$new->load_from_array($row);
+			$pcommits[] = $new;
+		}
+		
+		return $pcommits;
+	} else {
+		return null;
+	}
+}
+
 function load_project_commit_where($where) {
 	global $__db_conn;
 

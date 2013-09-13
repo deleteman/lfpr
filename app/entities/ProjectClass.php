@@ -36,7 +36,7 @@ class Project extends MakiaveloEntity {
 	}
 
 	public function countCommits() {
-		return count(load_project_commit_where("project_id = " . $this->id));
+		return count(load_project_commits_where("project_id = " . $this->id));
 	}
 
 	public function url() {
