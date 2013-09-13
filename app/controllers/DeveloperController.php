@@ -2,6 +2,12 @@
 
  class DeveloperController extends ApplicationController {
 
+	private function getCurrentDev() {
+		$username = $this->request->getParam("name");
+		$dev = load_developer_where("name = '" . $username . "'");
+		return $dev;
+	}
+
  	public function newAction() {
 		$entity = new Developer();
 		$this->render(array("entity" => $entity));
@@ -9,8 +15,7 @@
 
 	public function getStatsAction() {
 		$this->layout = null;
-		$username = $this->request->getParam("usrname");
-		$dev = load_developer_where("name = '" . $username . "'");
+		$dev = $this->getCurrentDev();
 		$stats = "";
 		if(!$dev) {
 			$stats = array("error" => "User not found");
@@ -34,9 +39,14 @@
 	}
 
 	public function showAction() {
-		$id = $this->request->getParam("id");
-		$ent = load_developer($id);
-		$this->render(array("entity" => $ent));
+		$ent = $this->getCurrentDev();
+		if(!$ent) {
+			$this->statusCode = Makiavelo::RESPONSE_CODE_NOT_FOUND;
+			$this->flash->setError("Wrong name dude, the developer you're looking for does not exist.");
+			$this->redirect_to(home_root_path_path());
+		} else {
+			$this->render(array("entity" => $ent));
+		}
 	}
 
 	public function createAction() {
