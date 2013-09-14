@@ -12,7 +12,7 @@ function get_developer_contributions($id, $username) {
 	$projects = array();
 	if($rs = mysql_query($sql, $__db_conn)) {
 		while($data = mysql_fetch_assoc($rs)) {
-			$projects[] = array("project" => $data['project_name'], "contribs" => $data['total'], "language" => $data['lang']);
+			$projects[] = array("project" => $data['project_name'], "contribs" => intval($data['total']), "language" => $data['lang']);
 		}
 	}
 	return $projects;
