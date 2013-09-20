@@ -1,18 +1,7 @@
 <?php
 if(count($this->issues) > 0) { ?>
     <div class="row">
-    <h3>Can you fix this? Help! <small> Showing 
-       <?php 
-         $total_issues = $this->pagination['total_results'];
-         if ($total_issues < 5) {
-           echo $total_issues;
-         } else if ($page == $total_pages) { 
-           echo $total_issues % 5;
-         } else { 
-           echo "5"; 
-         }
-       ?> 
-       out of <?=$this->pagination['total_results']?> results...</small></h3>
+    <h3>Can you fix this? Help! <small> Showing <?=count($this->issues)?> out of <?=$this->pagination['total_results']?> results...</small></h3>
 
     <div class="accordion well" id="issues-list">
         <?php 
