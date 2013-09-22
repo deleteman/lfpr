@@ -1,7 +1,7 @@
 <?php
 if(count($this->issues) > 0) { ?>
     <div class="row">
-    <h3>Can you fix this? Help! <small> Showing 5 out of <?=$this->pagination['total_results']?> results...</small></h3>
+    <h3>Can you fix this? Help! <small> Showing <?=count($this->issues)?> out of <?=$this->pagination['total_results']?> results...</small></h3>
 
     <div class="accordion well" id="issues-list">
         <?php 
