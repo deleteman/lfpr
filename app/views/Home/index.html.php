@@ -12,7 +12,7 @@
 		<?=link_to(GithubAPI::login_url(), '<i class="icon-github" style="font-size:30px;" ></i> Github', array("class" => "has-tooltip btn btn-large btn-success", "data-title" => "Sign-in using Github"))?>
 	</p>
 	<?php } ?>
-<h3>Welcome to </h3>
+<h3><img src="/img/LFPR-logo.png" /> </h3>
 <h1> Looking for Pull Requests!</h1>
 <p>
 	Use the site to find a project to contribute to, <em>OR</em> publish your projects and let the 
