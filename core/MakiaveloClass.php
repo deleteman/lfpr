@@ -70,15 +70,15 @@ class Makiavelo {
 		return $af->getAction($action_code);
 	}
 
-	public function camel_to_underscore($txt) {
+	public static function camel_to_underscore($txt) {
 		return strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $txt));
 	}
 
-	public function underscore_to_camel($txt) {
+	public static function underscore_to_camel($txt) {
 		return str_replace(" ", "", ucwords(str_replace("_", " ", strtolower($txt))));
 	}
 
-	public function titlelize($txt) {
+	public static function titlelize($txt) {
 		return ucwords(str_replace("_", " ", $txt));
 	}
 
