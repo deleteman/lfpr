@@ -1,0 +1,12 @@
+development:
+    host: localhost
+    name: lfpr_dev
+    user: lfpr
+    pwd: lfpr
+
+production:
+    host: localhost
+    name: lfpr_prod
+    user: lfpr
+    pwd: lfpr
+
