@@ -39,10 +39,12 @@ If you're planning on cloning the site and running it locally, follow these simp
   </Directory>
 </VirtualHost>
 ```
+5.1 If you're using Apache 2.4+ then you should add one more line after "AlloOverride All": Require all granted
 6. Add an entry to your hosts file, so that the virtual host will work.
 7. Make sure the /tmp folder inside the project is writable by  Apache (if in doubt, give it a 777)
 8. ????
 9. Profit!
+
 
 
 ###Contributing
