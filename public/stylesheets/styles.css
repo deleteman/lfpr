@@ -379,3 +379,31 @@ float: right;
 margin-top: -22px;
 color: #0088cc;
 }
+
+#prize-list {
+	list-style: none;
+}
+#prize-list li {
+
+}
+.prize-data {
+	float:left;
+	width: 80%;
+}
+.prize-icon-cnt {
+	float:right;
+	margin-top: 20px;
+}
+
+img.prize-icon {
+	width: 50px;
+}
+
+#promo-page h2:before {
+	content: "☑";
+	font-size:30px;
+}
+
+#promo-page h1 {
+	text-shadow: 1px 1px white;
+}

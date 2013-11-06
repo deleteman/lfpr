@@ -3,7 +3,11 @@
 $_ROUTES = array();
 
 
-$_ROUTES[] = array("root_path" => array("url" => "/", "controller" => "Home", "action" => "index"));
+$_ROUTES[] = array(
+	"root_path" => array("url" => "/", "controller" => "Home", "action" => "index"),
+	"december_promo" => array("url" => "decpromo", "controller" => "Home", "action" => "decPromo")
+
+	);
 $_ROUTES[] = array(
 	//"login" => array("url" => "/login", "controller" => "Login", "action" => "index"),
 	//"sign_in" => array("url" => "/login/sign_in", "controller" => "Login", "action" => "signIn", "via" => "post"),
