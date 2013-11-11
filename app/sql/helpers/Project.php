@@ -1,5 +1,23 @@
 <?php
 
+function get_languages_by_ranking() {
+	$sql = "SELECT COUNT(*) as total, language from project 
+			WHERE published = 1
+			GROUP BY language 
+			ORDER BY total desc";
+	global $__db_conn;
+
+	$langs = array();
+	if($rs = mysql_query($sql, $__db_conn)) {
+		while($data = mysql_fetch_assoc($rs)) {
+			$langs[] = array("lang" => $data['language'], "total" => intval($data['total']));
+		}
+	} else {
+		Makiavelo::info("SQL Error::" . mysql_error() . "::" . $sql);
+	}
+	return $langs;
+}
+
 function get_developer_contributions($id, $username) {
 	$sql = "SELECT COUNT( * ) as total , project_id, p.name as project_name, p.language as lang
 			FROM  `project_commit` pc

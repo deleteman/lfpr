@@ -7,9 +7,11 @@ class AdminController extends ApplicationController {
 		$most_pr = get_projects_by_pr();
 		$latest = load_latest_projects("id desc");
 		$suscribers = list_suscriptor("id ");
+		$langs = get_languages_by_ranking();
 		$this->render(array("commits" => $most_commits, 
 							"most_pr" => $most_pr,
 							"latest" => $latest,
+							"langs" => $langs,
 							"suscribers" => $suscribers)); 
 	}
 }

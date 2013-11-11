@@ -2,6 +2,17 @@
 
 <div class="well span12">
 	<div class="well span6">
+		<h2>Most common languages</h2>
+		<ol>
+		<?php 
+		foreach($this->langs as $langData) { ?>
+			<li><?=$langData['lang']?> - <?=$langData['total']?> 
+				(<a href="http://www.lookingforpullrequests.com/project/?language=<?=$langData['lang']?>&owner=&sort=language_asc" target="_blank">list projects</a>)
+			</li>
+		<?php } ?>
+		</ol>
+	</div>
+	<div class="well span6">
 		<h2>Most commits</h2>
 		<ol>
 		<?php 
