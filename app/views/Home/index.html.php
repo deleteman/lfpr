@@ -21,6 +21,11 @@
 	<p class="pull-left">
 	<?=link_to(project_list_path(), "Find projects", array("class" => "btn btn-primary btn-large", "id" => "main-btn"))?>
 	<?=link_to(project_new_path(), "Publish your project", array("class" => "btn btn-large"))?>
+	<a class="palette palette-wet-asphalt promo-link" href="<?=home_contest_path()?>">
+		Win an cool T-Shirt and more! <br/>
+		Click here for more information...
+		<img src="/img/premios-iconos.png" alt="Awesome stuff!">
+	</a>
 	</p>
 
 	<div class="well span4 pull-right">

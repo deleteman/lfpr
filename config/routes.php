@@ -5,7 +5,7 @@ $_ROUTES = array();
 
 $_ROUTES[] = array(
 	"root_path" => array("url" => "/", "controller" => "Home", "action" => "index"),
-	"december_promo" => array("url" => "decpromo", "controller" => "Home", "action" => "decPromo")
+	"contest" => array("url" => "contest", "controller" => "Home", "action" => "contest")
 
 	);
 $_ROUTES[] = array(

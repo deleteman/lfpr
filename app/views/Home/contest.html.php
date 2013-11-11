@@ -1,8 +1,8 @@
 <div class="hero-unit" id="promo-page">
-	<h1 class="huge-title">Get the goodies in December!</h1>
+	<h1 class="huge-title">Get coding and Win awesome stuff!!!</h1>
 	<h2>How?</h2>
 	<p>
-		<strong>Easy!</strong> During the month of December, we'll be receiving Pull Requests for the features listed below. If
+		<strong>Easy!</strong> From November, 12th we'll be receiving Pull Requests for the features listed below. If
 		your PR is the one we pick, then you get the goodie associated to that feature.
 	</p>
 	<h2>Why?</h2>
@@ -34,7 +34,7 @@
 		<b>If</b> your Pull Request ends up being the winner, then we'll proceed to send the prize and it'll get to you as soon as the postal mail service
 		can deliver it to you.
 	</p>
-	<h2>Feature list</h2>
+	<h2>Feature list <small>(With associated prize)</small></h2>
 	<div class="well">
 		<ol id="prize-list">
 			<li>
@@ -72,6 +72,10 @@
 			</li>
 		</ol>
 	</div>
+	<h2>Can I see a picture of the prize?</h2>
+	<p>
+		Not yet! But we're working on the Mug and T-Shirt designs, so once we have the final one, we'll publish them here, stay tunned!
+	</p>
 	<h2>How do I start?</h2>
 	<p>
 		Easy! Read the links listed above, so you know how to use the framework, and then fork the repo and start coding!
@@ -80,7 +84,11 @@
 	</p>
 	<h2>When will the winners be picked?</h2>
 	<p>
-		The contest will last for a month, finishing officially on XX XXth, 2013. If by that time some of the features are still lacking a
+		The contest will last for a month, finishing officially on December 12th, 2013. If by that time some of the features are still lacking a
 		proper PR, we'll probably leave it open until we get one.
+	</p>
+	<h2>Got another question?</h2>
+	<p>	
+		Hit the issues on Github: <a href="https://github.com/deleteman/lfpr/issues" target="_blank">https://github.com/deleteman/lfpr/issues</a>
 	</p>
 </div>

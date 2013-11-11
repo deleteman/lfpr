@@ -103,6 +103,15 @@ display: none;
 	display: inline-block;
 }
 
+.palette-wet-asphalt {
+	clear:both;
+	background-color: #34495e;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-o-border-radius: 10px;
+}
+
 .palette-info-dark {
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;	
@@ -406,4 +415,22 @@ img.prize-icon {
 
 #promo-page h1 {
 	text-shadow: 1px 1px white;
+}
+
+.promo-link {
+	margin-top: 10px;
+	display: block;
+	widows: 150px;
+	text-decoration: none;
+	color: white;
+	text-transform: none;
+	position: relative;
+	border: 3px dashed #1abc9c;
+}
+
+.promo-link img {
+	position: absolute;
+	right: -44px;
+	top: 10px;
+
 }

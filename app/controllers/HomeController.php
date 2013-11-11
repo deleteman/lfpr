@@ -7,7 +7,7 @@ class HomeController extends ApplicationController {
 		$this->render(array("new_projects" => $latest, "suscriptor" => new Suscriptor()));
 	}
 
-	public function decPromoAction() {
+	public function contestAction() {
 		$this->render();
 	}
 }
