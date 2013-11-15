@@ -23,10 +23,12 @@ OR, you can just email me at: deleteman[at]gmail[dot]com
 If you're planning on cloning the site and running it locally, follow these simple steps:
 
 1. Clone the repo
-2. Run ./makiavelo.php db:create
-3. Run ./makiavelo.php db:load
-4. Run ./makiavelo.php db:migrate
-5. Configure a virtual host, with the following information
+2. Create a `tmp` directory on the project directory
+3. `$ cp config/config{.base,}.yml && cp config/database{.base,}.yml`
+4. Run ./makiavelo.php db:create
+5. Run ./makiavelo.php db:load
+6. Run ./makiavelo.php db:migrate
+7. Configure a virtual host, with the following information
 ```
 <VirtualHost *:80>
     ServerAdmin webmaster@dummy-host2.example.com
