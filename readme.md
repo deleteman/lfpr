@@ -23,27 +23,30 @@ OR, you can just email me at: deleteman[at]gmail[dot]com
 If you're planning on cloning the site and running it locally, follow these simple steps:
 
 1. Clone the repo
-2. Run ./makiavelo.php db:create
-3. Run ./makiavelo.php db:load
-4. Run ./makiavelo.php db:migrate
-5. Configure a virtual host, with the following information
+2. Create a `tmp` directory on the project directory
+3. `$ cp config/config{.base,}.yml && cp config/database{.base,}.yml`
+4. Run ./makiavelo.php db:create
+5. Run ./makiavelo.php db:load
+6. Run ./makiavelo.php db:migrate
+7. Configure a virtual host, with the following information
 ```
 <VirtualHost *:80>
     ServerAdmin webmaster@dummy-host2.example.com
     DocumentRoot "<path to the public folder>""
     ServerName lfpr.local.com
     SetEnv makiavelo_env "development"
-    
+
    <Directory "<path to the public folder>">
-      AllowOverride All 
+      AllowOverride All
   </Directory>
 </VirtualHost>
 ```
-5.1 If you're using Apache 2.4+ then you should add one more line after "AlloOverride All": Require all granted
-6. Add an entry to your hosts file, so that the virtual host will work.
-7. Make sure the /tmp folder inside the project is writable by  Apache (if in doubt, give it a 777)
-8. ????
-9. Profit!
+7.1 If you're using Apache 2.4+ then you should add one more line after AllowOverride All: `Require all granted`
+8. Make sure you have mod_rewrite enabled - `sudo a2enmod rewrite`
+9. Add an entry to your hosts file, so that the virtual host will work.
+10. Make sure the /tmp folder inside the project is writable by Apache (if in doubt, give it a 777)
+11. ????
+12. Profit!
 
 
 

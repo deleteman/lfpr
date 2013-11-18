@@ -14,7 +14,7 @@
 	<p>
 		Not a lot, the features we're trying to add are not that complex, but there are some things you'll be interested in knowing:
 		<ol>
-			<li>LFPR it's written in PHP, so you probably need to know the basics of the language.</li>
+			<li>LFPR is written in PHP, so you probably need to know the basics of the language.</li>
 			<li>
 				We built LFPR using a custom web framework called <a href="http://github.com/deleteman/makiavelo" target="_blank">Makiavelo</a>
 				<br/>
@@ -26,7 +26,7 @@
 					<li>Using migrations: <a href="http://www.commented-out.com/2013/02/21/makiavelo-now-with-migrations/" target="_blank">Here</a></li>
 				</ul>
 			</li>
-			<li>The site's running using PHP version 5.2, so no ultra-new features, stick with the classics please!</li>
+			<li>The site's running on a server using PHP version 5.2, so no ultra-new features, stick with the classics please!</li>
 		</ol>
 	</p>
 	<h2>When do I get my prize?</h2>
@@ -48,9 +48,9 @@
 			<li>
 				<div class="prize-data">
 					<h3>Search field</h3>
-					<div>We need a new search function, one that won't just filter the information, but also search throug all of it. </div>
+					<div>We need a new search function, one that won't just filter the information, but also search through all of it. </div>
 				</div>
-				<div class="prize-icon-cnt"><img src="/img/t-shirt-icon.png" class="prize-icon shirt has-tooltip" data-title="A awesome LFPR t-shirt!" /></div>
+				<div class="prize-icon-cnt"><img src="/img/t-shirt-icon.png" class="prize-icon shirt has-tooltip" data-title="An awesome LFPR t-shirt!" /></div>
 				<div class="clearfix"></div>
 			</li>
 			<li>
@@ -59,7 +59,7 @@
 					<div>Allow the user to set himself up as wanting to help with a set of languages. After that, on every login the homepage will display
 						a list of projecs written in those languages</div>
 				</div>				
-				<div class="prize-icon-cnt"><img src="/img/t-shirt-icon.png" class="prize-icon shirt has-tooltip" data-title="A awesome LFPR t-shirt!"/></div>
+				<div class="prize-icon-cnt"><img src="/img/t-shirt-icon.png" class="prize-icon shirt has-tooltip" data-title="An awesome LFPR t-shirt!"/></div>
 				<div class="clearfix"></div>
 			</li>
 			<li>
