@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="/javascripts/jquery.timePicker.js" ></script>
 	<script type="text/javascript" src="/javascripts/bootstrap.js" ></script>
 	<script type="text/javascript" src="/javascripts/application.js" ></script>
-	<script type="text/javascript" src="/javascripts/jquery.dropkick-1.0.0.js" ></script>
+	<script type="text/javascript" src="/javascripts/jquery.dropkick.js" ></script>
 	<link rel="stylesheet" href="/stylesheets/bootstrap.css" type="text/css" />
 	<link rel="stylesheet" href="/stylesheets/flat-ui.css" type="text/css" />
 	<link rel="stylesheet" href="/stylesheets/styles.css" type="text/css" />
