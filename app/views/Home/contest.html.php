@@ -79,8 +79,8 @@
 		<img src="/img/concurso/real-tshirt.png" data-title="Customized T-Shirt!" class="has-tooltip" />
 		<h3>The I - love - OpenSource mug </h3>
 		<img src="/img/concurso/I-love-opensource-mugs.png" data-title="An I - love - OpenSource mug!" class="has-tooltip" />
-		<h3>The Raspberri PI model B</h3>
-		<img src="/img/concurso/RASP-BI-PI.jpg" data-title="A brand new Raspberri PI" class="has-tooltip" />
+		<h3>The Raspberry Pi model B</h3>
+		<img src="/img/concurso/RASP-BI-PI.jpg" data-title="A brand new Raspberry PI" class="has-tooltip" />
 	</p>
 	<h2>How do I start?</h2>
 	<p>
