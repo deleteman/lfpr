@@ -27,7 +27,8 @@
 		$new_faq->project_id = $id;
 		$project = load_project($id);
 		$faqs = $project->getQuestions();
-		
+		$project_url = $project->url()
+
 		if($ent && !$ent->published) {
 			$this->flash->setError("This project has not been published yet!");
 			$this->redirect_to(project_list_path());
