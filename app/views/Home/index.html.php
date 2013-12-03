@@ -32,7 +32,7 @@
 		<p>Subscribe to get weekly updates on the site and new repos published.</p>
 		<?=form_for($this->suscriptor) ?>
 			<?=email_field($this->suscriptor, "email", false, array("placeholder" => "your@email.com"));?>
-			<?=submit("Suscribe", array("class" => "btn btn-primary btn-large"))?>
+			<?=submit("Subscribe", array("class" => "btn btn-primary btn-large"))?>
 		<?=form_end_tag()?>
 			</div>
 	<div class="clearfix"></div>
