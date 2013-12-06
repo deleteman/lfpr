@@ -25,7 +25,7 @@
 			<li><span class="fui-menu-24"></span> <?=$this->project->forks?> forks</li>
 			<li><span class="fui-heart-24"></span> <?=$this->project->stars?> stars</li>
 			<li><span class="fui-settings-24"></span> <?=$this->project->language()?> </li>
-			<li><span class="fui-eye-24"></span> <?=link_to((preg_match("~^(?:ht)tps?://~i", $this->project->url)) ? $this->project->url : "http://" . $this->project->url, "GitHub URL", array("target" => "_blank"))?></li>
+			<li><span class="fui-eye-24"></span> <?=link_to(($project_url, "GitHub URL", array("target" => "_blank"))?></li>
 		</ul>
 		<div class="span7">
 			<p>
