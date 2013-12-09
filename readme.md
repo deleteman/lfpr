@@ -22,8 +22,17 @@ OR, you can just email me at: deleteman[at]gmail[dot]com
 
 If you're planning on cloning the site and running it locally, follow these simple steps:
 
+####Pre requirements
+
+1. Install Apache 2
+2. Install MySQL 5 
+3. Install PHP 5  (with cli package and mysql package)
+4. Install PHP CURL module
+
+####Actual steps
+
 1. Clone the repo
-2. Create a `tmp` directory on the project directory
+2. Create a `tmp` directory on the project directory (and make sure it's writable by apache)
 3. `$ cp config/config{.base,}.yml && cp config/database{.base,}.yml`
 4. Run ./makiavelo.php db:create
 5. Run ./makiavelo.php db:load
