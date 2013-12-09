@@ -43,8 +43,9 @@ class Project extends MakiaveloEntity {
 		$url = $this->url;
 		$url = str_replace("https://", "", $url);
 		$url = str_replace("http://", "", $url);
+		$url = str_replace("github.com/", "", $url);
 		$url = str_replace("github.com", "", $url);
-		return "https://github.com" . $url;
+		return "https://github.com/" . $url;
 	}
 
 	public function language() {

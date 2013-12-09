@@ -154,7 +154,9 @@ function count_projects($where = null) {
 	
 	$result = mysql_query($sql, $__db_conn);
 	$results = array();
-
+	if(!$result) {
+		Makiavelo::info("ERROR MYSQL: " . mysql_error() . " - " . $sql);
+	}
 	$row = mysql_fetch_assoc($result);
 	return $row['cant'];
 }
@@ -186,6 +188,9 @@ function list_project($order = null, $limit = null, $where = null) {
 
 	Makiavelo::info("== Loading projects:: " . $sql);
 	$result = mysql_query($sql, $__db_conn);
+	if(!$result) {
+		Makiavelo::info("ERROR MYSQL: " . mysql_error() . " - " . $sql);
+	}
 	$results = array();
 
 	while($row = mysql_fetch_assoc($result)) {
