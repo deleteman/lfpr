@@ -2,7 +2,7 @@
 <h1>
 	List of published projects
 
-	<?=link_to(project_new_path(), "Publish yours", array("class" => "pull-right btn btn-large"))?>
+
 </h1>
 </div>
 <ul class="breadcrumb">
