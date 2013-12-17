@@ -20,7 +20,7 @@
 </p>
 	<p class="pull-left">
 	<?=link_to(project_list_path(), "Find projects", array("class" => "btn btn-primary btn-large", "id" => "main-btn"))?>
-	<?=link_to(project_new_path(), "Publish your project", array("class" => "btn btn-large"))?>
+
 	<a class="palette palette-wet-asphalt promo-link" href="<?=home_contest_path()?>">
 		Win a cool T-Shirt and more! <br/>
 		Click here for more information...
@@ -74,7 +74,7 @@
 					<img src="/img/illustrations/clipboard.png">
 				</p>
 				<?=link_to(GithubAPI::login_url(), '<i class="icon-github" style="font-size:30px;" ></i> Github', array("class" => "has-tooltip btn btn-large btn-success", "data-title" => "Sign-in using Github"))?>
-				<?#=link_to(project_new_path(), "Publish now!", array("class" => "btn btn-success btn-large"))?>
+			
 			</div>
 		</div>
 	</div>
