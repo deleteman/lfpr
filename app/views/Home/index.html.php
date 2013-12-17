@@ -73,7 +73,8 @@
 				<p>
 					<img src="/img/illustrations/clipboard.png">
 				</p>
-				<?=link_to(project_new_path(), "Publish now!", array("class" => "btn btn-success btn-large"))?>
+				<?=link_to(GithubAPI::login_url(), '<i class="icon-github" style="font-size:30px;" ></i> Github', array("class" => "has-tooltip btn btn-large btn-success", "data-title" => "Sign-in using Github"))?>
+				<?#=link_to(project_new_path(), "Publish now!", array("class" => "btn btn-success btn-large"))?>
 			</div>
 		</div>
 	</div>
