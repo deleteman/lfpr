@@ -8,6 +8,7 @@ function search_projects($term, $init, $limit) {
 	$where = "published=1 and (";
 	$search_term_conditions = array();
 	foreach($terms as $term) {
+		$term = mysql_real_escape_string($term);
 		$search_term_conditions[] = " (name like '%$term%' or description like '%$term%' or language like '%$term%')  ";
 	} 
 	$where .= implode(" or ", $search_term_conditions) . ")";
