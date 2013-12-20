@@ -31,13 +31,20 @@
 	<div class="well span4 pull-right">
 		<p>Subscribe to get weekly updates on the site and new repos published.</p>
 		<?=form_for($this->suscriptor) ?>
-			<?=email_field($this->suscriptor, "email", false, array("placeholder" => "your@email.com"));?>
-			<?=submit("Subscribe", array("class" => "btn btn-primary btn-large"))?>
+		<?=email_field($this->suscriptor, "email", false, array("placeholder" => "your@email.com"));?>
+		<?=submit("Subscribe", array("class" => "btn btn-primary btn-large"))?>
 		<?=form_end_tag()?>
-			</div>
-	<div class="clearfix"></div>
-</div>
+	</div>
 
+	<div class="clearfix"></div>
+
+</div>
+<div class="row">
+	<div class="well span12" id="expanded-search-form">
+		<?php $this->renderView("../Project/_search_form")?>
+		<div class="clearfix"></div>
+	</div>
+</div>
 	<h3>Random projects</h3>
 	<div class="row latest-projects">
 		<?php

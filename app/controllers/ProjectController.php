@@ -3,6 +3,31 @@
  class ProjectController extends ApplicationController {
  	private $per_page = 12;
 
+	 public function searchAction() {
+		 $searchTerm = urldecode($this->request->getParam("q"));
+
+
+		 $curr_page = intVal($this->request->getParam("p"));
+		 $init = $curr_page * $this->per_page;
+		 $search_result = search_projects($searchTerm, $init, $this->per_page);
+
+		 $total = $search_result['total'];
+
+
+		 $pages = ceil($total / $this->per_page);
+
+
+
+		 $this->render(array(
+			 "results" => $search_result['results'], 
+			 "q" => $searchTerm,
+			 "pagination" => array(
+				 "current_page" => $curr_page,
+				 "total_pages" => $pages,
+				 "total_results" => $total),
+		 ));
+	 }
+
  	public function newAction() {
 		$entity = new Project();
 		$this->render(array("entity" => $entity));

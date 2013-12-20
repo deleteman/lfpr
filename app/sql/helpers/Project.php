@@ -1,5 +1,44 @@
 <?php
 
+function search_projects($term, $init, $limit) {
+	global $__db_conn;
+
+	$terms = explode(" ", urldecode($term));
+
+	$where = "published=1 and (";
+	$search_term_conditions = array();
+	foreach($terms as $term) {
+		$search_term_conditions[] = " (name like '%$term%' or description like '%$term%' or language like '%$term%')  ";
+	} 
+	$where .= implode(" or ", $search_term_conditions) . ")";
+
+	$sql = "SELECT * FROM project where  $where LIMIT $init , $limit";
+
+
+	$rs = mysql_query($sql, $__db_conn);
+	$results = array();
+	while($row = mysql_fetch_assoc($rs)) {
+		$tmp = new Project();
+		$tmp->load_from_array($row);
+		$results[] = $tmp;
+	}
+
+	$return = array("results" => $results, "total" => 0);
+
+	if(count($results) > 0) {
+		$sql_count = "SELECT count(*) as total from project WHERE $where";
+		$rs = mysql_query($sql_count, $__db_conn);
+		if(!$rs) {
+			Makiavelo::info("SQL Error:: " . mysql_error() . "::" . $sql_count);
+		} else {
+			$row = mysql_fetch_assoc($rs);
+			$return['total'] = $row['total'];
+		}
+	}
+	return $return;
+	
+}
+
 function get_languages_by_ranking() {
 	$sql = "SELECT COUNT(*) as total, language from project 
 			WHERE published = 1

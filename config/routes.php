@@ -9,8 +9,6 @@ $_ROUTES[] = array(
 
 	);
 $_ROUTES[] = array(
-	//"login" => array("url" => "/login", "controller" => "Login", "action" => "index"),
-	//"sign_in" => array("url" => "/login/sign_in", "controller" => "Login", "action" => "signIn", "via" => "post"),
 	"sign_out" => array("url" => "/login/sign_out", "controller" => "Login", "action" => "signOut", "via" => "post")
 	);
 $_ROUTES[] = array(
@@ -18,6 +16,7 @@ $_ROUTES[] = array(
 	"create" => array("url" => "/project/create", "controller" => "Project", "action" => "create", "via" => "post"),
 	"grab_data" => array("url" => "/project/grab_data", "controller" => "Project", "action" => "grab_data", "via" => "post"),
 	"publish" => array("url" => "/project/publish/:id", "controller" => "Project", "action" => "publish"),
+	"search" => array("url" => "/project/search", "controller" => "Project", "action" => "search"),
 //	"new" => array("url" => "/project/new", "controller" => "Project", "action" => "new","role" => "user"),
 	"show" => array("url" => "/project/:id", "controller" => "Project", "action" => "show", "via" => "get"),
 	"update" => array("url" => "/project/:id/edit", "controller" => "Project", "action" => "edit"),
