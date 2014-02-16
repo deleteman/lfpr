@@ -80,7 +80,13 @@
 				<p>
 					<img src="/img/illustrations/clipboard.png">
 				</p>
-				<?=link_to(GithubAPI::login_url(), '<i class="icon-github" style="font-size:30px;" ></i> Github', array("class" => "has-tooltip btn btn-large btn-success", "data-title" => "Sign-in using Github"))?>
+				<?php
+				if (user_logged_in()) {
+					link_to(developer_show_path(current_user()), '<i class="fui-plus-24"></i> Add Project'.current_user()->name, array("class" => "btn btn-primary btn-large"))
+				} else {
+					link_to(GithubAPI::login_url(), '<i class="icon-github" style="font-size:30px;" ></i> Github', array("class" => "has-tooltip btn btn-large btn-success", "data-title" => "Sign-in using Github"))
+				}
+				?>
 			
 			</div>
 		</div>
