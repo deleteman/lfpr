@@ -10,7 +10,7 @@ If you're looking to publish your project and let others find it, just click on 
 
 ##What's inside it?
 
-Apart from listing repos, LFPR is daily pulling statistics of those projecs from GitHub, trying to display in a graphical manner, how "alive" that project is, because, lets be honest, if you're going to spend your time contributing to someone else's project, you want to make sure that, at least, it's still under development, otherwise, you'll probably sending pull requests that will never be answered.
+Apart from listing repos, LFPR is daily pulling statistics of those projects from GitHub, trying to display in a graphical manner, how "alive" that project is, because, lets be honest, if you're going to spend your time contributing to someone else's project, you want to make sure that, at least, it's still under development, otherwise, you'll probably sending pull requests that will never be answered.
 
 ##Contributing to the project.
 
