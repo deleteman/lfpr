@@ -16,6 +16,7 @@ $_ROUTES[] = array(
 	"create" => array("url" => "/project/create", "controller" => "Project", "action" => "create", "via" => "post"),
 	"grab_data" => array("url" => "/project/grab_data", "controller" => "Project", "action" => "grab_data", "via" => "post"),
 	"publish" => array("url" => "/project/publish/:id", "controller" => "Project", "action" => "publish"),
+	"unpublish" => array("url" => "/project/unpublish/:id", "controller" => "Project", "action" => "unpublish", "via" => "post"),
 	"search" => array("url" => "/project/search", "controller" => "Project", "action" => "search"),
 //	"new" => array("url" => "/project/new", "controller" => "Project", "action" => "new","role" => "user"),
 	"show" => array("url" => "/project/:id", "controller" => "Project", "action" => "show", "via" => "get"),
