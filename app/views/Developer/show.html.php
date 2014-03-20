@@ -30,7 +30,7 @@ if(current_user() != null) {
       ?>
       <li class="<?=$class?>">
       <?php if($proj->published) { ?> 
-        <?=link_to(project_show_path($proj), $proj->name, array("class" => "project-lnk"))?>
+        <?=link_to(project_show_path($proj), truncate_string($proj->name, 10), array("class" => "project-lnk"))?>
         <span class="language">(<?=$proj->language?>)</span>
         <p class="project-description">
           <?=truncate_string($proj->description, 90)?>
