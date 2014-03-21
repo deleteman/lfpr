@@ -53,6 +53,9 @@
       <div class="project-spotlight">
         <h3><?=link_to(project_show_path($proj), truncate_string($proj->name, 13), array("class" => "proj-name-link"))?></a></h3>
         <div class="">
+          <?php if($proj->open_issues) { ?>
+            <div class="open-issues-indicator"><i class="fui-bubble-24"></i> <?=$proj->open_issues?> Open <?=($proj->open_issues > 1) ? "Issues" : "Issue" ?></div>
+          <?php } ?>
           <ul class="simple-stats pull-left">
             <li><span class="fui-menu-24"></span> <?=$proj->forks?> forks</li>
             <li><span class="fui-heart-24"></span> <?=$proj->stars?> stars</li>

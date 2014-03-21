@@ -464,3 +464,11 @@ img.prize-icon {
 #expanded-search-form input[type="submit"] {
     float:left;
 }
+
+.open-issues-indicator {
+  box-shadow: 1px 1px 1px;
+  -moz-box-shadow: 1px 1px 1px;
+  -o-box-shadow: 1px 1px 1px;
+  -webkit-box-shadow: 1px 1px 1px;
+  padding: 2px;
+}
