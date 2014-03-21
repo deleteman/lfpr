@@ -1,137 +1,137 @@
 <?php
 
 function get_projects_by_pr($total = 5) {
-	$start_date = date("Y-m-d", strtotime("-7 days"));
+  $start_date = date("Y-m-d", strtotime("-7 days"));
 
-	global $__db_conn;
+  global $__db_conn;
 
-	$sql = "SELECT (sum(new_pulls) + sum(closed_pulls) + sum(merged_pulls)) as total, 
-			sum(new_pulls) as np , sum(closed_pulls) as cp, sum(merged_pulls) as mp, project_id
-			from project_delta 
-			where sample_date >= '$start_date'
-			group by project_id
-			order by total desc
-			limit $total";
-	$rs = mysql_query($sql, $__db_conn);
-	$projects = array();
-	if($rs) {
-		while($row = mysql_fetch_assoc($rs)) {
-			Makiavelo::info("GETTING PROJECT: " . print_r($row, true));
-			$projects[] = array("project" => load_project($row['project_id']), 
-								"total_activity" => $row['total'],
-								"new_pulls" => $row['np'],
-								"closed_pulls" => $row['cp'],
-								"merged_pulls" => $row['mp']);
-		}
-	} else {
-		Makiavelo::info("MYSQL ERROR:: " . mysql_error());
-	}
-	return $projects;
+  $sql = "SELECT (sum(new_pulls) + sum(closed_pulls) + sum(merged_pulls)) as total, 
+      sum(new_pulls) as np , sum(closed_pulls) as cp, sum(merged_pulls) as mp, project_id
+      from project_delta 
+      where sample_date >= '$start_date'
+      group by project_id
+      order by total desc
+      limit $total";
+  $rs = mysql_query($sql, $__db_conn);
+  $projects = array();
+  if($rs) {
+    while($row = mysql_fetch_assoc($rs)) {
+      Makiavelo::info("GETTING PROJECT: " . print_r($row, true));
+      $projects[] = array("project" => load_project($row['project_id']), 
+                "total_activity" => $row['total'],
+                "new_pulls" => $row['np'],
+                "closed_pulls" => $row['cp'],
+                "merged_pulls" => $row['mp']);
+    }
+  } else {
+    Makiavelo::info("MYSQL ERROR:: " . mysql_error());
+  }
+  return $projects;
 }
 
 function get_projects_by_commits($total = 5) {
 
-	$start_date = date("Y-m-d", strtotime("-7 days"));
+  $start_date = date("Y-m-d", strtotime("-7 days"));
 
-	global $__db_conn;
+  global $__db_conn;
 
-	$sql = "SELECT sum(commits_count) as total_commits, project_id
-			from project_delta 
-			where sample_date >= '$start_date'
-			group by project_id
-			order by total_commits desc
-			limit $total";
-	$rs = mysql_query($sql, $__db_conn);
-	$projects = array();
-	if($rs) {
-		while($row = mysql_fetch_assoc($rs)) {
-			Makiavelo::info("GETTING PROJECT: " . print_r($row, true));
-			$projects[] = array("project" => load_project($row['project_id']), "commits" => $row['total_commits']);
-		}
-	} else {
-		Makiavelo::info("MYSQL ERROR:: " . mysql_error());
-	}
-	return $projects;
+  $sql = "SELECT sum(commits_count) as total_commits, project_id
+      from project_delta 
+      where sample_date >= '$start_date'
+      group by project_id
+      order by total_commits desc
+      limit $total";
+  $rs = mysql_query($sql, $__db_conn);
+  $projects = array();
+  if($rs) {
+    while($row = mysql_fetch_assoc($rs)) {
+      Makiavelo::info("GETTING PROJECT: " . print_r($row, true));
+      $projects[] = array("project" => load_project($row['project_id']), "commits" => $row['total_commits']);
+    }
+  } else {
+    Makiavelo::info("MYSQL ERROR:: " . mysql_error());
+  }
+  return $projects;
 }
 
 function save_project_delta($entity) {
-	if(!$entity->is_new()) {
-		return update_project_delta($entity);
-	} else {
-			
-		if($entity->validate()) {
-			global $__db_conn;	
+  if(!$entity->is_new()) {
+    return update_project_delta($entity);
+  } else {
+      
+    if($entity->validate()) {
+      global $__db_conn;  
 
-			$sql = "INSERT INTO project_delta(created_at,updated_at,sample_date,stars,delta_stars,forks,delta_forks, project_id, commits_count, new_pulls, closed_pulls, merged_pulls, closed_issues, open_issues) 
-					values (':created_at:',':updated_at:',':sample_date:',':stars:',':delta_stars:',':forks:',':delta_forks:', ':project_id:', ':commits_count:', ':new_pulls:',':closed_pulls:', ':merged_pulls:', ':closed_issues:', ':open_issues:')";
+      $sql = "INSERT INTO project_delta(created_at,updated_at,sample_date,stars,delta_stars,forks,delta_forks, project_id, commits_count, new_pulls, closed_pulls, merged_pulls, closed_issues, open_issues) 
+          values (':created_at:',':updated_at:',':sample_date:',':stars:',':delta_stars:',':forks:',':delta_forks:', ':project_id:', ':commits_count:', ':new_pulls:',':closed_pulls:', ':merged_pulls:', ':closed_issues:', ':open_issues:')";
 
-			$sql = str_replace(":created_at:", Date("Y-m-d"), $sql);
-			$sql = str_replace(":updated_at:", Date("Y-m-d"), $sql);
+      $sql = str_replace(":created_at:", Date("Y-m-d"), $sql);
+      $sql = str_replace(":updated_at:", Date("Y-m-d"), $sql);
 
-			preg_match_all("/:([a-zA-Z_0-9]*):/", $sql, $matches);
-			foreach($matches[1] as $attr) {
-				$sql = str_replace(":$attr:", $entity->$attr, $sql);
-			}
-			mysql_query($sql, $__db_conn);
-			$entity->id = mysql_insert_id($__db_conn);
-			return true;
-		} else {
-			return false;
-		}
-	}
+      preg_match_all("/:([a-zA-Z_0-9]*):/", $sql, $matches);
+      foreach($matches[1] as $attr) {
+        $sql = str_replace(":$attr:", $entity->$attr, $sql);
+      }
+      mysql_query($sql, $__db_conn);
+      $entity->id = mysql_insert_id($__db_conn);
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 }
 
 
 function update_project_delta($en) {
-	if($en->validate()) {
-		global $__db_conn;	
+  if($en->validate()) {
+    global $__db_conn;  
 
-		$sql = str_replace(":id:", $en->id, "UPDATE project_delta SET id=':id:',created_at=':created_at:',updated_at=':updated_at:',sample_date=':sample_date:',stars=':stars:',delta_stars=':delta_stars:',forks=':forks:',delta_forks=':delta_forks:' , project_id= ':project_id:', commits_count = ':commits_count:', new_pulls=':new_pulls:', closed_pulls=':closed_pulls:', merged_pulls=':merged_pulls:' WHERE id = :id:"); 
+    $sql = str_replace(":id:", $en->id, "UPDATE project_delta SET id=':id:',created_at=':created_at:',updated_at=':updated_at:',sample_date=':sample_date:',stars=':stars:',delta_stars=':delta_stars:',forks=':forks:',delta_forks=':delta_forks:' , project_id= ':project_id:', commits_count = ':commits_count:', new_pulls=':new_pulls:', closed_pulls=':closed_pulls:', merged_pulls=':merged_pulls:' WHERE id = :id:"); 
 
-		$sql = str_replace(":updated_at:", Date("Y-m-d"), $sql);
+    $sql = str_replace(":updated_at:", Date("Y-m-d"), $sql);
 
 
-		preg_match_all("/:([a-zA-Z_0-9]*):/", $sql, $matches);
-		foreach($matches[1] as $attr) {
-			$sql = str_replace(":$attr:", $en->$attr, $sql);
-		}
-		mysql_query($sql, $__db_conn);
-		return true;
-	} else {
-		return false;
-	}
+    preg_match_all("/:([a-zA-Z_0-9]*):/", $sql, $matches);
+    foreach($matches[1] as $attr) {
+      $sql = str_replace(":$attr:", $en->$attr, $sql);
+    }
+    mysql_query($sql, $__db_conn);
+    return true;
+  } else {
+    return false;
+  }
 
 
 }
 
 function delete_project_delta($entity_id) {
-	global $__db_conn;
-	$sql = str_replace(":id:", $entity_id, "DELETE FROM project_delta WHERE id = :id:"); #DELETE FROM tipo_buque WHERE id = " . $entity_id;
+  global $__db_conn;
+  $sql = str_replace(":id:", $entity_id, "DELETE FROM project_delta WHERE id = :id:"); #DELETE FROM tipo_buque WHERE id = " . $entity_id;
 
-	if(!mysql_query($sql, $__db_conn)) {
-		echo mysql_error();
-	}
+  if(!mysql_query($sql, $__db_conn)) {
+    echo mysql_error();
+  }
 }
 
 function load_project_delta($id) {
-	return load_project_delta_where("id = $id");
+  return load_project_delta_where("id = $id");
 }
 
 function load_project_delta_where($where) {
-	global $__db_conn;
+  global $__db_conn;
 
-	$sql =  "SELECT * FROM project_delta WHERE $where"; #SELECT * FROM tipo_buque WHERE id = " . $id;
+  $sql =  "SELECT * FROM project_delta WHERE $where"; #SELECT * FROM tipo_buque WHERE id = " . $id;
 
-	$result = mysql_query($sql, $__db_conn);
-	if(mysql_num_rows($result) > 0) {
-		$row = mysql_fetch_assoc($result);
-		$new = new ProjectDelta();
-		$new->load_from_array($row);
-		return $new;
-	} else {
-		return null;
-	}
+  $result = mysql_query($sql, $__db_conn);
+  if(mysql_num_rows($result) > 0) {
+    $row = mysql_fetch_assoc($result);
+    $new = new ProjectDelta();
+    $new->load_from_array($row);
+    return $new;
+  } else {
+    return null;
+  }
 }
 
 /** 
@@ -140,36 +140,36 @@ Retrieves a list of ProjectDelta
 @limit = Optional
 */
 function list_project_delta($order = null, $limit = null, $where = null) {
-	global $__db_conn;	
+  global $__db_conn;  
 
-	$sql = "SELECT * FROM project_delta";
+  $sql = "SELECT * FROM project_delta";
 
-	if($where != null) {
-		$sql .= " WHERE $where";
-	}
+  if($where != null) {
+    $sql .= " WHERE $where";
+  }
 
-	if($order != null) {
-		$order_str = $order;
-		if(is_array($order)) {
-			$order_str = implode(",", $order);
-		}
-		$sql .= " order by $order_str";
-	}
+  if($order != null) {
+    $order_str = $order;
+    if(is_array($order)) {
+      $order_str = implode(",", $order);
+    }
+    $sql .= " order by $order_str";
+  }
 
-	if($limit != null) {
-		$sql .= " limit $limit";
-	}
+  if($limit != null) {
+    $sql .= " limit $limit";
+  }
 
-	$result = mysql_query($sql, $__db_conn);
-	$results = array();
+  $result = mysql_query($sql, $__db_conn);
+  $results = array();
 
-	while($row = mysql_fetch_assoc($result)) {
-		$tmp = new ProjectDelta();
-		$tmp->load_from_array($row);
-		$results[] = $tmp;
-	}
+  while($row = mysql_fetch_assoc($result)) {
+    $tmp = new ProjectDelta();
+    $tmp->load_from_array($row);
+    $results[] = $tmp;
+  }
 
-	return $results;
+  return $results;
 
 }
 

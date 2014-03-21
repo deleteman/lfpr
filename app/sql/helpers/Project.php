@@ -131,7 +131,7 @@ function update_project($en) {
 	if($en->validate()) {
 		global $__db_conn;	
 
-		$sql = str_replace(":id:", $en->id, "UPDATE project SET id=':id:',created_at=':created_at:',updated_at=':updated_at:',name=':name:',url=':url:',description=':description:',owner_id=':owner_id:',stars=':stars:',forks=':forks:',last_update=':last_update:', language=':language:', published = ':published:', readme=':readme:', pr_acceptance_rate=':pr_acceptance_rate:' WHERE id = :id:"); 
+		$sql = str_replace(":id:", $en->id, "UPDATE project SET id=':id:',created_at=':created_at:',updated_at=':updated_at:',name=':name:',url=':url:',description=':description:',owner_id=':owner_id:',stars=':stars:',forks=':forks:',last_update=':last_update:', language=':language:', published = ':published:', readme=':readme:', pr_acceptance_rate=':pr_acceptance_rate:', open_issues=':open_issues:' WHERE id = :id:"); 
 
 		$sql = str_replace(":updated_at:", Date("Y-m-d"), $sql);
 
