@@ -472,3 +472,18 @@ img.prize-icon {
   -webkit-box-shadow: 1px 1px 1px;
   padding: 2px;
 }
+
+.dk_container.dk_theme_default.ui-datepicker-month {
+  display: inline-block !important;
+  height: 27px;
+}
+
+
+.dk_container.dk_theme_default.ui-datepicker-month a.dk_toggle{
+  padding:0;
+}
+
+.dk_container {
+  margin-bottom: 0!important;
+  vertical-align: top !important;
+}
