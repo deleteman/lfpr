@@ -18,9 +18,9 @@
 			$this->flash->error("Dude! Chill, you're already suscribed, just relax and browse the list of repos...");
 		} else {
 			if(save_suscriptor($entity)) {
-				$this->flash->success("Thanks for suscribing! Stay tuned!");
+				$this->flash->setSuccess("Thanks for suscribing! Stay tuned!");
 			} else {
-				$this->flash->error("Please enter a valid email address and try again");
+				$this->flash->setError("Please enter a valid email address and try again");
 			}
 		}
 		$this->redirect_to(home_root_path_path());

@@ -9,10 +9,22 @@ class HTTPRequest {
   public function __construct($uri, $params, $request_method) {
     Makiavelo::info("Building new HTTPRequest:: " . print_r($params, true));
     foreach($params as $k => $v) {
-      $this->params[$k] = mysql_real_escape_string($v);
+      $this->params[$k] = $this->escapeString($v);
     }
+    Makiavelo::info("Escaped params: " . print_r($this->params, true));
     $this->request_method = $request_method;
     $this->uri = $uri;
+  }
+
+  private function escapeString($txt) {
+    if(is_array($txt)) {
+      foreach($txt as $i => $item) {
+        $txt[$i] = $this->escapeString($item);
+      }
+      return $txt;
+    } else {
+      return mysql_real_escape_string($txt);
+    }
   }
 
   public function getParam($name) {
