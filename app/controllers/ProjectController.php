@@ -54,8 +54,7 @@
 
   public function showAction() {
     $id = mysql_real_escape_string($this->request->getParam("id"));
-    $userId = current_user()->id;
-    $project = load_project_where("id = '$id' and owner_id = '$userId'");
+    $project = load_project($id);
     $new_faq = new Faq();
     $new_faq->project_id = $id;
     $faqs = $project->getQuestions();
@@ -69,7 +68,7 @@
     } else {
       //$issue = random_issue($id);
       $issues = list_issue("num desc", 5, "project_id = " . $id);
-      $this->render(array("faqs_list" => $faqs, "faq" => $new_faq, "issues" => $issues, "project" => $ent));
+      $this->render(array("faqs_list" => $faqs, "faq" => $new_faq, "issues" => $issues, "project" => $project));
     }
   }
 
