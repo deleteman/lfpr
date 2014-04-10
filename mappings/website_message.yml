@@ -1,0 +1,9 @@
+crud:
+  entity:
+    name: WebSiteMessage
+    fields:
+      email: string
+      body: text
+    validations:
+      email: [presence, email]
+      body: [presence]

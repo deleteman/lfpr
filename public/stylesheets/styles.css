@@ -487,3 +487,30 @@ img.prize-icon {
   margin-bottom: 0!important;
   vertical-align: top !important;
 }
+footer legend{
+  font-family: 'Yellowtail', cursive;
+  font-size: 40px;
+  color: #1abc9c;
+  border: 0;
+  padding-top: 17px;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+footer i {
+  font-size: 200%;
+}
+
+footer .light-bg {
+  height: 300px;
+  background: #34495e;
+  margin-top: -13px;
+  border-radius: 121px;
+}
+
+#contact-form textarea {
+  width: 400px;
+  height: 90px;
+}
