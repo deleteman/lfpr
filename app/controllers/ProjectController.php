@@ -19,7 +19,7 @@
 
 
      $this->render(array(
-       "results" => $search_result['results'], 
+       "results" => $search_result['results'],
        "q" => $searchTerm,
        "pagination" => array(
          "current_page" => $curr_page,
@@ -34,29 +34,36 @@
   }
 
   public function deleteAction() {
-    delete_project($this->request->getParam("id"));
-    $this->flash->setSuccess("Delete successfull!");
+    $id = mysql_real_escape_string($this->request->getParam("id"));
+    $userId = current_user()->id;
+    $project = load_project_where("id = '$id' and owner_id = '$userId'");
+    if ($project) {
+      delete_project($project->id);
+      $this->flash->setSuccess("Delete successfull!");
+    }
     $this->redirect_to(project_list_path());
   }
 
   public function editAction() {
-    $tb = load_project($this->request->getParam("id"));
+    $id = mysql_real_escape_string($this->request->getParam("id"));
+    $userId = current_user()->id;
+    $project = load_project_where("id = '$id' and owner_id = '$userId'");
 
-    $this->render(array("entity" => $tb));
+    $this->render(array("entity" => $project));
   }
 
   public function showAction() {
-    $id = $this->request->getParam("id");
-    $ent = load_project($id);
+    $id = mysql_real_escape_string($this->request->getParam("id"));
+    $userId = current_user()->id;
+    $project = load_project_where("id = '$id' and owner_id = '$userId'");
     $new_faq = new Faq();
     $new_faq->project_id = $id;
-    $project = load_project($id);
     $faqs = $project->getQuestions();
 
-    if($ent && !$ent->published) {
+    if($project && !$project->published) {
       $this->flash->setError("This project has not been published yet!");
       $this->redirect_to(project_list_path());
-    } else if(!$ent){
+    } else if(!$project){
       $this->flash->setError("Project not found!");
       $this->redirect_to(project_list_path());
     } else {
@@ -67,29 +74,31 @@
   }
 
   public function unpublishAction() {
-    $id = $this->request->getParam("id");
-    $ent = load_project($id);
-    if($ent == null) {
+    $id = mysql_real_escape_string($this->request->getParam("id"));
+    $userId = current_user()->id;
+    $project = load_project_where("id = '$id' and owner_id = '$userId'");
+    if($project == null) {
       $this->flash->setError("Project not found!");
     } else {
-      $ent->published = 0;
-      save_project($ent);
-      //Create the first set of stats 
+      $project->published = 0;
+      save_project($project);
+      //Create the first set of stats
       $this->flash->setSuccess("Project was un-published correctly!");
     }
     $this->redirect_to(developer_show_path(current_user()));
   }
   public function publishAction() {
-    $id = $this->request->getParam("id");
-    $ent = load_project($id);
-    if($ent == null) {
+    $id = mysql_real_escape_string($this->request->getParam("id"));
+    $userId = current_user()->id;
+    $project = load_project_where("id = '$id' and owner_id = '$userId'");
+    if($project == null) {
       $this->flash->setError("Project not found!");
     } else {
-      $ent->published = 1;
-      save_project($ent);
-      //Create the first set of stats 
-      $ent->saveInitStats();
-      $ent->grabHistoricData();
+      $project->published = 1;
+      save_project($project);
+      //Create the first set of stats
+      $project->saveInitStats();
+      $project->grabHistoricData();
       $this->flash->setSuccess("Project was published correctly!");
     }
     $this->redirect_to(developer_show_path(current_user()));
@@ -100,7 +109,7 @@
     $proj = $this->request->getParam("project");
 
     $dev = load_developer_where('name = "' . $this->request->getParam("owner_name").'"');
-    
+
     if($dev == null) { //Create the developer if it's not on our database already
       $dev = new Developer();
       $dev->name = $this->request->getParam("owner_name");
@@ -114,7 +123,7 @@
     }
 
     if(!load_project_where("name = '".$proj['name']."' and owner_id = ".$dev->id)) {
-      
+
       $proj['url'] = str_replace("https", "", $proj['url']);
       $proj['url'] = str_replace("http", "", $proj['url']);
       $proj['url'] = str_replace("://", "", $proj['url']);
@@ -124,7 +133,7 @@
       $proj['published'] = 1;
       $entity->load_from_array($proj);
       if(save_project($entity)) {
-        //Create the first set of stats 
+        //Create the first set of stats
         $entity->saveInitStats();
         $entity->grabHistoricData();
         $this->flash->setSuccess("The project was added correctly, thanks!");
@@ -160,13 +169,13 @@
 
     $entity_list = list_project($sort, $init . "," . $this->per_page, $where);
     $this->render(array(
-            "entity_list" => $entity_list, 
+            "entity_list" => $entity_list,
             "pagination" => array(
                       "current_page" => $curr_page,
                       "total_pages" => $pages,
                       "total_results" => $total),
             "search_crit" => array(
-                        "lang" => $language, 
+                        "lang" => $language,
                         "owner" => $owner,
                         "sort" => $this->request->getParam("sort"))));
   }
