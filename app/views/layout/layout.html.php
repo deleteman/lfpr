@@ -117,8 +117,8 @@ UserVoice.push(['showTab', 'classic_widget', {
           </li>
           <li class="span4 offset2 ">
             <legend>... or follow us</legend>
-             <div ><a href="http://twitter.com/lookingfor_pr"><i class="icon-twitter"></i> Check us out on Twitter</a></div>
-             <div ><a href="http://github.com/deleteman/lfpr"><i class="icon-github"></i> Check out our code on GitHub</a></div>
+             <div ><a href="http://twitter.com/lookingfor_pr" target="_blank"><i class="icon-twitter"></i> Check us out on Twitter</a></div>
+             <div ><a href="http://github.com/deleteman/lfpr" target="_blank"><i class="icon-github"></i> Fork us on GitHub</a></div>
           </li>
         </ul>
       </div>

@@ -487,6 +487,11 @@ img.prize-icon {
   margin-bottom: 0!important;
   vertical-align: top !important;
 }
+
+footer .navbar.navbar-inverse {
+  border-top: 23px solid #2B3A49;
+}
+
 footer legend{
   font-family: 'Yellowtail', cursive;
   font-size: 40px;
