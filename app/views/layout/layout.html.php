@@ -109,7 +109,7 @@ UserVoice.push(['showTab', 'classic_widget', {
         <ul class="nav footer-nav ">
           <li class="span6 offset4"> 
              <form id="contact-form" action="<?=web_site_message_create_path()?>" method="post">
-                <legend>Drop us a line...</legend> 
+                <legend>Get in touch...</legend> 
                 <input type="text" name="web_site_message[email]" placeholder="Your e-mail" />
                 <textarea name="web_site_message[body]" placeholder="A nice message here..."></textarea>
                 <input type="submit" class="btn btn-primary" value="Send"/>
