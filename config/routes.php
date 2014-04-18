@@ -24,7 +24,6 @@ $_ROUTES[] = array(
   "delete" => array("url" => "/project/:id/delete", "controller" => "Project", "action" => "delete", "via" => "post")
   ); 
 $_ROUTES[] = array(
-  "list" => array("url" => "/developer/", "controller" => "Developer", "action" => "index"),
   "show" => array("url" => "/developer/:name", "controller" => "Developer", "action" => "show", "via" => "get"),
   "stats" => array("url" => "/developer/:name/stats", "controller" => "Developer", "action" => "getStats", "via" => "get")
   ); 
