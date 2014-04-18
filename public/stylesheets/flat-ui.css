@@ -1508,6 +1508,7 @@ textarea,
     line-height: 16px;
     margin: 7px 2px 6px;
     padding: 0 4px;
+    width: 16px;
     -webkit-transition: background 0.2s ease-out, border-color 0s ease-out, color 0.2s ease-out;
     -moz-transition: background 0.2s ease-out, border-color 0s ease-out, color 0.2s ease-out;
     -o-transition: background 0.2s ease-out, border-color 0s ease-out, color 0.2s ease-out;
