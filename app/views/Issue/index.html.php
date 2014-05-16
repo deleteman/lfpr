@@ -19,7 +19,7 @@ if(count($this->issues) > 0) { ?>
                  <div class="">  
                    <div class="clearfix"></div>
                  </div>
-                 <p><?=htmlentities($issue->body)?></p>
+                 <p><?=$issue->body?></p>
              </div>
             </div>
                    
