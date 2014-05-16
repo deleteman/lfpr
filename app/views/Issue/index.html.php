@@ -10,7 +10,7 @@ if(count($this->issues) > 0) { ?>
             <div class="accordion-heading">
              <h3>
                 <small class="issue-nmbr ">#<?=$issue->num?></small>
-                <?=link_to("#issue".$idx, $issue->title, array("class" => "proj-name-link accordion-toggle collapsed", "data-toggle" => "collapse", "data-parent" => "issues-list"))?></a>
+                <?=link_to("#issue".$idx, htmlentities($issue->title), array("class" => "proj-name-link accordion-toggle collapsed", "data-toggle" => "collapse", "data-parent" => "issues-list"))?></a>
                 <?=link_to($issue->url, '<i class="icon-share"></i>', array("target" => "_blank", "class" => "has-tooltip", "data-title" => "Check it out on Github..."))?>
              </h3>
             </div>
@@ -19,7 +19,7 @@ if(count($this->issues) > 0) { ?>
                  <div class="">  
                    <div class="clearfix"></div>
                  </div>
-                 <p><?=$issue->body?></p>
+                 <p><?=htmlentities($issue->body)?></p>
              </div>
             </div>
                    
