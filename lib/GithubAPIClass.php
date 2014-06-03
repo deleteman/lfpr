@@ -61,11 +61,15 @@ class GithubAPI {
     $page = 1;
     $projects = array();
     $dev = load_developer_where("name = '" . $user . "'");
+    $full_repo_list = array();
     do {
       $url = "https://api.github.com/users/$user/repos?page=" . $page;
+      Makiavelo::info("----------- URL : " . $url);
       $repo_list = self::sendRequest($url);
+      //Makiavelo::puts("------------ number of repos found: " . count($repo_list));
       Makiavelo::info("=== Getting list of repos :: " . print_r($repo_list, true));
       foreach($repo_list as $repo) {
+        $full_repo_list[] = $repo;
         $proj = load_project_where("owner_id = " . $dev->id . " and name ='".$repo->name."'");
         if($proj == null) {
           $proj = new Project();
@@ -87,8 +91,8 @@ class GithubAPI {
         }
       }
       $page++;
-      GithubAPI::deleteOldProjects($dev, $repo_list);
     } while (count($repo_list) > 0);
+    GithubAPI::deleteOldProjects($dev, $full_repo_list);
     return $projects;
   }
 
