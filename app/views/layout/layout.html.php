@@ -107,7 +107,7 @@ UserVoice.push(['showTab', 'classic_widget', {
     <div class="navbar navbar-inverse ">
       <div class="navbar-inner ">
         <ul class="nav footer-nav ">
-          <li class="span6 offset2"> 
+          <li class="span6 "> 
              <form id="contact-form" action="<?=web_site_message_create_path()?>" method="post">
                 <legend>Get in touch...</legend> 
                 <input type="text" name="web_site_message[email]" placeholder="Your e-mail" />
