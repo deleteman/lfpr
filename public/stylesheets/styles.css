@@ -88,6 +88,12 @@ footer .navbar {
   margin-bottom: 0;
 }
 
+footer .navbar .nav {
+  margin: 0 auto;
+  float: none;
+  width: 961px
+}
+
 footer .navbar-inner {
   border-radius: 0;
   -webkit-border-radius: 0;
