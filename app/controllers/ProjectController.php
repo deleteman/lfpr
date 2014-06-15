@@ -158,9 +158,12 @@
       $dev = load_developer_where("name like '%".$owner."%'");
       $where .= " and owner_id = " . $dev->id;
     }
-
-    $sort = str_replace("_", " ", $this->request->getParam("sort"));
-
+    
+    $sort_param = $this->request->getParam("sort");
+    $underscore_pos = strrpos($sort_param, "_");
+    if($underscore_pos !== false)
+        $sort = substr_replace($sort_param, " ", $underscore_pos, 1);
+    
     $curr_page = intVal($this->request->getParam("p"));
     $total = count_projects($where);
     $init = $curr_page * $this->per_page;
