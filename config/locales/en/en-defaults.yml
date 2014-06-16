@@ -3,6 +3,7 @@ en:
 		language_asc: Language
 		stars_desc: Stars 
 		forks_desc: Forks
+		open_issues_desc: Open Issues
 
 
 	makiavelo:
