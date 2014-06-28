@@ -15,7 +15,7 @@
       $dev = $proj->owner();
       Makiavelo::info("==== Querying for $usr_name/$proj_name");
       Makiavelo::info("Last Update: " . $proj->updated_at);
-      if($proj->updated_at == date("Y-m-d") . " 00:00:00") {
+      if(strstr($proj->updated_at, date("Y-m-d") )) {
         Makiavelo::info("Skiping project");
         continue; //Avoid duplicated entries
       }
@@ -100,6 +100,7 @@
       $proj->stars = $data->watchers;
       $proj->forks = $data->forks;
       $proj->readme = $data->readme;
+      $proj->description = $data->description;
       $proj->open_issues = $data->open_issues;
       save_project($proj);
 
