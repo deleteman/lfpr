@@ -1,5 +1,5 @@
-#Looking For Pull Requests
-
+Looking For Pull Requests
+=====================
 The site where you can find possible projects to contribute to, or even publish your own projects and let others find it and help you!.
 
 ##Using LFPR
