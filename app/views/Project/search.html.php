@@ -62,7 +62,7 @@ if($this->pagination && $this->pagination['total_pages'] > 1) {
   <ul>
     <?php if($page > 0) { ?>
     <li class="previous">
-      <a href="<?=project_search_path(array("q" => $this->q,
+      <a href="<?=project_search_path(array("q" => urlencode($this->q),
                                                "p" => $page - 1))?>">
         <img src="/img/pager/previous.png">
       </a>
@@ -71,14 +71,14 @@ if($this->pagination && $this->pagination['total_pages'] > 1) {
     <?php
     for($i = 0; $i < $total_pages; $i++) { ?>
       <li class="<?=($i == $page) ? "active":""?>">
-        <a href="<?=project_search_path(array("q" => $this->q, "p" => $i))?>">
+        <a href="<?=project_search_path(array("q" => urlencode($this->q), "p" => $i))?>">
           <?=($i+1)?>
         </a>
       </li>
     <?php } ?>
     <?php if($page < $total_pages - 1) { ?>
     <li class="next">
-      <a href="<?=project_search_path(array("q" => $this->q, "p" => $page + 1))?>">
+      <a href="<?=project_search_path(array("q" => urlencode($this->q), "p" => $page + 1))?>">
         <img src="/img/pager/next.png">
       </a>
     </li>
