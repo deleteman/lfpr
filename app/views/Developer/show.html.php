@@ -44,7 +44,7 @@ if(current_user() != null) {
         <span class="project-name"><?=truncate_string($proj->name, 10)?></span>
         <span class="language">(<?=$proj->language?>)</span>
         <p class="project-description">
-          <?=$proj->description?>
+          <?=truncate_string($proj->description, 90)?>
         </p>
 
  
