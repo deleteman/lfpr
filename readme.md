@@ -34,10 +34,25 @@ If you're planning on cloning the site and running it locally, follow these simp
 1. Clone the repo
 2. Create a `tmp` directory on the project directory (and make sure it's writable by apache)
 3. `$ cp config/config{.base,}.yml && cp config/database{.base,}.yml`
-4. Run ./makiavelo.php db:create
-5. Run ./makiavelo.php db:load
-6. Run ./makiavelo.php db:migrate
-7. Configure a virtual host, with the following information
+4. Create a 'dummy' application on GitHub by following this link:
+
+    https://github.com/settings/applications/new
+    
+    Most important here is the field **Authorization Callback URL**. It must read *http://lfpr.local.com/github_cb/login*.
+5. Edit the file config/config.yml as follows, using the information given when you completed step 4:
+    ```
+    github:
+        client_id: *your client ID from step 4*
+        secret: *your secret code from step 4*
+        login_redirect: *http://lfpr.local.com/github_cb/login*
+        username: *your GitHub username*
+        pwd: *your GitHub password*
+    ```
+
+6. Run ./makiavelo.php db:create
+7. Run ./makiavelo.php db:load
+8. Run ./makiavelo.php db:migrate
+9. Configure a virtual host, with the following information
 ```
 <VirtualHost *:80>
     ServerAdmin webmaster@dummy-host2.example.com
@@ -50,12 +65,12 @@ If you're planning on cloning the site and running it locally, follow these simp
   </Directory>
 </VirtualHost>
 ```
-7.1 If you're using Apache 2.4+ then you should add one more line after AllowOverride All: `Require all granted`
-8. Make sure you have mod_rewrite enabled - `sudo a2enmod rewrite`
-9. Add an entry to your hosts file, so that the virtual host will work.
-10. Make sure the /tmp folder inside the project is writable by Apache (if in doubt, give it a 777)
-11. ????
-12. Profit!
+9.1 If you're using Apache 2.4+ then you should add one more line after AllowOverride All: `Require all granted`
+10. Make sure you have mod_rewrite enabled - `sudo a2enmod rewrite`
+11. Add an entry to your hosts file, so that the virtual host will work.
+12. Make sure the /tmp folder inside the project is writable by Apache (if in doubt, give it a 777)
+13. ????
+14. Profit!
 
 
 
