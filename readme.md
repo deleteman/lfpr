@@ -52,25 +52,25 @@ If you're planning on cloning the site and running it locally, follow these simp
 6. Run ./makiavelo.php db:create
 7. Run ./makiavelo.php db:load
 8. Run ./makiavelo.php db:migrate
-9. Configure a virtual host, with the following information
-```
-<VirtualHost *:80>
-    ServerAdmin webmaster@dummy-host2.example.com
-    DocumentRoot "<path to the public folder>""
-    ServerName lfpr.local.com
-    SetEnv makiavelo_env "development"
+9. Configure a virtual host, with the following information:
+    ```
+    <VirtualHost *:80>
+        ServerAdmin webmaster@dummy-host2.example.com
+        DocumentRoot "<path to the public folder>""
+        ServerName lfpr.local.com
+        SetEnv makiavelo_env "development"
+    <Directory "<path to the public folder>">
+        AllowOverride All
+    </Directory>
+    </VirtualHost>
+    ```
 
-   <Directory "<path to the public folder>">
-      AllowOverride All
-  </Directory>
-</VirtualHost>
-```
-9.1 If you're using Apache 2.4+ then you should add one more line after AllowOverride All: `Require all granted`
-10. Make sure you have mod_rewrite enabled - `sudo a2enmod rewrite`
-11. Add an entry to your hosts file, so that the virtual host will work.
-12. Make sure the /tmp folder inside the project is writable by Apache (if in doubt, give it a 777)
-13. ????
-14. Profit!
+10. If you're using Apache 2.4+ then you should add one more line after AllowOverride All: `Require all granted`
+11. Make sure you have mod_rewrite enabled - `sudo a2enmod rewrite`
+12. Add an entry to your hosts file, so that the virtual host will work.
+13. Make sure the /tmp folder inside the project is writable by Apache (if in doubt, give it a 777)
+14. ????
+15. Profit!
 
 
 
