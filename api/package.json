@@ -1,0 +1,19 @@
+{
+  "name": "lfpr-api",
+  "version": "1.0.0",
+  "description": "Back-end RESTful API for LFPR",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "dependencies": {
+    "vatican": "*"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "istanbul": "^0.3.19",
+    "mocha": "^2.3.0",
+    "should": "^7.1.0"
+  }
+}

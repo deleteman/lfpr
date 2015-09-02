@@ -1,4 +1,3 @@
-config/database.yml
-config/config.yml
 tmp/logs.txt
+node_modules
 *~

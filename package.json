@@ -1,0 +1,11 @@
+{
+  "name": "lfpr-api",
+  "version": "1.0.0",
+  "description": "Back-end RESTful API for LFPR",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover _mocha -- -u exports -R spec"
+  },
+  "author": "",
+  "license": "ISC"
+}
