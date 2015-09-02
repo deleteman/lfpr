@@ -1,9 +1,0 @@
-crud:
-	entity:
-		name: ProjectDelta
-		fields:
-			sample_date: datetime
-			stars: integer
-			delta_stars: integer
-			forks: integer 
-			delta_forks: integer 
