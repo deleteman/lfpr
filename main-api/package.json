@@ -1,0 +1,22 @@
+{
+  "name": "lfpr-main-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "config": "^1.24.0",
+    "express": "^4.14.0",
+    "github-api": "^2.3.0",
+    "jsonwebtoken": "^7.1.9",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
+    "request": "^2.78.0",
+    "winston": "^2.3.0"
+  }
+}

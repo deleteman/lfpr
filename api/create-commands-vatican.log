@@ -1,6 +1,0 @@
-
-vatican g Repos -a name:string url:string description:string owner:Developer stars:int forks:int last_update:date language:string published:bool open_issues:int closed_issues:int readme:string pr_acceptance_rate:int -m publish:put unpublish:put list:get details:get stats:get 
-
-vatican g Developers -a name:string avatar_url:string github_url:string role:string  -m newUser:post update:put getDetails:get 
-
-vatican g RepoDeltas -a sample_date:Date stars:number delta_stars:number forks:number delta_forks:number commits_count:number new_pulls:number closed_pulls:number merged_pulls:number open_issues:number closed_issues:number repo:Repos -m newDelta:post getDeltas:get
