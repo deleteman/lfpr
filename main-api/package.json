@@ -14,6 +14,7 @@
     "express": "^4.14.0",
     "github-api": "^2.3.0",
     "jsonwebtoken": "^7.1.9",
+    "mongoose": "^4.6.8",
     "passport": "^0.3.2",
     "passport-github": "^1.1.0",
     "request": "^2.78.0",
